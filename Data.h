@@ -17,7 +17,7 @@ public:
     Data();
     map<string, Command> getCommandsMap;
     map<string, double> getSymbolTable;
-
+    Command getCommand(string commandName);
     void addToSymbolTable(string name, double value);
 
 };
