@@ -3,3 +3,7 @@
 //
 
 #include "Parser.h"
+
+void Parser::parseFunc(vector<string> strings) {
+
+}
