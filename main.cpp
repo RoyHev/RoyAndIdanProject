@@ -14,10 +14,18 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    UnaryExpression* e = new Negative(new Minus(new Divide(new Number(3),new
-    Number(4)),
-            new Number(5)));
-    cout << e->calculate();
+    string s = "roy";
+    for (char c: s){
+        cout << c << endl;
+        c++;
+        cout << c;
+    }
+
+
+//    UnaryExpression* e = new Negative(new Minus(new Divide(new Number(3),new
+//    Number(4)),
+//            new Number(5)));
+//    cout << e->calculate();
 
     return 0;
 }
