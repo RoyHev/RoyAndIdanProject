@@ -7,10 +7,13 @@
 
 #include <string>
 #include <vector>
-
+#include "Data.h"
 using namespace std;
 
 class Parser {
+Data mapsData;
+public:
+    Parser(Data mapsData);
     void parseFunc(vector<string> strings);
 };
 

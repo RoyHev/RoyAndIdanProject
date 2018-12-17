@@ -14,6 +14,7 @@ class Data {
     map<string, Command> commandsMap;
     map<string, double> symbolTable;
 public:
+    Data();
     map<string, Command> getCommandsMap;
     map<string, double> getSymbolTable;
 
