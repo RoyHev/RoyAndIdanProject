@@ -11,9 +11,14 @@
 using namespace std;
 
 class Data {
-    map<string,Command> commandsMap;
+    map<string, Command> commandsMap;
     map<string, double> symbolTable;
 public:
-    map<string,Command> getCommandsMap;
-    map<string,double> getSymbolTable;
+    map<string, Command> getCommandsMap;
+    map<string, double> getSymbolTable;
+
     void addToSymbolTable(string name, double value);
+
+};
+
+#endif //EX3_DATA_H
