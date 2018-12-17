@@ -17,7 +17,7 @@ int ShuntingYard::operationPriority(char operation) {
         return 1;
     } else if (operation == '+' || operation == '-') {
         return 2;
-    } else return -1;
+    } else return -1;f
 }
 
 Expression *ShuntingYard::applyOperation(Expression *left, Expression *right, char operation) {
