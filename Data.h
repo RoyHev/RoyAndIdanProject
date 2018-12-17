@@ -15,10 +15,11 @@ class Data {
     map<string, double> symbolTable;
 public:
     Data();
-    map<string, Command> getCommandsMap;
-    map<string, double> getSymbolTable;
+    bool doesCommandExist(string commandName);
     Command getCommand(string commandName);
     void addToSymbolTable(string name, double value);
+    map<string, Command> getCommandsMap();
+    map<string, double> getSymbolTable();
 
 };
 
