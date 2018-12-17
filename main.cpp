@@ -9,18 +9,15 @@
 #include "Divide.h"
 #include "Minus.h"
 #include "Negative.h"
+#include "ShuntingYard.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-
-    string s = "roy";
-    for (char c: s){
-        cout << c << endl;
-        c++;
-        cout << c;
-    }
-
+    ShuntingYard* x = new ShuntingYard;
+    Expression *e = x->evaluateInfix("40 - 8 * 2");
+    double l = e->calculate();
+    cout << l << endl;
 
 //    UnaryExpression* e = new Negative(new Minus(new Divide(new Number(3),new
 //    Number(4)),

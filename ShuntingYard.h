@@ -19,14 +19,11 @@ using namespace std;
 class ShuntingYard {
 private:
     int operationPriority(char operation);
-
     Expression *applyOperation(Expression *left, Expression *right, char operation);
 
 public:
     ShuntingYard() {}
-
     Expression *evaluateInfix(string expression);
 };
-
 
 #endif //EX3_SHUNTINGYARD_H
