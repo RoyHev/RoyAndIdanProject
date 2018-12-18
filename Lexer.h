@@ -14,8 +14,6 @@ class Lexer {
 
 public:
     vector<string> lexerFromFile (const string &textFile);
-    vector<string> lexerFromCommand(int argc, char*argv[]);
-    vector<string> lexer(int argc, char* argv[]);
 };
 
 

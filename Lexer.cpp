@@ -11,14 +11,25 @@
 #define ENTER 10
 #define MAX_FILE 2
 #define FILE_IN_ARG 1
+#define PLUS_SIGN 43
+#define MINUS_SIGN 45
+#define MULT_SIGN 42
+#define COMMA ','
+#define DIVISION_SIGN 47
+#define EXCLAIM '!'
+#define LESS_THAN '<'
+#define GREATER_THAN '>'
+#define EQUAL '='
+#define QUOTE 34
+#define OPEN_BRACKET 40
+#define CLOSE_BRACKET 41
+#define OPEN_SWIRLY_B 123
+#define CLOSE_SWIRLY_B 125
+#define DOT 46
 
 using namespace std;
 
-/**
- * lexer from a given file.
- * @param textFile - file to read the commands from.
- * @return - vector with each word in it's own cell.
- */
+
 vector<string> Lexer::lexerFromFile(const string &textFile) {
     vector<string> lexer;
     ifstream inputStream;
@@ -28,53 +39,101 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
         throw "Cannot open file to lexer.";
     }
     //read all the lines in the file.
-    for (string str; getline(inputStream,str);){
-        str+= ENTER;
+    for (string str; getline(inputStream,str);) {
+        str += ENTER;
         string temp = "";
         //go over the line and put each word in a different place.
-        for(char& c : str) {
-            //whitespace found, new word.
-            if (c == ENTER || c == TAB || c == SPACE){
-                if (!temp.empty()) {
+        for (int i = 0; i<str.length(); i++) {
+//            char c = str[i];
+            if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' &&
+            str[i] <= 'z' || isdigit(str[i])) || (str[i] == DOT)) {
+                temp += str[i];
+                continue;
+            } else {
+                //whitespace found, new word.
+                if (str[i] == ENTER || str[i] == TAB || str[i] == SPACE) {
+                    if (!temp.empty()) {
+                        lexer.push_back(temp);
+                    }
+                    temp = "";
+                    continue;
+                }
+                //
+                if (str[i] == PLUS_SIGN || str[i] == MINUS_SIGN || str[i]
+                == MULT_SIGN || str[i] == DIVISION_SIGN || str[i] == COMMA ||
+                str[i] == OPEN_SWIRLY_B || str[i] == CLOSE_SWIRLY_B){
+                    if (!temp.empty()){
+                        lexer.push_back(temp);
+                        temp = "";
+                    }
+                    string sign = "";
+                    sign += str[i];
+                    lexer.push_back(sign);
+                    continue;
+                }
+                if (str[i] == GREATER_THAN || str[i] == LESS_THAN || str[i] ==
+                EQUAL || str[i] == EXCLAIM) {
+                    if (!temp.empty()){
+                        lexer.push_back(temp);
+                        temp = "";
+                    }
+                    temp += str[i];
+                    if (str[i+1] == EQUAL){
+                        temp += str[i+1];
+                        i++;
+                    }
                     lexer.push_back(temp);
                     temp = "";
+                    continue;
                 }
-                continue;
+                if (str[i] == OPEN_BRACKET){
+                    char needed = CLOSE_BRACKET;
+                    int counter = 1;
+                    i++;
+                    if (!temp.empty()){
+                        lexer.push_back(temp);
+                        temp = "";
+                    }
+                    temp += OPEN_BRACKET;
+                    while (counter != 0){
+                        if (str[i] == ENTER && counter != 0){
+                            throw "Invalid Syntax - Missing Parentheses";
+                        }
+                        temp += str[i];
+                        if (str[i] == OPEN_BRACKET){
+                            counter++;
+                        } else if (str[i] == CLOSE_BRACKET){
+                            counter--;
+                            if (counter == 0){
+                                lexer.push_back(temp);
+                                temp = "";
+                                continue;
+                            }
+                        }
+                        i++;
+                    }
+                }
+                if (str[i] == QUOTE){
+                    if (!temp.empty()){
+                        lexer.push_back(temp);
+                        temp = "";
+                    }
+                    temp += str[i];
+                    i++;
+                    while (str[i] != QUOTE){
+                        if (str[i] == ENTER){
+                            throw "Syntax Error - Missing Quotation Mark";
+                        }
+                        temp += str[i];
+                        i++;
+                    }
+                    temp += QUOTE;
+                    lexer.push_back(temp);
+                    temp = "";
+                    continue;
+                }
             }
-            temp += c;
         }
     }
     return lexer;
-}
-
-/**
- * Lexer a given command line.
- *
- * @param argc - number of arguments in argv.
- * @param argv - array of commands from command line.
- * @return - vector with words after they've been lexered.
- */
-vector<string> Lexer::lexerFromCommand(int argc, char **argv) {
-    vector<string> lexer;
-    //start from the second place in the array as the first is the file's name.
-    for (int i=1; i<argc; i++){
-        lexer.push_back(argv[i]);
-    }
-    return lexer;
-}
-
-/**
- * Returns a vector with strings that has been lexered.
- *
- * @param argc - from command line.
- * @param argv - from command line.
- * @return - string vector.
- */
-vector<string> Lexer::lexer(int argc, char **argv) {
-    //2 arguments means read from a file.
-    if (argc == MAX_FILE){
-        return lexerFromFile(argv[FILE_IN_ARG]);
-    } else {
-        return lexerFromCommand(argc,argv);
-    }
 }

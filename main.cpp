@@ -10,12 +10,15 @@
 #include "Minus.h"
 #include "Negative.h"
 #include "ShuntingYard.h"
+#include "Lexer.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    for (int i=0; i< argc; i++){
-        cout << argv[i] << endl;
+    Lexer* lexer = new Lexer();
+    vector<string> v = lexer->lexerFromFileNew("text.txt");
+    for (string s : v){
+        cout << s << endl;
     }
 
 //    ShuntingYard* x = new ShuntingYard;
