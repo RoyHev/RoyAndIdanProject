@@ -14,10 +14,14 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    ShuntingYard* x = new ShuntingYard;
-    Expression *e = x->evaluateInfix("(5 + (5 / 5))");
-    double l = e->calculate();
-    cout << l << endl;
+    for (int i=0; i< argc; i++){
+        cout << argv[i] << endl;
+    }
+
+//    ShuntingYard* x = new ShuntingYard;
+//    Expression *e = x->evaluateInfix("40 - 8 * 2");
+//    double l = e->calculate();
+//    cout << l << endl;
 
 //    UnaryExpression* e = new Negative(new Minus(new Divide(new Number(3),new
 //    Number(4)),
