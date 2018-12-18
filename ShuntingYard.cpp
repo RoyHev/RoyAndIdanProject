@@ -18,7 +18,7 @@ int ShuntingYard::operationPriority(char operation) {
         return 2;
     } else if (operation == '+' || operation == '-') {
         return 1;
-    } else{
+    } else {
         return 0;
     }
 }
@@ -49,6 +49,7 @@ Expression *ShuntingYard::applyOperation(Expression *left, Expression *right, ch
  * the function gets a string which describes an expression and calculates it using applyOperation method.
  */
 Expression *ShuntingYard::evaluateInfix(string expression) {
+    bool minusOp = false;
     //contains all the operation
     stack<char> operations;
     //contains all the values
@@ -64,6 +65,7 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
         } else if (isdigit(expression.at(index))) {
             //will hold the current number which is consists of the current chars.
             double temp = 0;
+            minusOp = true;
             while (index < expression.length() && isdigit(expression.at(index))) {
                 temp *= 10;
                 temp += (expression.at(index) - '0');
@@ -86,7 +88,11 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             }
             operations.pop();
         } else {
-            while (!operations.empty() &&
+            if (!minusOp) {
+                Expression *zeroNum = new Number(0);
+                numbers.push(zeroNum);
+            }
+            while (!operations.empty() && minusOp &&
                    (operationPriority(expression.at(index)) <= operationPriority(operations.top()))) {
                 Expression *val2 = numbers.top();
                 numbers.pop();
@@ -97,6 +103,7 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
                 numbers.push(applyOperation(val, val2, operation));
             }
             operations.push(expression.at(index));
+            minusOp = false;
         }
     }
     while (!operations.empty()) {
