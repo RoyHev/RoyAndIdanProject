@@ -17,7 +17,8 @@ using namespace std;
 int main(int argc, char *argv[]) {
     Lexer* lexer = new Lexer();
     vector<string> v = lexer->lexerFromFile("txt.txt");
-    for (string s : v){
+    vector<string> v1 = lexer->elementsMerge(v);
+    for (string s : v1){
         cout << s << endl;
     }
 

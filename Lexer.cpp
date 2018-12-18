@@ -48,7 +48,7 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
         for (int i = 0; i < str.length(); i++) {
 //            char c = str[i];
             if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' &&
-                                                     str[i] <= 'z' || isdigit(str[i])) || (str[i] == DOT)) {
+                                                     str[i] <= 'z' )|| isdigit(str[i]) || (str[i] == DOT)) {
                 temp += str[i];
                 continue;
             } else {
@@ -148,10 +148,9 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     for (int i = 0; i < initialVector.size(); i++) {
         string str = initialVector[i];
         temp = "";
-        int numOfP = count(str.begin(), str.end(), ".");
         if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
             str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
-            str == "<=" || str == "==" || numOfP > 1) {
+            str == "<=" || str == "==" ) {
             mergedVector.push_back(str);
             flag = 1;
             continue;
@@ -162,8 +161,8 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
                    initialVector[i] == "-") {
                 temp += initialVector[i];
                 temp += initialVector[i + 1];
-                if (initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
-                    initialVector[i] == "-") {
+                if (initialVector[i+1] == "+" || initialVector[i+1] == "*" || initialVector[i+1] == "/" ||
+                    initialVector[i+1] == "-") {
                     temp += initialVector[i + 2];
                     i += 3;
                 } else { i += 2; }
@@ -195,4 +194,5 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             flag = 0;
         }
     }
+    return mergedVector;
 }
