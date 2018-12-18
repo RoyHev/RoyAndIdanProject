@@ -45,9 +45,8 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
         string temp = "";
         //go over the line and put each word in a different place.
         for (int i = 0; i < str.length(); i++) {
-//            char c = str[i];
             if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' &&
-                                                     str[i] <= 'z' )|| isdigit(str[i]) || (str[i] == DOT)) {
+                                                     str[i] <= 'z') || isdigit(str[i]) || (str[i] == DOT)) {
                 temp += str[i];
                 continue;
             } else {
@@ -143,26 +142,30 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
 vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     vector<string> mergedVector;
     string temp;
+    //if gets 1 then '-' describes unary exp', if 0 then binary
     int flag = 0;
     for (int i = 0; i < initialVector.size(); i++) {
         string str = initialVector[i];
         temp = "";
         //TODO in map
+        //if the string describes a command, an IP address or inequality sign then push string to mergedVector.
         if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
             str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
             str == "<=" || str == "==" || isIP(str)) {
             mergedVector.push_back(str);
+            //flag = 1
             flag = 1;
             continue;
         }
             //TODO MAGIC
+            //this condition merges a calculation string that starts with '-' operator
         else if (initialVector[i] == "-" && (flag == 1 || i == 0)) {
             while (initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
                    initialVector[i] == "-") {
                 temp += initialVector[i];
                 temp += initialVector[i + 1];
-                if (initialVector[i+1] == "+" || initialVector[i+1] == "*" || initialVector[i+1] == "/" ||
-                    initialVector[i+1] == "-") {
+                if (initialVector[i + 1] == "+" || initialVector[i + 1] == "*" || initialVector[i + 1] == "/" ||
+                    initialVector[i + 1] == "-") {
                     temp += initialVector[i + 2];
                     i += 3;
                 } else { i += 2; }
@@ -172,7 +175,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             temp = "";
             i--;
             continue;
-
+            //this condition merges a calculation string that doesn't starts with '-' operator
         } else if ((initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
                     initialVector[i] == "-") && i != 0) {
             while (initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
@@ -197,10 +200,11 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     return mergedVector;
 }
 
+//checks if the given string describes IP address
 bool Lexer::isIP(const string &s) const {
     int counter = 0;
-    for (int i = 0; i< s.length(); i++){
-        if (s.at(i) == '.'){
+    for (int i = 0; i < s.length(); i++) {
+        if (s.at(i) == '.') {
             counter++;
         }
     }
