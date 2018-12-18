@@ -15,7 +15,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     ShuntingYard* x = new ShuntingYard;
-    Expression *e = x->evaluateInfix("40 - 8 * 2");
+    Expression *e = x->evaluateInfix("(5 + (5 / 5))");
     double l = e->calculate();
     cout << l << endl;
 
