@@ -14,6 +14,7 @@ class Lexer {
 
 public:
     vector<string> lexerFromFile (const string &textFile);
+    vector<string> elementsMerge (vector<string> initialVector);
 };
 
 

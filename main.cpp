@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     Lexer* lexer = new Lexer();
-    vector<string> v = lexer->lexerFromFileNew("text.txt");
+    vector<string> v = lexer->lexerFromFile("txt.txt");
     for (string s : v){
         cout << s << endl;
     }
