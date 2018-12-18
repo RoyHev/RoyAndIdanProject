@@ -148,6 +148,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     for (int i = 0; i < initialVector.size(); i++) {
         string str = initialVector[i];
         temp = "";
+        //TODO in map
         if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
             str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
             str == "<=" || str == "==" ) {
