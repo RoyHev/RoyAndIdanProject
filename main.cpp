@@ -14,13 +14,24 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-    Lexer* lexer = new Lexer();
-    vector<string> v = lexer->lexerFromFile("txt.txt");
-    vector<string> v1 = lexer->elementsMerge(v);
-    for (string s : v1){
-        cout << s << endl;
+bool is(string s){
+    int counter = 0;
+    for (int i = 0; i< s.length(); i++){
+        if (s.at(i) == '.'){
+            counter++;
+        }
     }
+    return (counter == 3);
+}
+
+int main(int argc, char *argv[]) {
+    cout << is("127.0.0.1.") << endl;
+//    Lexer* lexer = new Lexer();
+//    vector<string> v = lexer->lexerFromFile("txt.txt");
+//    vector<string> v1 = lexer->elementsMerge(v);
+//    for (string s : v1){
+//        cout << s << endl;
+//    }
 
 //    ShuntingYard* x = new ShuntingYard;
 //    Expression *e = x->evaluateInfix("40 - 8 * 2");

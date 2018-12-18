@@ -10,8 +10,6 @@
 #define TAB 9
 #define SPACE 32
 #define ENTER 10
-#define MAX_FILE 2
-#define FILE_IN_ARG 1
 #define PLUS_SIGN 43
 #define MINUS_SIGN 45
 #define MULT_SIGN 42
@@ -27,6 +25,7 @@
 #define OPEN_SWIRLY_B 123
 #define CLOSE_SWIRLY_B 125
 #define DOT 46
+#define IP_DOTS 3
 
 
 using namespace std;
@@ -151,7 +150,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
         //TODO in map
         if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
             str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
-            str == "<=" || str == "==" ) {
+            str == "<=" || str == "==" || isIP(str)) {
             mergedVector.push_back(str);
             flag = 1;
             continue;
@@ -196,4 +195,14 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
         }
     }
     return mergedVector;
+}
+
+bool Lexer::isIP(const string &s) const {
+    int counter = 0;
+    for (int i = 0; i< s.length(); i++){
+        if (s.at(i) == '.'){
+            counter++;
+        }
+    }
+    return (counter == IP_DOTS);
 }

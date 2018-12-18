@@ -12,6 +12,7 @@ using namespace std;
 
 class Lexer {
 
+    bool isIP(const string &s) const;
 public:
     vector<string> lexerFromFile (const string &textFile);
     vector<string> elementsMerge (vector<string> initialVector);
