@@ -20,7 +20,7 @@ int PrintCommand::execute(int index, vector<string> data) {
     string str = data.at(index);
     //if the given string is a Var Expression
     if (symbolTable.find(str) != symbolTable.end()) {
-        cout << symbolTable.find(str)->second;
+        cout << symbolTable.find(str)->second<<endl;
     }
         //if its a string
     else if (str.at(0) == QUOTE) {
@@ -28,7 +28,7 @@ int PrintCommand::execute(int index, vector<string> data) {
         for (int i = 1; i < str.length() - 1; i++) {
             temp += str.at(i);
         }
-        cout << temp;
+        cout << temp<<endl;
     }
         //convert the string to an Expression and print it if its a legal Expression
     else {
