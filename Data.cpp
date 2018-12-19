@@ -27,6 +27,6 @@ void Data::updateValue(string name, double value) {
 
 }
 
-void Data::addValue(string name, double value) {
+void Data::addNewVar(string name, double value) {
 
 }

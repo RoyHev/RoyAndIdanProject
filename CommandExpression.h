@@ -13,11 +13,11 @@
 using namespace std;
 
 class CommandExpression: public Expression{
-    Command &cmd;
+    Command* &cmd;
     vector<string> &lexer;
     int &index;
 public:
-    CommandExpression(Command &cmd, vector<string> &lexer, int &index);
+    CommandExpression(Command* &cmd, vector<string> &lexer, int &index);
     virtual double calculate();
 };
 

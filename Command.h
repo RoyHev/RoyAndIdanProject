@@ -67,12 +67,14 @@ public:
 
 class PrintCommand: public Command{
 public:
+    PrintCommand() = default;
     virtual int execute(int index, vector<string> data);
 
 };
 
 class SleepCommand: public Command{
 public:
+    SleepCommand() = default;
     virtual int execute(int index, vector<string> data);
 
 };

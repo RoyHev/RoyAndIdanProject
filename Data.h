@@ -17,7 +17,7 @@ public:
     static map<string,double> getSymbolMap();
     static double getValue(string name);
     static void updateValue(string name, double value);
-    static void addValue(string name, double value);
+    static void addNewVar(string name, double value);
 
 };
 

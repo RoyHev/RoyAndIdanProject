@@ -4,10 +4,11 @@
 #include "CommandExpression.h"
 #include "Command.h"
 
-CommandExpression::CommandExpression(Command &cmd, vector<string> &lexer,
+CommandExpression::CommandExpression(Command* &cmd, vector<string> &lexer,
         int &index) :cmd(cmd), lexer(lexer), index(index) {
+    this->cmd = cmd;
 }
 
 double CommandExpression::calculate() {
-    this->cmd.execute(this->index, this->lexer);
+    this->cmd->execute(this->index, this->lexer);
 }
