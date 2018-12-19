@@ -131,7 +131,3 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
     return numbers.top();
 }
 
-bool ShuntingYard::isItAnOperator(const char &op) {
-    if (op == PLU)
-}
-
