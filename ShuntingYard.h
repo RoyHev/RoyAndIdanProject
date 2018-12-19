@@ -14,16 +14,21 @@
 #include "Negative.h"
 #include "Var.h"
 #include <string>
+#include "VarManager.h"
 
 using namespace std;
 
 class ShuntingYard {
+    VarManager *varManager;
 private:
     int operationPriority(char operation);
+
     Expression *applyOperation(Expression *left, Expression *right, char
     operation);
+
 public:
-    ShuntingYard() = default;
+    ShuntingYard(VarManager *varManager);
+
     Expression *evaluateInfix(string expression);
 };
 

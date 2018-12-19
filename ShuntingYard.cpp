@@ -10,6 +10,10 @@
 
 using namespace std;
 
+ShuntingYard::ShuntingYard(VarManager *varManager) {
+    this->varManager = varManager;
+}
+
 //TODO - CHECK IF WE NEED TO SUPPORT DOUBLES OR NOT.
 
 /*
@@ -91,13 +95,14 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             }
             operations.pop();
             //checks if it is one of the operators - +,-,/,*
-        } else if (operationPriority(expression[index]) != 0){
+        } else if (operationPriority(expression[index]) != 0) {
             if (!minusOp) {
                 Expression *zeroNum = new Number(0);
                 numbers.push(zeroNum);
             }
             while (!operations.empty() && minusOp && (operationPriority
-            (expression.at(index)) <= operationPriority(operations.top()))) {
+                                                              (expression.at(index)) <=
+                                                      operationPriority(operations.top()))) {
                 Expression *val2 = numbers.top();
                 numbers.pop();
                 Expression *val = numbers.top();
@@ -112,11 +117,11 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             string variableName = "";
             minusOp = true;
             while (operationPriority(expression[index]) == 0 && index <
-            expression.length()){
+                                                                expression.length()) {
                 variableName += expression[index];
                 index += 1;
             }
-            Expression* variable = new Var(variableName);
+            Expression *variable = new Var(variableName);
             numbers.push(variable);
             index -= 1;
 
@@ -133,4 +138,6 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
     }
     return numbers.top();
 }
+
+
 
