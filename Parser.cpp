@@ -7,6 +7,9 @@
 #include "CommandExpression.h"
 #include "Command.h"
 #include "OpenDataServer.h"
+#include "LoopCommand.h"
+#include "IfCommand.h"
+
 #define OPEN_SERVER "openDataServer"
 #define IF_CONDITION "if"
 #define WHILE_LOOP "while"
