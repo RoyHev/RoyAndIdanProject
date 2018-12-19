@@ -10,7 +10,7 @@
 
 class PrintCommand: public Command{
 public:
-    PrintCommand() = default;
+    PrintCommand();
     virtual int execute(int index, vector<string> data);
 
 };

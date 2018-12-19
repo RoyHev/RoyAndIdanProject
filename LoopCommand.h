@@ -10,7 +10,7 @@
 
 class LoopCommand: public ConditionParser{
 public:
-    //LoopCommand() = default;
+    LoopCommand();
     virtual int execute(int index, vector<string> data);
 };
 

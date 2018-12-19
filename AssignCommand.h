@@ -10,7 +10,7 @@
 
 class AssignCommand: public Command{
 public:
-    AssignCommand() = default;
+    AssignCommand();
     virtual int execute(int index, vector<string> data);
 
 };

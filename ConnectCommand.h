@@ -10,7 +10,7 @@
 
 class ConnectCommand: public Command{
 public:
-    ConnectCommand() = default;
+    ConnectCommand();
     virtual int execute(int index, vector<string> data);
 
 };

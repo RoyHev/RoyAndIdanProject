@@ -4,3 +4,10 @@
 
 #include "IfCommand.h"
 
+int IfCommand::execute(int index, vector<string> data) {
+    return 0;
+}
+
+IfCommand::IfCommand() {
+
+}

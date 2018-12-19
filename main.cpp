@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
    }*/
 
     ShuntingYard* sh= new ShuntingYard();
-    Expression* e = sh->evaluateInfix("-2--3");
+    Expression* e = sh->evaluateInfix("5-+3");
     cout << e->calculate();
     return 0;
 }

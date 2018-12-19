@@ -3,3 +3,11 @@
 //
 
 #include "PrintCommand.h"
+
+PrintCommand::PrintCommand() {
+
+}
+
+int PrintCommand::execute(int index, vector<string> data) {
+    return 0;
+}

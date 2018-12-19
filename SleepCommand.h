@@ -10,7 +10,7 @@
 
 class SleepCommand: public Command{
 public:
-    SleepCommand() = default;
+    SleepCommand();
     virtual int execute(int index, vector<string> data);
 
 };

@@ -10,7 +10,7 @@
 
 class CreateVarCommand: public Command{
 public:
-    CreateVarCommand() = default;
+    CreateVarCommand();
     virtual int execute(int index, vector<string> data);
 
 };

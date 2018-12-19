@@ -3,3 +3,11 @@
 //
 
 #include "AssignCommand.h"
+
+AssignCommand::AssignCommand() {
+
+}
+
+int AssignCommand::execute(int index, vector<string> data) {
+    return 0;
+}

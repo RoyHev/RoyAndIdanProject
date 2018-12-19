@@ -3,3 +3,11 @@
 //
 
 #include "SleepCommand.h"
+
+SleepCommand::SleepCommand() {
+
+}
+
+int SleepCommand::execute(int index, vector<string> data) {
+    return 0;
+}
