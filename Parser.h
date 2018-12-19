@@ -17,13 +17,13 @@ using namespace std;
 
 class Parser {
     vector<string> lexStrings;
-    map<string, CommandExpression *> commandsMap;
+    map<string, Expression *> commandsMap;
     int index;
 public:
     Parser(vector<string> lexStrings);
 
 private:
-    map<string,CommandExpression*> commandsGenerator();
+    map<string,Expression*> commandsGenerator();
 };
 
 

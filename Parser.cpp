@@ -3,9 +3,10 @@
 //
 
 #include "Parser.h"
-#include "OpenDataServer.h"
 #include <vector>
-
+#include "CommandExpression.h"
+#include "Command.h"
+#include "OpenDataServer.h"
 #define OPEN_SERVER "openDataServer"
 #define IF_CONDITION "if"
 #define WHILE_LOOP "while"
@@ -23,15 +24,15 @@ Parser::Parser(vector<string> lexStrings) {
 
 }
 
-map<string, CommandExpression *> Parser::commandsGenerator() {
-    map<string, CommandExpression *> commandsExMap;
-    commandsExMap.insert(make_pair(OPEN_SERVER,new OpenDataServerCommand()));
-    commandsExMap.insert(make_pair(IF_CONDITION,IfCommand));
-    commandsExMap.insert(make_pair(WHILE_LOOP,LoopCommand));
-    commandsExMap.insert(make_pair(CONNECT,ConnectCommand));
-    commandsExMap.insert(make_pair(VAR,CreateVarCommand));
-    commandsExMap.insert(make_pair(PRINT,PrintCommand));
-    commandsExMap.insert(make_pair(SLEEP,SleepCommand));
-    commandsExMap.insert(make_pair(ASSIGN,AssignCommand));
+map<string, Expression *> Parser::commandsGenerator() {
+    map<string, Expression *> commandsExMap;
+    commandsExMap.insert(make_pair(OPEN_SERVER,new CommandExpression(new OpenDataServerCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(IF_CONDITION,new CommandExpression(new IfCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(WHILE_LOOP,new CommandExpression(new LoopCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(CONNECT,new CommandExpression(new ConnectCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(VAR,new CommandExpression(new CreateVarCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(PRINT,new CommandExpression(new PrintCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(SLEEP,new CommandExpression(new SleepCommand(),this->lexStrings,index)));
+    commandsExMap.insert(make_pair(ASSIGN,new CommandExpression(new AssignCommand(),this->lexStrings,index)));
     return commandsExMap;
 }
