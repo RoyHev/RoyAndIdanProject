@@ -7,10 +7,13 @@
 
 
 #include "Command.h"
+#include "VarManager.h"
 
-class PrintCommand: public Command{
+class PrintCommand : public Command {
+    VarManager *varManager;
 public:
-    PrintCommand();
+    PrintCommand(VarManager *varManager);
+
     virtual int execute(int index, vector<string> data);
 
 };
