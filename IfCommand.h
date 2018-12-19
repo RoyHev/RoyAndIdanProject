@@ -13,6 +13,8 @@ public:
 //    IfCommand() = default;
     virtual int execute(int index, vector<string> data);
 
+    IfCommand();
+
 };
 
 
