@@ -14,8 +14,6 @@ ShuntingYard::ShuntingYard(VarManager *varManager) {
     this->varManager = varManager;
 }
 
-//TODO - CHECK IF WE NEED TO SUPPORT DOUBLES OR NOT.
-
 /*
  * sets priorities to the operations
  */
@@ -71,12 +69,25 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
         } else if (isdigit(expression.at(index))) {
             //will hold the current number which is consists of the current chars.
             double temp = 0;
+            double tempDecimal = 0;
+            int exponent = 1;
             minusOp = true;
             //turns a string that consists of numbers into an integer.
             while (index < expression.length() && isdigit(expression.at(index))) {
                 temp *= 10;
                 temp += (expression.at(index) - '0');
                 index++;
+            }
+            if (index<expression.length() && expression.at(index) == '.'){
+                index++;
+                while (index <expression.length() && isdigit(expression.at
+                (index))){
+                    tempDecimal += ((double)(expression.at(index) - '0') /
+                            pow(10,exponent));
+                    exponent++;
+                    index++;
+                }
+                temp += tempDecimal;
             }
             index--;
             //push the number to the numbers' stack
@@ -117,14 +128,16 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             string variableName = "";
             minusOp = true;
             while (operationPriority(expression[index]) == 0 && index <
-                                                                expression.length()) {
-                variableName += expression[index];
+            expression.length()) {
+                if (expression.at(index) != SPACE) {
+                    variableName += expression[index];
+                }
                 index += 1;
             }
-            Expression *variable = new Var(variableName);
-            numbers.push(variable);
+            Expression *variableValue = new Number
+                    (this->varManager->getValueByName(variableName));
+            numbers.push(variableValue);
             index -= 1;
-
         }
     }
     while (!operations.empty()) {

@@ -19,6 +19,11 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     VarManager *varManager = new VarManager();
+    varManager->addToSymbolTable("xyz",10.425);
+    varManager->addToSymbolTable("idan", 0.426);
+    ShuntingYard* shuntingYard = new ShuntingYard(varManager);
+    Expression *e = shuntingYard->evaluateInfix("idan - xyz");
+    cout << e->calculate() << endl;
 
     return 0;
 }

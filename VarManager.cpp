@@ -20,32 +20,36 @@ double VarManager::getValueByName(string name) {
     if (this->symbolTable.find(name) != symbolTable.end()) {
         return this->symbolTable.find(name)->second;
     }
-    return NULL;
+    throw runtime_error("Could not find in SymbolTable");
 }
 
 double VarManager::getValueByPath(string path) {
     if (this->paths.find(path) != paths.end()) {
         return this->paths.find(path)->second;
     }
-    return NULL;
+    throw runtime_error("Could not find in Paths map");
 }
 
 string VarManager::getPathByName(string name) {
     if (this->bindedVars.find(name) != bindedVars.end()) {
         return this->bindedVars.find(name)->second;
     }
-    return "NULL";
+    throw runtime_error("Could not find in BindedVars map.");
 }
 
 void VarManager::setValueByName(string name, double value) {
     if (this->symbolTable.find(name) != symbolTable.end()) {
         this->symbolTable.find(name)->second = value;
+    } else {
+        throw runtime_error("Could not find in SymbolTable");
     }
 }
 
 void VarManager::setValueByPath(string path, double value) {
     if (this->bindedVars.find(path) != bindedVars.end()) {
         this->bindedVars.find(path)->second = value;
+    } else {
+        throw runtime_error("Could not find in BindedVars map.");
     }
 }
 
