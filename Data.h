@@ -1,26 +1,24 @@
-////
-//// Created by roy on 17/12/18.
-////
 //
-//#ifndef EX3_DATA_H
-//#define EX3_DATA_H
+// Created by roy on 17/12/18.
 //
-//#include <map>
-//#include "Command.h"
-//
-//using namespace std;
-//
-//class Data {
-//    map<string, Command> commandsMap;
-//    map<string, double> symbolTable;
-//public:
-//    Data();
-//    bool doesCommandExist(string commandName);
-//    Command getCommand(string commandName);
-//    void addToSymbolTable(string name, double value);
-//    map<string, Command> getCommandsMap();
-//    map<string, double> getSymbolTable();
-//
-//};
-//
-//#endif //EX3_DATA_H
+
+#ifndef EX3_DATA_H
+#define EX3_DATA_H
+
+#include <map>
+#include "Command.h"
+
+using namespace std;
+
+class Data {
+    static map<string, double> symbolTable;
+public:
+    Data();
+    static map<string,double> getSymbolMap();
+    static double getValue(string name);
+    static void updateValue(string name, double value);
+    static void addValue(string name, double value);
+
+};
+
+#endif //EX3_DATA_H

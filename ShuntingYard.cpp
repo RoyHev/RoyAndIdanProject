@@ -10,6 +10,8 @@
 
 using namespace std;
 
+//TODO - CHECK IF WE NEED TO SUPPORT DOUBLES OR NOT.
+
 /*
  * sets priorities to the operations
  */
@@ -66,6 +68,7 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             //will hold the current number which is consists of the current chars.
             double temp = 0;
             minusOp = true;
+            //turns a string that consists of numbers into an integer.
             while (index < expression.length() && isdigit(expression.at(index))) {
                 temp *= 10;
                 temp += (expression.at(index) - '0');
@@ -93,8 +96,8 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
                 Expression *zeroNum = new Number(0);
                 numbers.push(zeroNum);
             }
-            while (!operations.empty() && minusOp &&
-                   (operationPriority(expression.at(index)) <= operationPriority(operations.top()))) {
+            while (!operations.empty() && minusOp && (operationPriority
+            (expression.at(index)) <= operationPriority(operations.top()))) {
                 Expression *val2 = numbers.top();
                 numbers.pop();
                 Expression *val = numbers.top();
