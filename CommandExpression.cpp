@@ -9,6 +9,7 @@ CommandExpression::CommandExpression(Command* &cmd, vector<string> &lexer,
     this->cmd = cmd;
 }
 
+//TODO - return this?
 double CommandExpression::calculate() {
-    this->cmd->execute(this->index, this->lexer);
+    return this->cmd->execute(this->index, this->lexer);
 }

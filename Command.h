@@ -27,14 +27,14 @@ public:
 //TODO what to do with the member ?? how to pass it to the constructor.
 class IfCommand : public ConditionParser{
 public:
-    IfCommand() = default;
+//    IfCommand() = default;
     virtual int execute(int index, vector<string> data);
 
 };
 
 class LoopCommand: public ConditionParser{
 public:
-    LoopCommand() = default;
+    //LoopCommand() = default;
     virtual int execute(int index, vector<string> data);
 };
 
