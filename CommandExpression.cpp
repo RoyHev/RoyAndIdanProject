@@ -1,14 +1,13 @@
-////
-//// Created by roy on 17/12/18.
-////
-//#include "CommandExpression.h"
 //
+// Created by roy on 17/12/18.
 //
-//CommandExpression::CommandExpression(Command *command) {
-//    this->command = command;
-//
-//}
-//
-//double CommandExpression::calculate() {
-//    this->command->execute();
-//}
+#include "CommandExpression.h"
+#include "Command.h"
+
+CommandExpression::CommandExpression(Command &cmd, vector<string> &lexer,
+        int &index) :cmd(cmd), lexer(lexer), index(index) {
+}
+
+double CommandExpression::calculate() {
+    this->cmd.execute(this->index, this->lexer);
+}

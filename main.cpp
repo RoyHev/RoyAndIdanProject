@@ -11,11 +11,12 @@
 #include "Negative.h"
 #include "ShuntingYard.h"
 #include "Lexer.h"
-
+#include "CommandExpression.h"
 using namespace std;
 
 
 int main(int argc, char *argv[]) {
+
     /*Lexer* lexer = new Lexer();
    vector<string> v = lexer->lexerFromFile("txt.txt");
    vector<string> v1 = lexer->elementsMerge(v);

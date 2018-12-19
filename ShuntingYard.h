@@ -12,6 +12,7 @@
 #include "Divide.h"
 #include "Minus.h"
 #include "Negative.h"
+#include "Var.h"
 #include <string>
 
 using namespace std;
@@ -20,9 +21,10 @@ class ShuntingYard {
 private:
     int operationPriority(char operation);
     Expression *applyOperation(Expression *left, Expression *right, char operation);
+    bool isItAnOperator(const char& op);
 
 public:
-    ShuntingYard() {}
+    ShuntingYard() = default;
     Expression *evaluateInfix(string expression);
 };
 

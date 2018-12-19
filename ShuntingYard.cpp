@@ -87,7 +87,8 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
                 numbers.push(applyOperation(val, val2, operation));
             }
             operations.pop();
-        } else {
+            //checks if it is one of the operators - +,-,/,*
+        } else if (operationPriority(expression[index]) != 0){
             if (!minusOp) {
                 Expression *zeroNum = new Number(0);
                 numbers.push(zeroNum);
@@ -104,6 +105,18 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             }
             operations.push(expression.at(index));
             minusOp = false;
+        } else {
+            string variableName = "";
+            minusOp = true;
+            while (operationPriority(expression[index]) == 0 && index <
+            expression.length()){
+                variableName += expression[index];
+                index += 1;
+            }
+            Expression* variable = new Var(variableName);
+            numbers.push(variable);
+            index -= 1;
+
         }
     }
     while (!operations.empty()) {
@@ -116,5 +129,9 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
         numbers.push(applyOperation(val, val2, operation));
     }
     return numbers.top();
+}
+
+bool ShuntingYard::isItAnOperator(const char &op) {
+    if (op == PLU)
 }
 
