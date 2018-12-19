@@ -40,3 +40,13 @@ map<string, Expression *> Parser::commandsGenerator() {
     commandsExMap.insert(make_pair(ASSIGN, new CommandExpression(new AssignCommand(), this->lexStrings, index)));
     return commandsExMap;
 }
+
+void Parser::parseLexer() {
+    for (int i = 0; i < this->lexStrings.size(); i++) {
+        string str = lexStrings.at(i);
+        if (commandsMap.find(str) != commandsMap.end()) {
+            Expression *command = commandsMap.find(str)->second;
+            i += command->calculate();
+        }
+    }
+}

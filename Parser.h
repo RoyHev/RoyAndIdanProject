@@ -21,6 +21,8 @@ class Parser {
     int index;
 public:
     Parser(vector<string> lexStrings);
+    void parseLexer();
+
 private:
     map<string,Expression*> commandsGenerator();
 };
