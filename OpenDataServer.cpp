@@ -3,3 +3,6 @@
 //
 #include "OpenDataServer.h"
 
+OpenDataServerCommand::OpenDataServerCommand() {
+
+}

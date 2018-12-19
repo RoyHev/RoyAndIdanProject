@@ -3,6 +3,7 @@
 //
 
 #include "Parser.h"
+#include "OpenDataServer.h"
 #include <vector>
 
 #define OPEN_SERVER "openDataServer"
@@ -24,7 +25,6 @@ Parser::Parser(vector<string> lexStrings) {
 
 map<string, CommandExpression *> Parser::commandsGenerator() {
     map<string, CommandExpression *> commandsExMap;
-    commandsExMap.emplace(OPEN_SERVER,new OpenDataServerCommand());
     commandsExMap.insert(make_pair(OPEN_SERVER,new OpenDataServerCommand()));
     commandsExMap.insert(make_pair(IF_CONDITION,IfCommand));
     commandsExMap.insert(make_pair(WHILE_LOOP,LoopCommand));

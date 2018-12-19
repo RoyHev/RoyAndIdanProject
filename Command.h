@@ -38,11 +38,6 @@ public:
     virtual int execute(int index, vector<string> data);
 };
 
-class OpenDataServerCommand: public Command{
-public:
-    OpenDataServerCommand() = default;
-    virtual int execute(int index, vector<string> data);
-};
 
 class CreateVarCommand: public Command{
 public:

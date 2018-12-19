@@ -11,6 +11,6 @@
 
 class OpenDataServerCommand: public Command{
 public:
-    OpenDataServerCommand() = default;
+    OpenDataServerCommand();
     virtual int execute(int index, vector<string> data);
 };
