@@ -9,15 +9,22 @@
 #include "Command.h"
 #include <vector>
 #include <string>
+#include "OpenDataServer.h"
+#include "Command.h"
+#include "CreateVarCommand.h"
+#include "PrintCommand.h"
+#include "SleepCommand.h"
+#include "AssignCommand.h"
+#include "ConnectCommand.h"
 
 using namespace std;
 
 class CommandExpression: public Expression{
-    Command* &cmd;
+    Command* cmd;
     vector<string> &lexer;
     int &index;
 public:
-    CommandExpression(Command* &cmd, vector<string> &lexer, int &index);
+    CommandExpression(Command* cmd, vector<string> &lexer, int &index);
     virtual double calculate();
 };
 

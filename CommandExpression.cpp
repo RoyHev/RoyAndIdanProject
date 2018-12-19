@@ -4,8 +4,8 @@
 #include "CommandExpression.h"
 #include "Command.h"
 
-CommandExpression::CommandExpression(Command* &cmd, vector<string> &lexer,
-        int &index) :cmd(cmd), lexer(lexer), index(index) {
+CommandExpression::CommandExpression(Command* cmd, vector<string> &lexer,
+        int &index) : lexer(lexer), index(index) {
     this->cmd = cmd;
 }
 
