@@ -7,10 +7,14 @@
 
 
 #include "Command.h"
+#include "ShuntingYard.h"
+#include "VarManager.h"
 
 class SleepCommand: public Command{
+    VarManager* varManager;
 public:
-    SleepCommand();
+
+    SleepCommand(VarManager* varManager);
     virtual int execute(int index, vector<string> data);
 
 };

@@ -16,7 +16,7 @@ PrintCommand::PrintCommand(VarManager *varManager) {
 
 int PrintCommand::execute(int index, vector<string> data) {
     //stores the output
-    string str = data.at(index);
+    string str = data.at(index+1);
     //if its a string print it without the quotes
     if (str.at(0) == QUOTE) {
         string temp = "";
@@ -28,7 +28,7 @@ int PrintCommand::execute(int index, vector<string> data) {
         //convert the string to an Expression and print it if its a legal Expression
     else {
         ShuntingYard *sh = new ShuntingYard(varManager);
-        cout << sh->evaluateInfix(str)->calculate();
+        cout << sh->evaluateInfix(str)->calculate() << endl;
     }
     //TODO - is it true
     return NUM_OF_ARG;
