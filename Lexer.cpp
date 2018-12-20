@@ -151,8 +151,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
         //if the string describes a command, an IP address or inequality sign then push string to mergedVector.
         if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
             str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
-            str == "<=" || str == "==" || isIP(str)) {
-            //TODO - changed here if there is an error.
+            str == "<=" || str == "==" || str == "!=" || isIP(str)) {
             if (str == "=" && initialVector[i+1] == "bind"){
                 i++;
                 str += initialVector[i];
