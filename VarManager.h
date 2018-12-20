@@ -32,6 +32,12 @@ public:
 
     void setValueByPath(string path, double value);
 
+    void setPathByName(string name, string path);
+
+    bool doesExistInSymbolTable(string name);
+
+    bool doesExistInBindedVars(string name);
+
 private:
     void initializePaths();
 };

@@ -52,16 +52,62 @@ void VarManager::setValueByName(string name, double value) {
 }
 
 void VarManager::setValueByPath(string path, double value) {
-    if (this->bindedVars.find(path) != bindedVars.end()) {
-        this->bindedVars.find(path)->second = value;
+    if (this->paths.find(path) != paths.end()) {
+        this->paths.find(path)->second = value;
     } else {
-        throw runtime_error("Could not find in BindedVars map.");
+        throw runtime_error("Could not find in paths map.");
     }
 }
 
-//TODO ***
+//TODO check if these are all the paths available or not.
 void VarManager::initializePaths() {
+    this->paths.insert(pair<string,double>("/instrumentation/airspeed-indicator/indicated-speed-kt",0));
+    this->paths.insert(pair<string,double>("/instrumentation/altimeter/indicated-altitude-ft",0));
+    this->paths.insert(pair<string,double>("/instrumentation/altimeter/pressure-alt-ft",0));
+    this->paths.insert(pair<string,double>("/instrumentation/attitude-indicator/indicated-pitch-deg",0));
+    this->paths.insert(pair<string,double>("/instrumentation/attitude-indicator/indicated-roll-deg",0));
+    this->paths.insert(pair<string,double>("/instrumentation/attitude-indicator/internal-pitch-deg",0));
+    this->paths.insert(pair<string,double>("/instrumentation/attitude-indicator/internal-roll-deg",0));
+    this->paths.insert(pair<string,double>("/instrumentation/encoder/indicated-altitude-ft",0));
+    this->paths.insert(pair<string,double>("/instrumentation/encoder/pressure-alt-ft",0));
+    this->paths.insert(pair<string,double>("/instrumentation/gps/indicated-altitude-ft",0));
+    this->paths.insert(pair<string,double>("/instrumentation/gps/indicated-ground-speed-kt",0));
+    this->paths.insert(pair<string,double>("/instrumentation/gps/indicated-vertical-speed",0));
+    this->paths.insert(pair<string,double>("/instrumentation/heading-indicator/indicated-heading-deg",0));
+    this->paths.insert(pair<string,double>("/instrumentation/magnetic-compass/indicated-heading-deg",0));
+    this->paths.insert(pair<string,double>("/instrumentation/slip-skid-ball/indicated-slip-skid",0));
+    this->paths.insert(pair<string,double>("/instrumentation/turn-indicator/indicated-turn-rate",0));
+    this->paths.insert(pair<string,double>("/instrumentation/vertical-speed-indicator/indicated-speed-fpm",0));
+    this->paths.insert(pair<string,double>("/controls/flight/aileron",0));
+    this->paths.insert(pair<string,double>("/controls/flight/elevator",0));
+    this->paths.insert(pair<string,double>("/controls/flight/rudder",0));
+    this->paths.insert(pair<string,double>("/controls/flight/flaps",0));
+    this->paths.insert(pair<string,double>("/controls/engines/engine/throttle",0));
+    this->paths.insert(pair<string,double>("/engines/engine/rpm",0));
 
+}
+
+void VarManager::setPathByName(string name, string path) {
+    if (this->bindedVars.find(name) != bindedVars.end()) {
+        this->bindedVars.insert(make_pair(name, path));
+    } else {
+        throw runtime_error("Could not find in BindedVars map.");
+    }
+
+}
+
+bool VarManager::doesExistInSymbolTable(string name) {
+    if (symbolTable.find(name) == symbolTable.end()){
+        return false;
+    }
+    return true;
+}
+
+bool VarManager::doesExistInBindedVars(string name) {
+    if (bindedVars.find(name) == bindedVars.end()){
+        return false;
+    }
+    return true;
 }
 
 
