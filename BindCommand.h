@@ -6,9 +6,12 @@
 #define EX3_BINDCOMMAND_H
 
 #include "Command.h"
+#include "VarManager.h"
+
 class BindCommand : public Command{
+    VarManager* varManager;
 public:
-    BindCommand();
+    BindCommand(VarManager* varManager);
     virtual int execute(int index, vector<string> data);
 };
 

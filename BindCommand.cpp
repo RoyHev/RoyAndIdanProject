@@ -4,10 +4,24 @@
 
 #include "BindCommand.h"
 
-BindCommand::BindCommand() {
+#define QUOTE '"'
+#define NUM_OF_ARGS 1
 
+BindCommand::BindCommand(VarManager* varManager) {
+    this->varManager = varManager;
 }
 
 int BindCommand::execute(int index, vector<string> data) {
-    return 0;
+    string variableName = data.at(index - 1);
+    string bindTo = data.at(index + 1);
+    bool isPath = true;
+    if (bindTo.at(0) != QUOTE){
+        isPath = false;
+    }
+    if (isPath == false){
+        string path = varManager->getPathByName(bindTo);
+    } else {
+
+    }
+    return NUM_OF_ARGS;
 }
