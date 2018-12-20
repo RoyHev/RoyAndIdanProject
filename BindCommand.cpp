@@ -19,8 +19,10 @@ int BindCommand::execute(int index, vector<string> data) {
         isPath = false;
     }
     if (isPath == false){
-        string path = varManager->getPathByName(bindTo);
+        string pathOfVarToBindTo = varManager->getPathByName(bindTo);
+
     } else {
+
 
     }
     return NUM_OF_ARGS;

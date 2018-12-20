@@ -32,6 +32,8 @@ public:
 
     void setValueByPath(string path, double value);
 
+    void setPathByName(string name, string path);
+
 private:
     void initializePaths();
 };

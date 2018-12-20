@@ -52,15 +52,24 @@ void VarManager::setValueByName(string name, double value) {
 }
 
 void VarManager::setValueByPath(string path, double value) {
-    if (this->bindedVars.find(path) != bindedVars.end()) {
-        this->bindedVars.find(path)->second = value;
+    if (this->paths.find(path) != paths.end()) {
+        this->paths.find(path)->second = value;
     } else {
-        throw runtime_error("Could not find in BindedVars map.");
+        throw runtime_error("Could not find in paths map.");
     }
 }
 
 //TODO ***
 void VarManager::initializePaths() {
+
+}
+
+void VarManager::setPathByName(string name, string path) {
+    if (this->bindedVars.find(name) != bindedVars.end()) {
+        this->bindedVars.insert(make_pair(name, path));
+    } else {
+        throw runtime_error("Could not find in BindedVars map.");
+    }
 
 }
 
