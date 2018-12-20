@@ -2,17 +2,11 @@
 // Created by idantp on 12/20/18.
 //
 
+#include <strings.h>
 #include "ConditionParser.h"
-#include "Parser.h"
+#include "BindCommand.h"
 
 ConditionParser::ConditionParser(VarManager *varManager) {
     this->varManager = varManager;
-    Parser* parser=new Parser();
-
+    this->parser = new Parser();
 }
-int ConditionParser::execute(int index, vector<string> data) {
- //   ShuntingYard *sh = new
-   // double operand1 = data.at(index + 1);
-   // double operand2 =
-}
-

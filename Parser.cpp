@@ -60,6 +60,7 @@ void Parser::parseLexer() {
     for (int i = 0; i < this->lexStrings.size(); i++) {
         string str = lexStrings.at(i);
         if (commandsMap.find(str) != commandsMap.end()) {
+            //TODO - count instead of find?
             Expression *command = commandsMap.find(str)->second;
             i += command->calculate();
         }
