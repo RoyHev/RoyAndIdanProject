@@ -8,6 +8,7 @@
 #include "ShuntingYard.h"
 
 #define QUOTE 34
+#define NUM_OF_ARG 1
 
 PrintCommand::PrintCommand(VarManager *varManager) {
     this->varManager = varManager;
@@ -30,5 +31,5 @@ int PrintCommand::execute(int index, vector<string> data) {
         cout << sh->evaluateInfix(str)->calculate();
     }
     //TODO - is it true
-    return 1;
+    return NUM_OF_ARG;
 }

@@ -4,6 +4,8 @@
 
 #include "AssignCommand.h"
 #include "ShuntingYard.h"
+#define NUM_OF_ARG 1
+
 
 AssignCommand::AssignCommand(VarManager *varManager) {
     this->varManager = varManager;
@@ -21,5 +23,5 @@ int AssignCommand::execute(int index, vector<string> data) {
 //    string pathName = varManager->getPathByName(varName);
 //    this->varManager->setValueByPath(pathName, result);
     //TODO is it true?
-    return 1;
+    return NUM_OF_ARG;
 }
