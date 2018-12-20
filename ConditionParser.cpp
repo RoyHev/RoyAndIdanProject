@@ -14,9 +14,33 @@
 #define INEQUALITY "!="
 #define WHILE_LOOP "while"
 #define IF_CONDITION "if"
+#define BRACKET_CLOSER "}"
+#define BRACKET_OPENER "{"
+
 
 ConditionParser::ConditionParser(VarManager *varManager) {
     this->varManager = varManager;
+}
+
+int ConditionParser::indexIncrement(int i, vector<string> data) {
+    int increments = 0;
+    while (data.at(i) != BRACKET_OPENER) {
+        increments++;
+        i++;
+    }
+    increments++;
+    i++;
+    int bracketsRatio = 1;
+    while (bracketsRatio != 0) {
+        if (data.at(i) == BRACKET_OPENER) {
+            bracketsRatio++;
+        } else if (data.at(i) == BRACKET_CLOSER) {
+            bracketsRatio--;
+        }
+        increments++;
+        i++;
+    }
+    return increments;
 }
 
 int ConditionParser::execute(int index, vector<string> data) {
@@ -33,26 +57,61 @@ int ConditionParser::execute(int index, vector<string> data) {
     string strOperand2 = data.at(index + 3);
     double operand2 = sh->evaluateInfix(strOperand2)->calculate();
     string operation = data.at(index + 2);
-
+    int indexCopy = index;
     if (operation == GREATER) {
-        if (operand1 > operand2) {}
-        else {
+        if (operand1 > operand2) {
+            if(isLoop){
 
+            }
+        }
+        else {
+            return indexIncrement(indexCopy,data);
         }
     } else if (operation == GREATER_EQUAL) {
-        if (operand1 >= operand2) {}
-        else {}
+        if (operand1 >= operand2) {
+            if(isLoop){
+
+            }
+        }
+        else {
+            return indexIncrement(indexCopy,data);
+        }
     } else if (operation == LOWER) {
-        if (operand1 < operand2) {}
-        else {}
+        if (operand1 < operand2) {
+            if(isLoop){
+
+            }
+        }
+        else {
+            return indexIncrement(indexCopy,data);
+        }
     } else if (operation == LOWER_EQUAL) {
-        if (operand1 <= operand2) {}
-        else {}
+        if (operand1 <= operand2) {
+            if(isLoop){
+
+            }
+        }
+        else {
+            return indexIncrement(indexCopy,data);
+        }
     } else if (operation == EQUALITY) {
-        if (operand1 == operand2) {}
-        else {}
+        if (operand1 == operand2) {
+            if(isLoop){
+
+            }
+        }
+        else {
+            return indexIncrement(indexCopy,data);
+        }
     } else if (operation == INEQUALITY) {
-        if (operand1 != operand2) {}
-        else {}
+        if (operand1 != operand2) {
+            if(isLoop){
+
+            }
+        }
+        else {
+            return indexIncrement(indexCopy,data);
+        }
     }
 }
+
