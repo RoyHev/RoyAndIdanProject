@@ -20,7 +20,7 @@
 
 class ConditionParser : public Command {
     VarManager *varManager;
-    Parser* parser;
+    Parser *parser;
 
 public:
     ConditionParser(VarManager *varManager);
