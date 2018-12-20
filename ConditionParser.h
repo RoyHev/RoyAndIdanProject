@@ -11,7 +11,6 @@
 #include <string>
 
 class ConditionParser: public Command{
-protected:
     vector<Command*> commandsVector;
 public:
     virtual int execute(int index, vector<string> data) = 0;

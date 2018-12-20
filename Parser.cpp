@@ -40,7 +40,7 @@ map<string, Expression *> Parser::commandsGenerator() {
     commandsExMap.insert(make_pair(VAR, new CommandExpression(new CreateVarCommand(), this->lexStrings, index)));
     commandsExMap.insert(make_pair(PRINT, new CommandExpression(new PrintCommand(varManager), this->lexStrings, index)));
     commandsExMap.insert(make_pair(SLEEP, new CommandExpression(new SleepCommand(), this->lexStrings, index)));
-    commandsExMap.insert(make_pair(ASSIGN, new CommandExpression(new AssignCommand(), this->lexStrings, index)));
+    commandsExMap.insert(make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager), this->lexStrings, index)));
     return commandsExMap;
 }
 

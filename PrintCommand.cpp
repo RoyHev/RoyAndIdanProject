@@ -14,7 +14,6 @@ PrintCommand::PrintCommand(VarManager *varManager) {
 }
 
 int PrintCommand::execute(int index, vector<string> data) {
-    index++;
     //stores the output
     string str = data.at(index);
     //if its a string print it without the quotes
@@ -30,4 +29,6 @@ int PrintCommand::execute(int index, vector<string> data) {
         ShuntingYard *sh = new ShuntingYard(varManager);
         cout << sh->evaluateInfix(str)->calculate();
     }
+    //TODO - is it true
+    return 1;
 }

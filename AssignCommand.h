@@ -7,10 +7,12 @@
 
 
 #include "Command.h"
+#include "VarManager.h"
 
 class AssignCommand: public Command{
+    VarManager *varManager;
 public:
-    AssignCommand();
+    AssignCommand(VarManager *varManager);
     virtual int execute(int index, vector<string> data);
 
 };

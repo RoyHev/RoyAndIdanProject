@@ -3,11 +3,23 @@
 //
 
 #include "AssignCommand.h"
+#include "ShuntingYard.h"
 
-AssignCommand::AssignCommand() {
-
+AssignCommand::AssignCommand(VarManager *varManager) {
+    this->varManager = varManager;
 }
 
 int AssignCommand::execute(int index, vector<string> data) {
-    return 0;
+    //TODO to update in the server
+    ShuntingYard *sh = new ShuntingYard(varManager);
+    string resultStr = data.at(index + 1);
+    double result = sh->evaluateInfix(resultStr)->calculate();
+    string varName = data.at(index - 1);
+    //update symbolTable map.
+    this->varManager->setValueByName(varName, result);
+    //update paths map
+//    string pathName = varManager->getPathByName(varName);
+//    this->varManager->setValueByPath(pathName, result);
+    //TODO is it true?
+    return 1;
 }
