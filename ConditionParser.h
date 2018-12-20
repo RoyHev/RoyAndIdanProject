@@ -18,6 +18,8 @@
 #include "OpenDataServer.h"
 
 
+
+
 class ConditionParser : public Command {
     VarManager *varManager;
 public:

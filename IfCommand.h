@@ -5,14 +5,14 @@
 #ifndef EX3_IFCOMMAND_H
 #define EX3_IFCOMMAND_H
 
-
 #include "ConditionParser.h"
 
-class IfCommand : public ConditionParser{
+class IfCommand : public ConditionParser {
+    VarManager *varManager;
 public:
-    virtual int execute(int index, vector<string> data);
-    IfCommand();
+    IfCommand(VarManager *varManager);
 
+    virtual int execute(int index, vector<string> data);
 };
 
 

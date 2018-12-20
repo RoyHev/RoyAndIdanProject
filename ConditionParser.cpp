@@ -58,60 +58,69 @@ int ConditionParser::execute(int index, vector<string> data) {
     double operand2 = sh->evaluateInfix(strOperand2)->calculate();
     string operation = data.at(index + 2);
     int indexCopy = index;
+
     if (operation == GREATER) {
         if (operand1 > operand2) {
-            if(isLoop){
+            if (isLoop) {
+
+            } else {
 
             }
-        }
-        else {
-            return indexIncrement(indexCopy,data);
+        } else {
+            return indexIncrement(indexCopy, data);
         }
     } else if (operation == GREATER_EQUAL) {
         if (operand1 >= operand2) {
-            if(isLoop){
+            if (isLoop) {
+
+            } else {
 
             }
-        }
-        else {
-            return indexIncrement(indexCopy,data);
+        } else {
+            return indexIncrement(indexCopy, data);
         }
     } else if (operation == LOWER) {
         if (operand1 < operand2) {
-            if(isLoop){
+            if (isLoop) {
+
+            } else {
 
             }
-        }
-        else {
-            return indexIncrement(indexCopy,data);
+        } else {
+            return indexIncrement(indexCopy, data);
         }
     } else if (operation == LOWER_EQUAL) {
         if (operand1 <= operand2) {
-            if(isLoop){
+            if (isLoop) {
+
+            } else {
 
             }
-        }
-        else {
-            return indexIncrement(indexCopy,data);
+        } else {
+            return indexIncrement(indexCopy, data);
         }
     } else if (operation == EQUALITY) {
         if (operand1 == operand2) {
-            if(isLoop){
+            if (isLoop) {
+
+            } else {
 
             }
-        }
-        else {
-            return indexIncrement(indexCopy,data);
+        } else {
+            return indexIncrement(indexCopy, data);
         }
     } else if (operation == INEQUALITY) {
         if (operand1 != operand2) {
-            if(isLoop){
+            if (isLoop) {
+
+            } else {
 
             }
+        } else {
+            return indexIncrement(indexCopy, data);
         }
-        else {
-            return indexIncrement(indexCopy,data);
-        }
+    } else {
+        throw "Syntax Error - Invalid operator"
     }
 }
 

@@ -4,9 +4,7 @@
 
 #include "LoopCommand.h"
 
-LoopCommand::LoopCommand() {
 
-}
 
 int LoopCommand::execute(int index, vector<string> data) {
     return 0;

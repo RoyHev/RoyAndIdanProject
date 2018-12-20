@@ -5,12 +5,13 @@
 #ifndef EX3_LOOPCOMMAND_H
 #define EX3_LOOPCOMMAND_H
 
-
 #include "ConditionParser.h"
 
-class LoopCommand: public ConditionParser{
+class LoopCommand : public ConditionParser {
+    VarManager *varManager;
 public:
-    LoopCommand();
+    LoopCommand(VarManager *varManager);
+
     virtual int execute(int index, vector<string> data);
 };
 
