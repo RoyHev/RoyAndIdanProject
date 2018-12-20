@@ -20,12 +20,14 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-//    Lexer *lexer = new Lexer();
-//    vector<string> v = lexer->lexerFromFile("txt.txt");
-//    lexer->elementsMerge(v);
-//    for (string str:v) {
-//        cout << str << endl;
-//    }
+    Lexer *lexer = new Lexer();
+    vector<string> v = lexer->lexerFromFile("text.txt");
+    for (string str:v) {
+        cout << str << endl;
+    }
+    return 0;
+}
+/*
         vector<string> v;
 //    v.push_back("nothing");
 //    v.push_back("idan - idan");
@@ -52,4 +54,4 @@ int main(int argc, char *argv[]) {
 //    cout << e->calculate() << endl;
     cout << varManager->getValueByName("openDataServer1")<< endl;
     return 0;
-}
+}*/

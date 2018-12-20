@@ -136,7 +136,7 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
             }
         }
     }
-    return lexer;
+    return elementsMerge(lexer);
 }
 
 vector<string> Lexer::elementsMerge(vector<string> initialVector) {
@@ -152,8 +152,12 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
         if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
             str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
             str == "<=" || str == "==" || isIP(str)) {
+            //TODO - changed here if there is an error.
+            if (str == "=" && initialVector[i+1] == "bind"){
+                i++;
+                str += initialVector[i];
+            }
             mergedVector.push_back(str);
-            //flag = 1
             flag = 1;
             continue;
         }
