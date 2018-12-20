@@ -9,10 +9,16 @@ VarManager::VarManager() {
 }
 
 void VarManager::addToSymbolTable(string name, double value) {
+    if (symbolTable.find(name) != symbolTable.end()){
+        throw runtime_error ("Variable already exists with that name.");
+    }
     this->symbolTable.insert(make_pair(name, value));
 }
 
 void VarManager::addToBindedVars(string name, string path) {
+    if (bindedVars.find(name) != bindedVars.end()){
+        throw runtime_error ("Variable already exists with that name.");
+    }
     this->bindedVars.insert(make_pair(name, path));
 }
 
