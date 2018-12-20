@@ -25,4 +25,5 @@ int AssignCommand::execute(int index, vector<string> data) {
 //    this->varManager->setValueByPath(pathName, result);
     //TODO is it true?
     return NUM_OF_ARG;
+
 }

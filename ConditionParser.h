@@ -11,9 +11,11 @@
 #include <string>
 
 class ConditionParser: public Command{
-    vector<Command*> commandsVector;
+    VarManager *varManager;
+    map<string, Expression *> commandsMap;
 public:
-    virtual int execute(int index, vector<string> data) = 0;
+    ConditionParser(VarManager *varManager);
+    virtual int execute(int index, vector<string> data);
 
 };
 #endif //EX3_CONDITIONPARSER_H
