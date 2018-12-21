@@ -9,7 +9,7 @@
 #include "Command.h"
 #include <vector>
 #include <string>
-#include "OpenDataServer.h"
+#include "OpenDataServerCommand.h"
 #include "Command.h"
 #include "CreateVarCommand.h"
 #include "PrintCommand.h"

@@ -2,8 +2,8 @@
 // Created by idantp on 12/19/18.
 //
 
-#ifndef EX3_OPENDATASERVER_H
-#define EX3_OPENDATASERVER_H
+#ifndef EX3_OPENDATASERVERCOMMAND_H
+#define EX3_OPENDATASERVERCOMMAND_H
 
 class OpenDataServerCommand : public Command {
 public:
@@ -13,4 +13,4 @@ public:
 };
 
 
-#endif //EX3_OPENDATASERVER_H
+#endif //EX3_OPENDATASERVERCOMMAND_H

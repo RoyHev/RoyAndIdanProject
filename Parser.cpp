@@ -6,7 +6,7 @@
 #include <vector>
 #include "CommandExpression.h"
 #include "Command.h"
-#include "OpenDataServer.h"
+#include "OpenDataServerCommand.h"
 #include "LoopCommand.h"
 #include "ConditionParser.h"
 #include "IfCommand.h"

@@ -15,7 +15,7 @@
 #include "Expression.h"
 #include "BindCommand.h"
 #include <strings.h>
-#include "OpenDataServer.h"
+#include "OpenDataServerCommand.h"
 
 
 class ConditionParser : public Command {
