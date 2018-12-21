@@ -57,12 +57,19 @@ map<string, Expression *> Parser::commandsGenerator() {
 }
 
 void Parser::parseLexer() {
-    for (int i = 0; i < this->lexStrings.size(); i++) {
-        string str = lexStrings.at(i);
-        if (commandsMap.find(str) != commandsMap.end()) {
-            //TODO - count instead of find?
-            Expression *command = commandsMap.find(str)->second;
-            i += command->calculate();
-        }
-    }
+    this->index = 0;
+    string temp;
+    //go over the lexer and execute only if it is a command.
+   while (index < this->lexStrings.size()){
+       temp = this->lexStrings[index];
+       //not a command, increase the index and continue to next iteration.
+       if (this->commandsMap.find(temp) == commandsMap.end()){
+           index++;
+           continue;
+       }
+       //otherwise, it is a command, index is moved as many as the command args
+       Expression* command = this->commandsMap.find(temp)->second;
+       index += command->calculate();
+       index++;
+   }
 }
