@@ -120,7 +120,7 @@ int ConditionParser::execute(int index, vector<string> data) {
             return indexIncrement(indexCopy, data);
         }
     } else {
-        throw "Syntax Error - Invalid operator"
+        throw runtime_error("Syntax Error - Invalid operator.");
     }
 }
 
