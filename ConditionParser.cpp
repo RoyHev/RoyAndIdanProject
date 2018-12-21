@@ -23,12 +23,9 @@ ConditionParser::ConditionParser(VarManager *varManager) {
 }
 
 int ConditionParser::indexIncrement(int i, vector<string> data) {
-    int increments = 0;
     while (data.at(i) != BRACKET_OPENER) {
-        increments++;
         i++;
     }
-    increments++;
     i++;
     int bracketsRatio = 1;
     while (bracketsRatio != 0) {
@@ -36,27 +33,25 @@ int ConditionParser::indexIncrement(int i, vector<string> data) {
             bracketsRatio++;
         } else if (data.at(i) == BRACKET_CLOSER) {
             bracketsRatio--;
+            //don't push the last brackets
+            if (bracketsRatio == 0) {
+                continue;
+            }
         }
-        increments++;
         i++;
     }
-    return increments;
+    return i;
 }
 
 //will execute one iteration
 int ConditionParser::execute(int index, vector<string> data) {
-    int increments = 0;
     vector<string> scopeLexerVector;
     while (data.at(index) != BRACKET_OPENER) {
-        increments++;
         index++;
     }
-    increments++;
     index++;
     int bracketsRatio = 1;
     while (bracketsRatio != 0) {
-        increments++;
-        scopeLexerVector.push_back(data.at(index));
         if (data.at(index) == BRACKET_OPENER) {
             bracketsRatio++;
         } else if (data.at(index) == BRACKET_CLOSER) {
@@ -71,7 +66,7 @@ int ConditionParser::execute(int index, vector<string> data) {
     }
     Parser *parser = new Parser(scopeLexerVector, varManager);
     parser->parseLexer();
-    return increments;
+    return index;
 }
 
 bool ConditionParser::conditionCheck(int i, vector<string> data) {

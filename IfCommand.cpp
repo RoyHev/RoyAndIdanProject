@@ -13,7 +13,7 @@ int IfCommand::execute(int index, vector<string> data) {
     } else {
         counter = conditionParser->indexIncrement(i, data);
     }
-    return counter;
+    return counter-index;
 }
 
 IfCommand::IfCommand(VarManager *varManager) : ConditionParser(varManager) {
