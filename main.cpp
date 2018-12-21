@@ -24,7 +24,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
     Lexer *lexer = new Lexer();
     VarManager *varManager = new VarManager();
-    vector<string> v = lexer->lexerFromFile("text.txt");
+    vector<string> v = lexer->lexerFromFile("txt.txt");
     Parser* parser = new Parser(v,varManager);
     parser->parseLexer();
 //    for (string str:v) {

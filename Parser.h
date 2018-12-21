@@ -23,8 +23,6 @@ class Parser {
 public:
     Parser(vector<string> lexStrings,VarManager *varManager);
     void parseLexer();
-
-private:
     map<string,Expression*> commandsGenerator();
 };
 
