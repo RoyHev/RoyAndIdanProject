@@ -43,84 +43,84 @@ int ConditionParser::indexIncrement(int i, vector<string> data) {
     return increments;
 }
 
+//will execute one iteration
 int ConditionParser::execute(int index, vector<string> data) {
-    bool isLoop = false;
-    //Must get "while" or "if"
-    string conditionStr = data.at(index);
-    if (conditionStr == WHILE_LOOP) {
-        isLoop = true;
+    int increments = 0;
+    vector<string> scopeLexerVector;
+    while (data.at(index) != BRACKET_OPENER) {
+        increments++;
+        index++;
     }
+    increments++;
+    index++;
+    int bracketsRatio = 1;
+    while (bracketsRatio != 0) {
+        increments++;
+        scopeLexerVector.push_back(data.at(index));
+        if (data.at(index) == BRACKET_OPENER) {
+            bracketsRatio++;
+        } else if (data.at(index) == BRACKET_CLOSER) {
+            bracketsRatio--;
+            //don't push the last brackets
+            if (bracketsRatio == 0) {
+                continue;
+            }
+        }
+        scopeLexerVector.push_back(data.at(index));
+        index++;
+    }
+    Parser *parser = new Parser(scopeLexerVector, varManager);
+    parser->parseLexer();
+    return increments;
+}
+
+bool ConditionParser::conditionCheck(int i, vector<string> data) {
     Parser *scopeParser = new Parser(data, varManager);
     ShuntingYard *sh = new ShuntingYard(varManager);
-    string strOperand1 = data.at(index + 1);
+    string strOperand1 = data.at(i + 1);
     double operand1 = sh->evaluateInfix(strOperand1)->calculate();
-    string strOperand2 = data.at(index + 3);
+    string strOperand2 = data.at(i + 3);
     double operand2 = sh->evaluateInfix(strOperand2)->calculate();
-    string operation = data.at(index + 2);
-    int indexCopy = index;
-
+    string operation = data.at(i + 2);
     if (operation == GREATER) {
         if (operand1 > operand2) {
-            if (isLoop) {
-
-            } else {
-
-            }
+            return true;
         } else {
-            return indexIncrement(indexCopy, data);
+            return false;
         }
     } else if (operation == GREATER_EQUAL) {
         if (operand1 >= operand2) {
-            if (isLoop) {
-
-            } else {
-
-            }
+            return true;
         } else {
-            return indexIncrement(indexCopy, data);
+            return false;
         }
     } else if (operation == LOWER) {
         if (operand1 < operand2) {
-            if (isLoop) {
-
-            } else {
-
-            }
+            return true;
         } else {
-            return indexIncrement(indexCopy, data);
+            return false;
         }
     } else if (operation == LOWER_EQUAL) {
         if (operand1 <= operand2) {
-            if (isLoop) {
-
-            } else {
-
-            }
+            return true;
         } else {
-            return indexIncrement(indexCopy, data);
+            return false;
         }
     } else if (operation == EQUALITY) {
         if (operand1 == operand2) {
-            if (isLoop) {
-
-            } else {
-
-            }
+            return true;
         } else {
-            return indexIncrement(indexCopy, data);
+            return false;
         }
     } else if (operation == INEQUALITY) {
         if (operand1 != operand2) {
-            if (isLoop) {
-
-            } else {
-
-            }
+            return true;
         } else {
-            return indexIncrement(indexCopy, data);
+            return false;
         }
     } else {
         throw runtime_error("Syntax Error - Invalid operator.");
     }
+
 }
 

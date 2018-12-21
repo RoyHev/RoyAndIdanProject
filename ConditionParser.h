@@ -18,15 +18,16 @@
 #include "OpenDataServer.h"
 
 
-
-
 class ConditionParser : public Command {
+    VarManager *varManager;
 public:
-    ConditionParser();
+    ConditionParser(VarManager *varManager);
 
     virtual int execute(int index, vector<string> data);
 
     int indexIncrement(int i, vector<string> data);
+
+    bool conditionCheck(int i, vector<string> data);
 };
 
 #endif //EX3_CONDITIONPARSER_H
