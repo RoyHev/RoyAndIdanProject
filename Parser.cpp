@@ -29,8 +29,8 @@ using namespace std;
 Parser::Parser(vector<string> lexStrings, VarManager *varManager) {
     this->lexStrings = lexStrings;
     this->index = 0;
-    this->commandsMap = commandsGenerator();
     this->varManager = varManager;
+    this->commandsMap = commandsGenerator();
 }
 
 map<string, Expression *> Parser::commandsGenerator() {
