@@ -21,9 +21,8 @@
 
 
 class ConditionParser : public Command {
-    VarManager *varManager;
 public:
-    ConditionParser(VarManager *varManager);
+    ConditionParser();
 
     virtual int execute(int index, vector<string> data);
 
