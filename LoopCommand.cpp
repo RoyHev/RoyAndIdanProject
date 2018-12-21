@@ -11,10 +11,10 @@ int LoopCommand::execute(int index, vector<string> data) {
     int temp;
     ConditionParser *conditionParser = new ConditionParser(varManager);
     while (conditionParser->conditionCheck(i, data)) {
-        temp = conditionParser->execute(index, data);
+        counter = conditionParser->execute(index, data);
     }
     counter = conditionParser->indexIncrement(i, data);
-    return counter;
+    return counter-index;
 }
 
 LoopCommand::LoopCommand(VarManager *varManager) : ConditionParser(varManager) {
