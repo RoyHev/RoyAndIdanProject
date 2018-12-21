@@ -27,9 +27,9 @@ int main(int argc, char *argv[]) {
     vector<string> v = lexer->lexerFromFile("text.txt");
     Parser* parser = new Parser(v,varManager);
     parser->parseLexer();
-    for (string str:v) {
-        cout << str << endl;
-    }
+//    for (string str:v) {
+//        cout << str << endl;
+//    }
 
 //        vector<string> v;
 //    v.push_back("nothing");

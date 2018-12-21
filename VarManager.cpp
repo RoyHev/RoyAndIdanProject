@@ -9,8 +9,13 @@ VarManager::VarManager() {
 }
 
 void VarManager::addToSymbolTable(string name, double value) {
+    if (symbolTable.empty()){
+        this->symbolTable.insert(make_pair(name,value));
+        return;
+    }
     if (symbolTable.find(name) != symbolTable.end()){
-        throw runtime_error ("Variable already exists with that name.");
+    return;//    throw runtime_error ("Variable already exists with that name
+    // .");
     }
     this->symbolTable.insert(make_pair(name, value));
 }
