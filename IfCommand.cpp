@@ -8,6 +8,7 @@ int IfCommand::execute(int index, vector<string> data) {
     return 0;
 }
 
-IfCommand::IfCommand(VarManager *varManager) {
+IfCommand::IfCommand(VarManager *varManager) : ConditionParser(varManager) {
     this->varManager = varManager;
+
 }

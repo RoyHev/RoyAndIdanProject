@@ -18,7 +18,8 @@
 #define BRACKET_OPENER "{"
 
 
-ConditionParser::ConditionParser() {
+ConditionParser::ConditionParser(VarManager *varManager) {
+    this->varManager = varManager;
 }
 
 int ConditionParser::indexIncrement(int i, vector<string> data) {
@@ -119,7 +120,7 @@ int ConditionParser::execute(int index, vector<string> data) {
             return indexIncrement(indexCopy, data);
         }
     } else {
-        throw "Syntax Error - Invalid operator";
+        throw runtime_error("Syntax Error - Invalid operator.");
     }
 }
 
