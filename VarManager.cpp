@@ -6,6 +6,7 @@
 
 VarManager::VarManager() {
     initializePaths();
+    initializeXMLVector();
 }
 
 void VarManager::addToSymbolTable(string name, double value) {
@@ -108,6 +109,36 @@ bool VarManager::doesExistInBindedVars(string name) {
         return false;
     }
     return true;
+}
+
+void VarManager::initializeXMLVector() {
+    this->pathsFromXML.emplace_back("/instrumentation/airspeed-indicator/indicated-speed-kt");
+    this->pathsFromXML.emplace_back("/instrumentation/altimeter/indicated-altitude-ft");
+    this->pathsFromXML.emplace_back("/instrumentation/altimeter/pressure-alt-ft");
+    this->pathsFromXML.emplace_back("/instrumentation/attitude-indicator/indicated-pitch-deg");
+    this->pathsFromXML.emplace_back("/instrumentation/attitude-indicator/indicated-roll-deg");
+    this->pathsFromXML.emplace_back("/instrumentation/attitude-indicator/internal-pitch-deg");
+    this->pathsFromXML.emplace_back("/instrumentation/attitude-indicator/internal-roll-deg");
+    this->pathsFromXML.emplace_back("/instrumentation/encoder/indicated-altitude-ft");
+    this->pathsFromXML.emplace_back("/instrumentation/encoder/pressure-alt-ft");
+    this->pathsFromXML.emplace_back("/instrumentation/gps/indicated-altitude-ft");
+    this->pathsFromXML.emplace_back("/instrumentation/gps/indicated-ground-speed-kt");
+    this->pathsFromXML.emplace_back("/instrumentation/gps/indicated-vertical-speed");
+    this->pathsFromXML.emplace_back("/instrumentation/heading-indicator/indicated-heading-deg");
+    this->pathsFromXML.emplace_back("/instrumentation/magnetic-compass/indicated-heading-deg");
+    this->pathsFromXML.emplace_back("/instrumentation/slip-skid-ball/indicated-slip-skid");
+    this->pathsFromXML.emplace_back("/instrumentation/turn-indicator/indicated-turn-rate");
+    this->pathsFromXML.emplace_back("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
+    this->pathsFromXML.emplace_back("/controls/flight/aileron");
+    this->pathsFromXML.emplace_back("/controls/flight/elevator");
+    this->pathsFromXML.emplace_back("/controls/flight/rudder");
+    this->pathsFromXML.emplace_back("/controls/flight/flaps");
+    this->pathsFromXML.emplace_back("/controls/engines/engine/throttle");
+    this->pathsFromXML.emplace_back("/engines/engine/rpm");
+}
+
+void VarManager::updateXMLVars(char *buffer) {
+
 }
 
 

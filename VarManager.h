@@ -7,16 +7,20 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 class VarManager {
     map<string, double> symbolTable;
     map<string, string> bindedVars;
+    vector<string> pathsFromXML;
     // TODO - from xml
     map<string, double> paths;
 public:
     VarManager();
+
+    void updateXMLVars(char buffer[]);
 
     void addToSymbolTable(string name, double value);
 
@@ -39,6 +43,7 @@ public:
     bool doesExistInBindedVars(string name);
 
 private:
+    void initializeXMLVector();
     void initializePaths();
 };
 
