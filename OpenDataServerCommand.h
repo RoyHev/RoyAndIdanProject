@@ -11,14 +11,18 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <netinet/in.h>
-
 #include <string.h>
-
+#include <pthread.h>
+#include <thread>
 #include <sys/socket.h>
 
+#include "ShuntingYard.h"
+#include "VarManager.h"
+
 class OpenDataServerCommand : public Command {
+    VarManager* varManager;
 public:
-    OpenDataServerCommand();
+    OpenDataServerCommand(VarManager* varManager);
 
     virtual int execute(int index, vector<string> data);
 };

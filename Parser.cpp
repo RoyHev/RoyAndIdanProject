@@ -38,7 +38,7 @@ map<string, Expression *> Parser::commandsGenerator() {
     commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
 
     commandsExMap.insert(
-            make_pair(OPEN_SERVER, new CommandExpression(new OpenDataServerCommand(), this->lexStrings, index)));
+            make_pair(OPEN_SERVER, new CommandExpression(new OpenDataServerCommand(varManager), this->lexStrings, index)));
     commandsExMap.insert(
             make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager), this->lexStrings, index)));
     commandsExMap.insert(
