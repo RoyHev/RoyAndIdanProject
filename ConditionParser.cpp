@@ -49,7 +49,7 @@ int ConditionParser::indexIncrement(int i, vector<string> data) {
 }
 
 /*
- * the function gets a vector of data which contains at least one condition or loop
+ * the function gets a vector of data which contains at least one loop,
  * and an index that points to the first condition string.
  * the function creates a new vector<string> that describes the condition's scope only,
  * and parses it.

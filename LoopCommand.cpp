@@ -4,7 +4,6 @@
 
 #include "LoopCommand.h"
 
-
 int LoopCommand::execute(int index, vector<string> data) {
     int i = index;
     int counter = 0;
@@ -14,7 +13,7 @@ int LoopCommand::execute(int index, vector<string> data) {
         counter = conditionParser->execute(index, data);
     }
     counter = conditionParser->indexIncrement(i, data);
-    return counter-index;
+    return counter - index;
 }
 
 LoopCommand::LoopCommand(VarManager *varManager) : ConditionParser(varManager) {
