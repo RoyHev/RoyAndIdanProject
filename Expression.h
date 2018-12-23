@@ -5,16 +5,9 @@
 #ifndef EX3_EXPRESSION_H
 #define EX3_EXPRESSION_H
 
-class Expression{
+class Expression {
 public:
     virtual double calculate() = 0;
-//    bool operator == (const Expression& other) const;
-//    bool operator != (const Expression& other) const;
-//    bool operator >= (const Expression& other) const;
-//    bool operator <= (const Expression& other) const;
-//    bool operator > (const Expression& other) const;
-//    bool operator < (const Expression& other) const;
-
 };
 
 #endif //EX3_EXPRESSION_H
