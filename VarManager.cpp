@@ -3,8 +3,10 @@
 //
 
 #include "VarManager.h"
+#include "ShuntingYard.h"
 
 #define COMMA ','
+#define ENTER '\n'
 #define END_OF_LINE '\0'
 #define SIZE_BUFFER 1024
 
@@ -144,17 +146,18 @@ void VarManager::updateXMLVars(char buffer[]) {
     string temp = "";
     int counter = 0;
     int flag = 0;
+    ShuntingYard *sh = new ShuntingYard(this);
     for (int i = 0; i < SIZE_BUFFER; i++) {
-        if (buffer[i] == END_OF_LINE || i == (SIZE_BUFFER - 1)) {
+        if (buffer[i] == END_OF_LINE || i == (SIZE_BUFFER - 1) || buffer[i] == ENTER) {
             flag = 1;
         }
         if (buffer[i] == COMMA || flag == 1) {
             string path = this->pathsFromXML.at(counter);
-            setValueByPath(path, stod(temp));
+            setValueByPath(path, sh->evaluateInfix(temp)->calculate());
             for (auto &it : bindedVars) {
                 if (it.second == path) {
                     string varName = it.first;
-                    setValueByName(varName, stod(temp));
+                    setValueByName(varName, sh->evaluateInfix(temp)->calculate());
                 }
             }
             if (flag == 1) {
@@ -162,6 +165,7 @@ void VarManager::updateXMLVars(char buffer[]) {
             }
             counter++;
             temp = "";
+            continue;
         }
         temp += buffer[i];
     }
