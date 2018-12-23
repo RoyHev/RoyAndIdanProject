@@ -44,6 +44,7 @@ public:
 
 private:
     void initializeXMLVector();
+
     void initializePaths();
 };
 

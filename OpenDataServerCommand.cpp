@@ -65,16 +65,13 @@ static void* openSocket(void* parameters){
         /* If connection is established then start communicating */
         bzero(buffer, SIZE_BUFFER);
         n = read(newsockfd, buffer, SIZE_BUFFER);
-
         if (n < 0) {
             perror("ERROR reading from socket");
             exit(1);
         }
-
         //TODO - UPDATE THE VARMANAGER'S VALUES.
-
         printf("Here is the message: %s\n", buffer);
-
+        myParameters->varManager->updateXMLVars(buffer);
         /* Write a response to the client */
         n = write(newsockfd, "I got your message", 18);
 
