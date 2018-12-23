@@ -23,7 +23,6 @@ int AssignCommand::execute(int index, vector<string> data) {
     //update paths map
 //    string pathName = varManager->getPathByName(varName);
 //    this->varManager->setValueByPath(pathName, result);
-    //TODO is it true?
     return NUM_OF_ARG;
 
 }
