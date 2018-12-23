@@ -24,22 +24,21 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
     VarManager *varManager = new VarManager();
-    vector<string> v;
-    v.push_back("openDataServer");
-    v.push_back("400+5*1000");
-    v.push_back("10");
-    OpenDataServerCommand *serverCommand = new OpenDataServerCommand(varManager);
-    serverCommand->execute(0,v);
-    while(true){
 
-    }
-//    Lexer *lexer = new Lexer();
-//    vector<string> v = lexer->lexerFromFile("text.txt");
-//    Parser* parser = new Parser(v,varManager);
-//    parser->parseLexer();
-//    for (string str:v) {
-//        cout << str << endl;
+//    varManager->addToBindedVars("xy", "/instrumentation/altimeter/pressure-alt-ft");
+//    varManager->addToSymbolTable("xy",0);
+//    v.push_back("openDataServer");
+//    v.push_back("400+5*1000");
+//    v.push_back("10");
+//    OpenDataServerCommand *serverCommand = new OpenDataServerCommand(varManager);
+//    serverCommand->execute(0,v);
+//    while(true){
+//
 //    }
+    Lexer *lexer = new Lexer();
+    vector<string> v = lexer->lexerFromFile("text.txt");
+    Parser* parser = new Parser(v,varManager);
+    parser->parseLexer();
 
 //        vector<string> v;
 //    v.push_back("nothing");

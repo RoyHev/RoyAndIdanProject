@@ -46,6 +46,8 @@ public:
 
     const map<string, string> &getBindedVars() const;
 
+    const map<string, double> &getPaths() const;
+
 private:
     void initializeXMLVector();
 

@@ -43,6 +43,10 @@ double VarManager::getValueByPath(string path) {
     throw runtime_error("Could not find in Paths map");
 }
 
+const map<string, double> &VarManager::getPaths() const {
+    return paths;
+}
+
 string VarManager::getPathByName(string name) {
     if (this->bindedVars.find(name) != bindedVars.end()) {
         return this->bindedVars.find(name)->second;
