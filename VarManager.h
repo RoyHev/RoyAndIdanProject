@@ -40,7 +40,11 @@ public:
 
     bool doesExistInSymbolTable(string name);
 
+    bool doesExistInPathsMap(string path);
+
     bool doesExistInBindedVars(string name);
+
+    const map<string, string> &getBindedVars() const;
 
 private:
     void initializeXMLVector();

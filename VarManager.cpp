@@ -166,3 +166,14 @@ void VarManager::updateXMLVars(char buffer[]) {
         temp += buffer[i];
     }
 }
+
+bool VarManager::doesExistInPathsMap(string path) {
+    if (this->paths.find(path) == paths.end()){
+        return false;
+    }
+    return true;
+}
+
+const map<string, string> &VarManager::getBindedVars() const {
+    return bindedVars;
+}

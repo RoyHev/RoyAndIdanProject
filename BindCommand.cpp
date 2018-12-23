@@ -12,31 +12,48 @@ BindCommand::BindCommand(VarManager* varManager) {
 }
 
 int BindCommand::execute(int index, vector<string> data) {
-    string variableName = data.at(index - 1);
+    string newVarName = data.at(index - 1);
     string bindTo = data.at(index + 1);
     bool isPath = true;
+    // false if it's a variable otherwise, it's a path so true
     if (bindTo.at(0) != QUOTE){
         isPath = false;
     }
-    //bindTo is a variable name and not a path.
+    //bind to is a variable.
     if (isPath == false){
-        string pathOfVarToBindTo = varManager->getPathByName(bindTo);
-        double valueOfBindTo = varManager->getValueByName(bindTo);
-        //variable already exists in binded and need to set a new bind.
-        if (varManager->doesExistInBindedVars(variableName)){
-            varManager->setPathByName(variableName,pathOfVarToBindTo);
+        //the bindTo varible exists in the symbol table.
+        if (varManager->doesExistInBindedVars(bindTo)){
+            double newValue = varManager->getValueByName(bindTo);
+            varManager->setValueByName(newVarName,newValue);
+            string newPath = varManager->getPathByName(bindTo);
+            varManager->addToBindedVars(newVarName,newPath);
         } else {
-            varManager->addToBindedVars(variableName,pathOfVarToBindTo);
+            perror("Cannot bind to a Var that is not binded itself.");
         }
-        //set the value of the bindTo variable's to also be variableNames val.
-        varManager->setValueByName(variableName,valueOfBindTo);
-        //bindTo specifies a path and not a variable that exists in the DataB.
     } else {
-        if (varManager->doesExistInBindedVars(variableName)){
-            varManager->setPathByName(variableName,bindTo);
-        } else {
-            varManager->addToBindedVars(variableName,bindTo);
+        string newPath = "";
+        //remove the quotes from the path.
+        for (int j = 1; j<bindTo.size() - 1; j++){
+            newPath+=bindTo.at(j);
         }
+        //bind to is from the XML file.
+        if (varManager->doesExistInPathsMap(newPath)){
+            double newValue = varManager->getValueByPath(newPath);
+            varManager->setValueByName(newVarName,newValue);
+        } else {
+            //go over the binded vars to check if this path already exists.
+            for (auto& it : varManager->getBindedVars()){
+                //two paths are the same then take the value and put it in symbol table.
+                if (it.second == newPath){
+                    double oldVarValue = varManager->getValueByName(it.first);
+                    varManager->setValueByName(newVarName,oldVarValue);
+                    break;
+                }
+            }
+        }
+        //add to the binded vars table.
+        varManager->addToBindedVars(newVarName,newPath);
     }
+    //return number of arguments.
     return NUM_OF_ARGS;
 }
