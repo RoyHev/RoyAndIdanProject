@@ -6,6 +6,7 @@
 
 #define COMMA ','
 #define END_OF_LINE '\0'
+#define SIZE_BUFFER 1024
 
 VarManager::VarManager() {
     initializePaths();
@@ -63,7 +64,6 @@ void VarManager::setValueByPath(string path, double value) {
     }
 }
 
-//TODO check if these are all the paths available or not.
 void VarManager::initializePaths() {
     this->paths.insert(pair<string, double>("/instrumentation/airspeed-indicator/indicated-speed-kt", 0));
     this->paths.insert(pair<string, double>("/instrumentation/altimeter/indicated-altitude-ft", 0));
@@ -143,13 +143,22 @@ void VarManager::initializeXMLVector() {
 void VarManager::updateXMLVars(char buffer[]) {
     string temp = "";
     int counter = 0;
-    for (int i = 0; i < 1024; i++) {
-        if (buffer[i] == END_OF_LINE) {
-            break;
-        } else if (buffer[i] == COMMA) {
+    int flag = 0;
+    for (int i = 0; i < SIZE_BUFFER; i++) {
+        if (buffer[i] == END_OF_LINE || i == (SIZE_BUFFER - 1)) {
+            flag = 1;
+        }
+        if (buffer[i] == COMMA || flag == 1) {
             string path = this->pathsFromXML.at(counter);
-            if (doesExistInBindedVars(path)) {
-                string varName = this->bindedVars.find(path)->second;
+            setValueByPath(path, stod(temp));
+            for (auto &it : bindedVars) {
+                if (it.second == path) {
+                    string varName = it.first;
+                    setValueByName(varName, stod(temp));
+                }
+            }
+            if (flag == 1) {
+                break;
             }
             counter++;
             temp = "";
@@ -157,6 +166,3 @@ void VarManager::updateXMLVars(char buffer[]) {
         temp += buffer[i];
     }
 }
-
-
-

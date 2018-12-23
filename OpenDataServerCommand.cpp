@@ -7,22 +7,22 @@
 #define NUM_OF_ARGS 2
 #define SIZE_BUFFER 1024
 
-OpenDataServerCommand::OpenDataServerCommand(VarManager* varManager) {
+OpenDataServerCommand::OpenDataServerCommand(VarManager *varManager) {
     this->varManager = varManager;
 }
 
-struct MyParameters{
+struct MyParameters {
     int portNumber;
     int hz;
-    VarManager* varManager;
+    VarManager *varManager;
 };
 
-static void* openSocket(void* parameters){
-    struct MyParameters *myParameters = (struct MyParameters*) parameters;
+static void *openSocket(void *parameters) {
+    struct MyParameters *myParameters = (struct MyParameters *) parameters;
     int sockfd, newsockfd, portno, clilen;
     char buffer[SIZE_BUFFER];
     struct sockaddr_in serv_addr, cli_addr;
-    int  n;
+    int n;
 
     /* First call to socket() function */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -51,11 +51,11 @@ static void* openSocket(void* parameters){
        * go in sleep mode and will wait for the incoming connection
     */
 
-    listen(sockfd,5);
+    listen(sockfd, 5);
     clilen = sizeof(cli_addr);
 
     /* Accept actual connection from the client */
-    newsockfd = accept(sockfd, (struct sockaddr *)&cli_addr, (socklen_t*)&clilen);
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
 
     if (newsockfd < 0) {
         perror("ERROR on accept");
@@ -69,23 +69,15 @@ static void* openSocket(void* parameters){
             perror("ERROR reading from socket");
             exit(1);
         }
-        //TODO - UPDATE THE VARMANAGER'S VALUES.
         printf("Here is the message: %s\n", buffer);
         myParameters->varManager->updateXMLVars(buffer);
-        /* Write a response to the client */
-        n = write(newsockfd, "I got your message", 18);
-
-        if (n < 0) {
-            perror("ERROR writing to socket");
-            exit(1);
-        }
     }
 }
 
 int OpenDataServerCommand::execute(int index, vector<string> data) {
     pthread_t threadID;
-    struct MyParameters* parameters = new MyParameters();
-    ShuntingYard* shuntingYard = new ShuntingYard(varManager);
+    struct MyParameters *parameters = new MyParameters();
+    ShuntingYard *shuntingYard = new ShuntingYard(varManager);
     double portNum = shuntingYard->evaluateInfix(data[index + 1])->calculate();
     double hertz = shuntingYard->evaluateInfix(data[index + 2])->calculate();
     parameters->varManager = this->varManager;
