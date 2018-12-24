@@ -15,9 +15,12 @@ class VarManager {
     map<string, double> symbolTable;
     map<string, string> bindedVars;
     vector<string> pathsFromXML;
-    // TODO - from xml
     map<string, double> paths;
+    int clientSocketID;
 public:
+
+    void setSocketID(int newScoketID);
+
     VarManager();
 
     void updateXMLVars(char buffer[]);

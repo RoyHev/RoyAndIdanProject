@@ -22,7 +22,7 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-
+    //TODO - singltone?
     VarManager *varManager = new VarManager();
 
 //    varManager->addToBindedVars("xy", "/instrumentation/altimeter/pressure-alt-ft");

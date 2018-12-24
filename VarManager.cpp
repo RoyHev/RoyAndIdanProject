@@ -13,7 +13,9 @@
 VarManager::VarManager() {
     initializePaths();
     initializeXMLVector();
+    this->clientSocketID = -1;
 }
+
 
 void VarManager::addToSymbolTable(string name, double value) {
     if (this->symbolTable.find(name) != symbolTable.end()) {
@@ -176,7 +178,7 @@ void VarManager::updateXMLVars(char buffer[]) {
 }
 
 bool VarManager::doesExistInPathsMap(string path) {
-    if (this->paths.find(path) == paths.end()){
+    if (this->paths.find(path) == paths.end()) {
         return false;
     }
     return true;
@@ -184,4 +186,8 @@ bool VarManager::doesExistInPathsMap(string path) {
 
 const map<string, string> &VarManager::getBindedVars() const {
     return bindedVars;
+}
+
+void VarManager::setSocketID(int newScoketID) {
+    this->clientSocketID = newScoketID;
 }
