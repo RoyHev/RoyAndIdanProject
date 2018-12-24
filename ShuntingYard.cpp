@@ -78,6 +78,7 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
                 temp += (expression.at(index) - '0');
                 index++;
             }
+            //implements shunting yard on decimal numbers
             if (index<expression.length() && expression.at(index) == '.'){
                 index++;
                 while (index <expression.length() && isdigit(expression.at
@@ -92,7 +93,7 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             index--;
             //push the number to the numbers' stack
             numbers.push(new Number(temp));
-            //if the current char is ')' - push it to operations.
+            //if the current char is ')' - push it to the stack, solve what's inside the braces
         } else if (expression.at(index) == CLOSE_BRACKET) {
             //calculate all the operations in the stack operations until we face '('
             while (operations.top() != OPEN_BRACKET && !operations.empty()) {
@@ -107,10 +108,13 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             operations.pop();
             //checks if it is one of the operators - +,-,/,*
         } else if (operationPriority(expression[index]) != 0) {
+            //if the current minus is not a binary expression, but unary
             if (!minusOp) {
                 Expression *zeroNum = new Number(0);
                 numbers.push(zeroNum);
             }
+            //while the top operation of the operations stack has same or greater precedence
+            //to the current operation, apply that operation.
             while (!operations.empty() && minusOp && (operationPriority
                                                               (expression.at(index)) <=
                                                       operationPriority(operations.top()))) {
@@ -140,6 +144,8 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             index -= 1;
         }
     }
+    //after the whole expression has been parsed, apply the remaining operations with
+    // to remaining values
     while (!operations.empty()) {
         Expression *val2 = numbers.top();
         numbers.pop();
