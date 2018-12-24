@@ -4,15 +4,19 @@
 
 #include "OpenClientSocket.h"
 
+
 struct MyParameters {
     string ip;
     int portNum;
     VarManager *varManager;
 };
 
+
 void *OpenClientSocket::openSocket(void *param) {
     struct MyParameters *myParameters = (struct MyParameters *) param;
-    int sockfd, portno;
+    int portno;
+    int n;
+    char buffer[1024];
     struct sockaddr_in serv_addr;
     struct hostent *server;
     portno = myParameters->portNum;
@@ -41,6 +45,20 @@ void *OpenClientSocket::openSocket(void *param) {
     /* Now connect to the server */
     if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
         perror("ERROR connecting");
+        exit(1);
+    }
+}
+
+void OpenClientSocket::writeToSimulator(char *buffer) {
+    int n;
+    bzero(buffer,1024);
+    fgets(buffer,1024,stdin);
+
+    /* Send message to the server */
+    n = write(sockfd, buffer, strlen(buffer));
+
+    if (n < 0) {
+        perror("ERROR writing to socket");
         exit(1);
     }
 }

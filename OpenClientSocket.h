@@ -20,8 +20,13 @@ using namespace std;
 
 class OpenClientSocket {
     struct sockaddr_in server;
+    int sockfd;
 public:
-    static void *openSocket(void *param);
+    OpenClientSocket();
+
+    void *openSocket(void *param);
+private:
+    void writeToSimulator(char *buffer);
 };
 
 
