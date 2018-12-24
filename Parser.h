@@ -21,9 +21,8 @@ class Parser {
     map<string, Expression *> commandsMap;
     int index;
 public:
-    Parser(vector<string> lexStrings,VarManager *varManager);
+    Parser(vector<string> lexStrings,VarManager *varManager,map<string,Expression*> commands);
     void parseLexer();
-    map<string,Expression*> commandsGenerator();
 };
 
 

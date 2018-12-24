@@ -26,34 +26,11 @@
 
 using namespace std;
 
-Parser::Parser(vector<string> lexStrings, VarManager *varManager) {
+Parser::Parser(vector<string> lexStrings, VarManager *varManager, map<string,Expression*> commands) {
     this->lexStrings = lexStrings;
     this->index = 0;
     this->varManager = varManager;
-    this->commandsMap = commandsGenerator();
-}
-
-map<string, Expression *> Parser::commandsGenerator() {
-    map<string, Expression *> commandsExMap;
-    commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
-
-    commandsExMap.insert(
-            make_pair(OPEN_SERVER,
-                      new CommandExpression(new OpenDataServerCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(
-            make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(
-            make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(new OpenClientSocket(), varManager), this->lexStrings, index)));
-    commandsExMap.insert(
-            make_pair(VAR, new CommandExpression(new CreateVarCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(
-            make_pair(PRINT, new CommandExpression(new PrintCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(
-            make_pair(SLEEP, new CommandExpression(new SleepCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(
-            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager), this->lexStrings, index)));
-    return commandsExMap;
+    this->commandsMap = commands;
 }
 
 void Parser::parseLexer() {
