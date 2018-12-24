@@ -4,10 +4,10 @@
 
 #include "ConnectCommand.h"
 
-ConnectCommand::ConnectCommand() {
-
-}
-
 int ConnectCommand::execute(int index, vector<string> data) {
     return 0;
+}
+
+ConnectCommand::ConnectCommand(OpenClientSocket *openClientSocket) {
+    this->openClientSocket = openClientSocket;
 }

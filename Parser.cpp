@@ -44,7 +44,7 @@ map<string, Expression *> Parser::commandsGenerator() {
             make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager), this->lexStrings, index)));
     commandsExMap.insert(
             make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager), this->lexStrings, index)));
-    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(), this->lexStrings, index)));
+    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(new OpenClientSocket()), this->lexStrings, index)));
     commandsExMap.insert(
             make_pair(VAR, new CommandExpression(new CreateVarCommand(varManager), this->lexStrings, index)));
     commandsExMap.insert(

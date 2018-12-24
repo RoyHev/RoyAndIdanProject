@@ -7,10 +7,12 @@
 
 
 #include "Command.h"
+#include "OpenClientSocket.h"
 
 class ConnectCommand: public Command{
+    OpenClientSocket *openClientSocket;
 public:
-    ConnectCommand();
+    ConnectCommand(OpenClientSocket* openClientSocket);
     virtual int execute(int index, vector<string> data);
 
 };
