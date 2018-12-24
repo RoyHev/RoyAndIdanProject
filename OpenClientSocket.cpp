@@ -12,25 +12,22 @@ struct MyParameters {
 };
 
 
-void *OpenClientSocket::openSocket(void *param) {
-    struct MyParameters *myParameters = (struct MyParameters *) param;
+void OpenClientSocket::openSocket(string ip, double portNumber) {
     int portno;
     int n;
     char buffer[1024];
     struct sockaddr_in serv_addr;
     struct hostent *server;
-    portno = myParameters->portNum;
+    portno = portNumber;
     /* Create a socket point */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-    myParameters->varManager->setSocketID(sockfd);
 
     if (sockfd < 0) {
         perror("ERROR opening socket");
         exit(1);
     }
 
-    server = gethostbyname(myParameters->ip.c_str());
+    server = gethostbyname(ip.c_str());
 
     if (server == NULL) {
         fprintf(stderr, "ERROR, no such host\n");
@@ -51,14 +48,15 @@ void *OpenClientSocket::openSocket(void *param) {
 
 void OpenClientSocket::writeToSimulator(char *buffer) {
     int n;
-    bzero(buffer,1024);
-    fgets(buffer,1024,stdin);
 
     /* Send message to the server */
     n = write(sockfd, buffer, strlen(buffer));
-    //todo
     if (n < 0) {
         perror("ERROR writing to socket");
         exit(1);
     }
+}
+
+int OpenClientSocket::getSockfd() const {
+    return sockfd;
 }

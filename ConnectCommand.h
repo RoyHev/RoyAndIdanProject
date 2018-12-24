@@ -11,9 +11,11 @@
 
 class ConnectCommand: public Command{
     OpenClientSocket *openClientSocket;
+    VarManager* varManager;
 public:
-    ConnectCommand(OpenClientSocket* openClientSocket);
+    ConnectCommand(OpenClientSocket* openClientSocket, VarManager* varManager);
     virtual int execute(int index, vector<string> data);
+    static void* openNewClientSocket(void* args);
 
 };
 

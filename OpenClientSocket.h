@@ -24,9 +24,12 @@ class OpenClientSocket {
 public:
     OpenClientSocket();
 
-    void *openSocket(void *param);
+    void openSocket(string ip, double portNumber);
 private:
     void writeToSimulator(char *buffer);
+
+public:
+    int getSockfd() const;
 };
 
 
