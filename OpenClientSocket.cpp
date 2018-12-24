@@ -56,7 +56,7 @@ void OpenClientSocket::writeToSimulator(char *buffer) {
 
     /* Send message to the server */
     n = write(sockfd, buffer, strlen(buffer));
-
+    //todo
     if (n < 0) {
         perror("ERROR writing to socket");
         exit(1);
