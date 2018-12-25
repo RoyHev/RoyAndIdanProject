@@ -12,16 +12,19 @@ struct MyParameters {
 };
 
 
+OpenClientSocket::OpenClientSocket() {
+    this->sockfd = 0;
+
+}
+
 void OpenClientSocket::openSocket(string ip, double portNumber) {
     int portno;
-    int n;
     char buffer[1024];
     struct sockaddr_in serv_addr;
     struct hostent *server;
     portno = portNumber;
     /* Create a socket point */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
     if (sockfd < 0) {
         perror("ERROR opening socket");
         exit(1);
@@ -50,7 +53,7 @@ void OpenClientSocket::writeToSimulator(const char *buffer) {
     int n;
 
     /* Send message to the server */
-    n = write(sockfd, buffer, strlen(buffer));
+    n = ::write(sockfd, buffer, strlen(buffer));
     if (n < 0) {
         perror("ERROR writing to socket");
         exit(1);
@@ -59,8 +62,4 @@ void OpenClientSocket::writeToSimulator(const char *buffer) {
 
 int OpenClientSocket::getSockfd() const {
     return sockfd;
-}
-
-OpenClientSocket::OpenClientSocket() {
-
 }

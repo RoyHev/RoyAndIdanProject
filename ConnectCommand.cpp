@@ -29,7 +29,6 @@ int ConnectCommand::execute(int index, vector<string> data) {
     myParameters->ip = ip;
     pthread_t pthreadID;
     pthread_create(&pthreadID, nullptr, openNewClientSocket, (void*) myParameters);
-
     return NUM_OF_ARGS;
 }
 
