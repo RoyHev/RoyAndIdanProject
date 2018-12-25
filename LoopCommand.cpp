@@ -5,7 +5,7 @@
 #include "LoopCommand.h"
 
 int LoopCommand::execute(int &index, vector<string> data) {
-//    int i = index;
+    //TODO - change name
     int counter = 0;
     int temp = index;
     ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);
