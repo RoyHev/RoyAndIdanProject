@@ -18,8 +18,9 @@
 #define BRACKET_OPENER "{"
 
 
-ConditionParser::ConditionParser(VarManager *varManager) {
+ConditionParser::ConditionParser(VarManager *varManager,  map<string,Expression*> *commandsMap) {
     this->varManager = varManager;
+    this->commandsMap = commandsMap;
 }
 
 /*
@@ -75,7 +76,7 @@ int ConditionParser::execute(int index, vector<string> data) {
         scopeLexerVector.push_back(data.at(index));
         index++;
     }
-    Parser *parser = new Parser(scopeLexerVector, varManager);
+    Parser *parser = new Parser(scopeLexerVector, varManager, commandsMap);
     parser->parseLexer();
     return index;
 }
@@ -88,7 +89,7 @@ int ConditionParser::execute(int index, vector<string> data) {
  * if inside the condition there is not a condition operator, the function throws an error.
  */
 bool ConditionParser::conditionCheck(int i, vector<string> data) {
-    Parser *scopeParser = new Parser(data, varManager);
+//    Parser *scopeParser = new Parser(data, varManager, commandsMap);
     ShuntingYard *sh = new ShuntingYard(varManager);
     string strOperand1 = data.at(i + 1);
     double operand1 = sh->evaluateInfix(strOperand1)->calculate();

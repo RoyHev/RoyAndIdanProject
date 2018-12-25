@@ -9,8 +9,9 @@
 
 class IfCommand : public ConditionParser {
     VarManager *varManager;
+    map<string,Expression*> *commandsMap;
 public:
-    IfCommand(VarManager *varManager);
+    IfCommand(VarManager *varManager, map<string,Expression*> *commandsMap);
 
     virtual int execute(int index, vector<string> data);
 };

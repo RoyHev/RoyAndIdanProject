@@ -9,8 +9,9 @@
 
 class LoopCommand : public ConditionParser {
     VarManager *varManager;
+    map<string,Expression*> *commandsMap;
 public:
-    LoopCommand(VarManager *varManager);
+    LoopCommand(VarManager *varManager, map<string,Expression*> *commandsMap);
 
     virtual int execute(int index, vector<string> data);
 };

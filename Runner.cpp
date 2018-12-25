@@ -24,22 +24,27 @@
 #define ASSIGN "="
 #define BIND "=bind"
 
-Runner::Runner() {
+Runner::Runner(string fileName) {
+    this->varManager = new VarManager();
+    Lexer *lexer = new Lexer();
+    this->lexeredFile = lexer->lexerFromFile(fileName);
+    this->commandsMap = commandsGenerator(this->lexeredFile);
 }
 
 map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     map<string, Expression *> commandsExMap;
     int index = 0;
+    OpenClientSocket* openClientSocket = new OpenClientSocket();
     commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
 
     commandsExMap.insert(
             make_pair(OPEN_SERVER,
                       new CommandExpression(new OpenDataServerCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
-            make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager, <#initializer#>), lexStrings, index)));
+            make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager, &commandsMap), lexStrings, index)));
     commandsExMap.insert(
-            make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager, <#initializer#>), lexStrings, index)));
-    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(new OpenClientSocket(), varManager), lexStrings, index)));
+            make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager,&commandsMap), lexStrings, index)));
+    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(openClientSocket, varManager), lexStrings, index)));
     commandsExMap.insert(
             make_pair(VAR, new CommandExpression(new CreateVarCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
@@ -47,15 +52,12 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     commandsExMap.insert(
             make_pair(SLEEP, new CommandExpression(new SleepCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
-            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager), lexStrings, index)));
+            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager,openClientSocket), lexStrings, index)));
     return commandsExMap;
 }
 
 void Runner::run(string fileName) {
-    VarManager* varManager = new VarManager();
-    Lexer *lexer = new Lexer();
-    vector<string> lexeredFile = lexer->lexerFromFile(fileName);
-    Parser* parser = new Parser(lexeredFile,varManager);
+    Parser* parser = new Parser(this->lexeredFile, this->varManager, &commandsMap);
 
 
 }

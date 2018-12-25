@@ -28,9 +28,10 @@
 class Runner {
     VarManager* varManager;
     map<string, Expression*> commandsMap;
+    vector<string> lexeredFile;
 
 public:
-    Runner();
+    Runner(string fileName);
     void run(string fileName);
 private:
     map<string,Expression*> commandsGenerator(vector<string> lexStrings);

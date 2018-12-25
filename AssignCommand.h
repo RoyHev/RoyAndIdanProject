@@ -8,11 +8,13 @@
 
 #include "Command.h"
 #include "VarManager.h"
+#include "OpenClientSocket.h"
 
 class AssignCommand: public Command{
     VarManager *varManager;
+    OpenClientSocket* openClientSocket;
 public:
-    AssignCommand(VarManager *varManager);
+    AssignCommand(VarManager *varManager, OpenClientSocket* openClientSocket);
     virtual int execute(int index, vector<string> data);
 
 };

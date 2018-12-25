@@ -20,8 +20,9 @@
 
 class ConditionParser : public Command {
     VarManager *varManager;
+    map<string,Expression*> *commandsMap;
 public:
-    ConditionParser(VarManager *varManager);
+    ConditionParser(VarManager *varManager,  map<string,Expression*> *commandsMap);
 
     virtual int execute(int index, vector<string> data);
 

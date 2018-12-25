@@ -46,7 +46,7 @@ void OpenClientSocket::openSocket(string ip, double portNumber) {
     }
 }
 
-void OpenClientSocket::writeToSimulator(char *buffer) {
+void OpenClientSocket::writeToSimulator(const char *buffer) {
     int n;
 
     /* Send message to the server */

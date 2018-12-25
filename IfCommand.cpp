@@ -24,7 +24,8 @@ int IfCommand::execute(int index, vector<string> data) {
     return counter-index;
 }
 
-IfCommand::IfCommand(VarManager *varManager) : ConditionParser(varManager) {
+IfCommand::IfCommand(VarManager *varManager, map<string,Expression*> *commandsMap) : ConditionParser(varManager) {
     this->varManager = varManager;
+    this->commandsMap = commandsMap;
 
 }

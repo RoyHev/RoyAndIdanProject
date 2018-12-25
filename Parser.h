@@ -18,10 +18,10 @@ using namespace std;
 class Parser {
     VarManager* varManager;
     vector<string> lexStrings;
-    map<string, Expression *> commandsMap;
+    map<string, Expression *> *commandsMap;
     int index;
 public:
-    Parser(vector<string> lexStrings,VarManager *varManager,map<string,Expression*> commands);
+    Parser(vector<string> lexStrings,VarManager *varManager,map<string,Expression*> *commands);
     void parseLexer();
 };
 
