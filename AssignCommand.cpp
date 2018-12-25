@@ -7,7 +7,7 @@
 
 #define NUM_OF_ARG 1
 #define SPACE 32
-#define ENTER "\r\n"
+#define ENTER '\r\n'
 
 AssignCommand::AssignCommand(VarManager *varManager, OpenClientSocket *openClientSocket) {
     this->varManager = varManager;

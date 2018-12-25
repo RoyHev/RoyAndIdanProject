@@ -22,8 +22,7 @@ class OpenClientSocket {
     struct sockaddr_in server;
     int sockfd = 0;
 public:
-    //TODO - change !!!
-    bool isConncted = false;
+    OpenClientSocket() = default;
 
     void openSocket(string ip, double portNumber);
 

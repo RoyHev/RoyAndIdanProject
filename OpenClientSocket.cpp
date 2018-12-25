@@ -36,22 +36,13 @@ void OpenClientSocket::openSocket(string ip, double portNumber) {
         exit(1);
     } else {
         cout << "connected !!!" << endl;
-        isConncted = true;
     }
 }
 
-/*
-struct MyParameters {
-    string ip;
-    int portNum;
-    VarManager *varManager;
-};*/
-
 void OpenClientSocket::writeToSimulator(const char *buffer) const{
     /* Send message to the server */
-    //TODO !!!!
-    ssize_t msg = ::write(sockfd, buffer, strlen(buffer));
-    if (msg < 0) {
+    ssize_t message = write(sockfd, buffer, strlen(buffer));
+    if (message < 0) {
         perror("ERROR writing to socket");
         exit(1);
     }

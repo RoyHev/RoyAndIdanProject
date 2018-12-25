@@ -81,6 +81,21 @@ int ConditionParser::execute(int index, vector<string> data) {
     parser->parseLexer();
     return index;
 }
+/*
+ * string temp;
+    //go over the lexer and execute only if it is a command.
+    while (index < this->lexStrings.size()) {
+        temp = this->lexStrings[index];
+        //not a command, increase the index and continue to next iteration.
+        if (this->commandsMap->find(temp) == commandsMap->end()) {
+            index++;
+            continue;
+        }
+        //otherwise, it is a command, index is moved as many as the command args
+        Expression *command = this->commandsMap->find(temp)->second;
+        index += command->calculate();
+        index++;
+ */
 
 /*
  * the function gets a vector of data which contains one condition or loop

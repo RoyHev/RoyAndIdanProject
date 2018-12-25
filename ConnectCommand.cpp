@@ -30,6 +30,7 @@ int ConnectCommand::execute(int index, vector<string> data) {
     struct MyParameters *myParameters = new MyParameters();
     myParameters->portNum = port;
     myParameters->ip = ip;
+    myParameters->openClientSocket = new OpenClientSocket();
     pthread_t pthreadID;
     pthread_create(&pthreadID, nullptr, openNewClientSocket, (void *) myParameters);
     return NUM_OF_ARGS;
