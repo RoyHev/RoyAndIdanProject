@@ -13,6 +13,7 @@
 #include "IfCommand.h"
 #include "VarManager.h"
 #include "BindCommand.h"
+#include "OpenClientSocket.h"
 
 #define OPEN_SERVER "openDataServer"
 #define IF_CONDITION "if"
@@ -24,16 +25,16 @@
 #define ASSIGN "="
 #define BIND "=bind"
 
-Runner::Runner(string fileName) {
+Runner::Runner(const char *fileName) {
     this->varManager = new VarManager();
     Lexer *lexer = new Lexer();
     this->lexeredFile = lexer->lexerFromFile(fileName);
-    this->commandsMap = commandsGenerator(this->lexeredFile);
+    this->commandsMap = commandsGenerator(&lexeredFile);
+    this->index = 0;
 }
 
-map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
+map<string, Expression *> Runner::commandsGenerator(vector<string> *lexStrings) {
     map<string, Expression *> commandsExMap;
-    int index = 0;
     OpenClientSocket* openClientSocket = new OpenClientSocket();
     commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
 
@@ -56,8 +57,9 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     return commandsExMap;
 }
 
-void Runner::run(string fileName) {
-    Parser* parser = new Parser(this->lexeredFile, this->varManager, &commandsMap);
-
-
+void Runner::run() {
+    Parser* parser = new Parser(this->lexeredFile, this->varManager, &commandsMap, index);
+    parser->parseLexer();
+    int x = 5;
+    cout << "HELLO";
 }

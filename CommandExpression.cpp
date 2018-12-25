@@ -4,12 +4,12 @@
 #include "CommandExpression.h"
 #include "Command.h"
 
-CommandExpression::CommandExpression(Command* cmd, vector<string> &lexer,
-        int &index) : lexer(lexer), index(index) {
+CommandExpression::CommandExpression(Command* cmd, vector<string> *lexer,
+        int &index) : index(index) {
     this->cmd = cmd;
+    this->lexer = lexer;
 }
 
-//TODO - return this?
 double CommandExpression::calculate() {
-    return this->cmd->execute(this->index, this->lexer);
+    return this->cmd->execute(this->index, *lexer);
 }

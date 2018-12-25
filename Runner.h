@@ -24,17 +24,20 @@
 #include "PrintCommand.h"
 #include "BindCommand.h"
 #include "Parser.h"
+#include "OpenClientSocket.h"
+#include "ConnectCommand.h"
 
 class Runner {
     VarManager* varManager;
     map<string, Expression*> commandsMap;
     vector<string> lexeredFile;
+    int index;
 
 public:
-    Runner(string fileName);
-    void run(string fileName);
+    Runner(const char *fileName);
+    void run();
 private:
-    map<string,Expression*> commandsGenerator(vector<string> lexStrings);
+    map<string,Expression*> commandsGenerator(vector<string> *lexStrings);
 };
 
 

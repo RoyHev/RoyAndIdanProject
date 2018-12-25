@@ -58,6 +58,7 @@ int ConditionParser::indexIncrement(int i, vector<string> data) {
  */
 int ConditionParser::execute(int index, vector<string> data) {
     vector<string> scopeLexerVector;
+    int newParserIndex = 0;
     while (data.at(index) != BRACKET_OPENER) {
         index++;
     }
@@ -76,7 +77,7 @@ int ConditionParser::execute(int index, vector<string> data) {
         scopeLexerVector.push_back(data.at(index));
         index++;
     }
-    Parser *parser = new Parser(scopeLexerVector, varManager, commandsMap);
+    Parser *parser = new Parser(scopeLexerVector, varManager, commandsMap, newParserIndex);
     parser->parseLexer();
     return index;
 }

@@ -15,7 +15,7 @@
 int IfCommand::execute(int index, vector<string> data) {
     int i = index;
     int counter = 0;
-    ConditionParser *conditionParser = new ConditionParser(varManager);
+    ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);
     if (conditionParser->conditionCheck(i, data)) {
         counter = conditionParser->execute(index, data);
     } else {
@@ -24,7 +24,8 @@ int IfCommand::execute(int index, vector<string> data) {
     return counter-index;
 }
 
-IfCommand::IfCommand(VarManager *varManager, map<string,Expression*> *commandsMap) : ConditionParser(varManager) {
+IfCommand::IfCommand(VarManager *varManager, map<string,Expression*> *commandsMap) : ConditionParser(varManager,
+        commandsMap) {
     this->varManager = varManager;
     this->commandsMap = commandsMap;
 

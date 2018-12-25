@@ -26,26 +26,26 @@
 
 using namespace std;
 
-Parser::Parser(vector<string> lexStrings, VarManager *varManager, map<string,Expression*> *commands) {
+Parser::Parser(vector<string> lexStrings, VarManager *varManager, map<string,Expression*> *commands, int &index) :
+index(index) {
     this->lexStrings = lexStrings;
-    this->index = 0;
     this->varManager = varManager;
     this->commandsMap = commands;
 }
 
 void Parser::parseLexer() {
-    this->index = 0;
+//    this->index = 0;
     string temp;
     //go over the lexer and execute only if it is a command.
     while (index < this->lexStrings.size()) {
         temp = this->lexStrings[index];
         //not a command, increase the index and continue to next iteration.
-        if (this->commandsMap.find(temp) == commandsMap.end()) {
+        if (this->commandsMap->find(temp) == commandsMap->end()) {
             index++;
             continue;
         }
         //otherwise, it is a command, index is moved as many as the command args
-        Expression *command = this->commandsMap.find(temp)->second;
+        Expression *command = this->commandsMap->find(temp)->second;
         index += command->calculate();
         index++;
     }

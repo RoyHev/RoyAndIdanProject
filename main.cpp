@@ -17,13 +17,15 @@
 #include "PrintCommand.h"
 #include "BindCommand.h"
 #include "Parser.h"
-
+#include "Runner.h"
 using namespace std;
 
 
 int main(int argc, char *argv[]) {
     //TODO - singltone?
-    VarManager *varManager = new VarManager();
+    Runner* runner = new Runner("text.txt");
+    runner->run();
+    //cout << s->evaluateInfix("1.1934444")->calculate();
 
 //    varManager->addToBindedVars("xy", "/instrumentation/altimeter/pressure-alt-ft");
 //    varManager->addToSymbolTable("xy",0);
@@ -35,10 +37,10 @@ int main(int argc, char *argv[]) {
 //    while(true){
 //
 //    }
-    Lexer *lexer = new Lexer();
-    vector<string> v = lexer->lexerFromFile("text.txt");
-    Parser* parser = new Parser(v,varManager);
-    parser->parseLexer();
+//    Lexer *lexer = new Lexer();
+//    vector<string> v = lexer->lexerFromFile("text.txt");
+//    Parser* parser = new Parser(v,varManager);
+//    parser->parseLexer();
 
 //        vector<string> v;
 //    v.push_back("nothing");

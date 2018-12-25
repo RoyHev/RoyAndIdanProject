@@ -8,7 +8,7 @@ int LoopCommand::execute(int index, vector<string> data) {
     int i = index;
     int counter = 0;
     int temp;
-    ConditionParser *conditionParser = new ConditionParser(varManager);
+    ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);
     while (conditionParser->conditionCheck(i, data)) {
         counter = conditionParser->execute(index, data);
     }
@@ -16,7 +16,8 @@ int LoopCommand::execute(int index, vector<string> data) {
     return counter - index;
 }
 
-LoopCommand::LoopCommand(VarManager *varManager, map<string,Expression*> *commandsMap) : ConditionParser(varManager) {
+LoopCommand::LoopCommand(VarManager *varManager, map<string,Expression*> *commandsMap) : ConditionParser(varManager,
+        commandsMap) {
     this->varManager = varManager;
     this->commandsMap = commandsMap;
 

@@ -60,3 +60,7 @@ void OpenClientSocket::writeToSimulator(const char *buffer) {
 int OpenClientSocket::getSockfd() const {
     return sockfd;
 }
+
+OpenClientSocket::OpenClientSocket() {
+
+}
