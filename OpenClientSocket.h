@@ -20,13 +20,14 @@ using namespace std;
 
 class OpenClientSocket {
     struct sockaddr_in server;
-    int sockfd;
+    int sockfd = 0;
 public:
-    OpenClientSocket();
+    //TODO - change !!!
+    bool isConncted = false;
 
     void openSocket(string ip, double portNumber);
 
-    void writeToSimulator(const char *buffer);
+    void writeToSimulator(const char *buffer) const;
 
     int getSockfd() const;
 };

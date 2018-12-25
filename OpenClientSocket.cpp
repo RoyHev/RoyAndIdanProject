@@ -2,24 +2,12 @@
 // Created by idantp on 12/24/18.
 //
 
+#include <iostream>
 #include "OpenClientSocket.h"
 
 
-struct MyParameters {
-    string ip;
-    int portNum;
-    VarManager *varManager;
-};
-
-
-OpenClientSocket::OpenClientSocket() {
-    this->sockfd = 0;
-
-}
-
 void OpenClientSocket::openSocket(string ip, double portNumber) {
     int portno;
-    char buffer[1024];
     struct sockaddr_in serv_addr;
     struct hostent *server;
     portno = portNumber;
@@ -46,20 +34,29 @@ void OpenClientSocket::openSocket(string ip, double portNumber) {
     if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
         perror("ERROR connecting");
         exit(1);
+    } else {
+        cout << "connected !!!" << endl;
+        isConncted = true;
     }
 }
 
-void OpenClientSocket::writeToSimulator(const char *buffer) {
-    int n;
+/*
+struct MyParameters {
+    string ip;
+    int portNum;
+    VarManager *varManager;
+};*/
 
+void OpenClientSocket::writeToSimulator(const char *buffer) const{
     /* Send message to the server */
-    n = ::write(sockfd, buffer, strlen(buffer));
-    if (n < 0) {
+    //TODO !!!!
+    ssize_t msg = ::write(sockfd, buffer, strlen(buffer));
+    if (msg < 0) {
         perror("ERROR writing to socket");
         exit(1);
     }
 }
 
 int OpenClientSocket::getSockfd() const {
-    return sockfd;
+    return this->sockfd;
 }
