@@ -24,7 +24,7 @@ CreateVarCommand::CreateVarCommand(VarManager* varManager) {
     this->varManager = varManager;
 }
 
-int CreateVarCommand::execute(int index, vector<string> data) {
+int CreateVarCommand::execute(int &index, vector<string> data) {
     string name = data.at(index + 1);
 
     if (!(checkIfValidConvention(name) && checkIfSavedWord(name))){

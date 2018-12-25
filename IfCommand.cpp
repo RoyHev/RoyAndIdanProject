@@ -12,7 +12,7 @@
  * the function parses the loop as long as the condition is true.
  * the function returns an index to the last element that describes the condition's scope ("}").
  */
-int IfCommand::execute(int index, vector<string> data) {
+int IfCommand::execute(int &index, vector<string> data) {
     int i = index;
     int counter = 0;
     ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);

@@ -13,7 +13,7 @@ class IfCommand : public ConditionParser {
 public:
     IfCommand(VarManager *varManager, map<string,Expression*> *commandsMap);
 
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 };
 
 

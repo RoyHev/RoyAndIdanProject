@@ -18,7 +18,7 @@
 #define BRACKET_OPENER "{"
 
 
-ConditionParser::ConditionParser(VarManager *varManager,  map<string,Expression*> *commandsMap) {
+ConditionParser::ConditionParser(VarManager *varManager, map<string, Expression *> *commandsMap) {
     this->varManager = varManager;
     this->commandsMap = commandsMap;
 }
@@ -56,30 +56,51 @@ int ConditionParser::indexIncrement(int i, vector<string> data) {
  * and parses it.
  * the function returns an index to the last element that describes the condition's scope.
  */
-int ConditionParser::execute(int index, vector<string> data) {
+int ConditionParser::execute(int &index, vector<string> data) {
+    int indexKeeper = index;
+    int i = index;
+    int elementsCounter = 0;
     vector<string> scopeLexerVector;
     int newParserIndex = 0;
-    while (data.at(index) != BRACKET_OPENER) {
-        index++;
+    while (data.at(i) != BRACKET_OPENER) {
+        i++;
     }
-    index++;
+    i++;
+    int firstScopeString = i;
     int bracketsRatio = 1;
     while (bracketsRatio != 0) {
-        if (data.at(index) == BRACKET_OPENER) {
+        if (data.at(i) == BRACKET_OPENER) {
             bracketsRatio++;
-        } else if (data.at(index) == BRACKET_CLOSER) {
+        } else if (data.at(i) == BRACKET_CLOSER) {
             bracketsRatio--;
             //don't push the last brackets
             if (bracketsRatio == 0) {
                 continue;
             }
         }
-        scopeLexerVector.push_back(data.at(index));
+        scopeLexerVector.push_back(data.at(i));
+        i++;
+        elementsCounter++;
+    }
+    index = firstScopeString;
+    int lastScopeString = index+elementsCounter -1;
+    string temp = "";
+
+    while (index < lastScopeString) {
+        temp = data[index];
+        if(commandsMap->find(temp) == commandsMap->end()){
+            index++;
+            continue;
+        }
+        Expression* conditionCommand = this->commandsMap->find(temp)->second;
+        index+= conditionCommand->calculate();
         index++;
     }
-    Parser *parser = new Parser(scopeLexerVector, varManager, commandsMap, newParserIndex);
-    parser->parseLexer();
-    return index;
+    index = indexKeeper;
+//    Parser *parser = new Parser(scopeLexerVector, varManager, commandsMap, newParserIndex);
+//    parser->parseLexer();
+
+    return lastScopeString;
 }
 /*
  * string temp;

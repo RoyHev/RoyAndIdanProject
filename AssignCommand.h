@@ -15,7 +15,7 @@ class AssignCommand: public Command{
     OpenClientSocket* openClientSocket;
 public:
     AssignCommand(VarManager *varManager, OpenClientSocket* openClientSocket);
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 
 };
 

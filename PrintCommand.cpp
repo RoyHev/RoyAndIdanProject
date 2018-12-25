@@ -14,7 +14,7 @@ PrintCommand::PrintCommand(VarManager *varManager) {
     this->varManager = varManager;
 }
 
-int PrintCommand::execute(int index, vector<string> data) {
+int PrintCommand::execute(int &index, vector<string> data) {
     //stores the output
     string str = data.at(index+1);
     //if its a string print it without the quotes

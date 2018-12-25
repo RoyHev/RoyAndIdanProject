@@ -24,7 +24,7 @@ class OpenDataServerCommand : public Command {
 public:
     OpenDataServerCommand(VarManager* varManager);
 
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 };
 
 

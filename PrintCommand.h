@@ -14,7 +14,7 @@ class PrintCommand : public Command {
 public:
     PrintCommand(VarManager *varManager);
 
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 
 };
 

@@ -14,7 +14,7 @@ AssignCommand::AssignCommand(VarManager *varManager, OpenClientSocket *openClien
     this->openClientSocket = openClientSocket;
 }
 
-int AssignCommand::execute(int index, vector<string> data) {
+int AssignCommand::execute(int &index, vector<string> data) {
 
     ShuntingYard *sh = new ShuntingYard(varManager);
     double result = sh->evaluateInfix(data.at(index + 1))->calculate();

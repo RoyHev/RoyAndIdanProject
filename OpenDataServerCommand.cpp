@@ -78,7 +78,7 @@ static void *openSocket(void *parameters) {
     }
 }
 
-int OpenDataServerCommand::execute(int index, vector<string> data) {
+int OpenDataServerCommand::execute(int &index, vector<string> data) {
     pthread_t threadID;
     struct MyParameters *parameters = new MyParameters();
     ShuntingYard *shuntingYard = new ShuntingYard(varManager);

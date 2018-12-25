@@ -34,7 +34,7 @@ index(index) {
 }
 
 void Parser::parseLexer() {
-//    this->index = 0;
+    this->index = 0;
     string temp;
     //go over the lexer and execute only if it is a command.
     while (index < this->lexStrings.size()) {

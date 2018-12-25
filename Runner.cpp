@@ -29,11 +29,11 @@ Runner::Runner(const char *fileName) {
     this->varManager = new VarManager();
     Lexer *lexer = new Lexer();
     this->lexeredFile = lexer->lexerFromFile(fileName);
-    this->commandsMap = commandsGenerator(&lexeredFile);
+    this->commandsMap = commandsGenerator(lexeredFile);
     this->index = 0;
 }
 
-map<string, Expression *> Runner::commandsGenerator(vector<string> *lexStrings) {
+map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     map<string, Expression *> commandsExMap;
     OpenClientSocket* openClientSocket = new OpenClientSocket();
     commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
@@ -60,9 +60,8 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> *lexStrings) 
 void Runner::run() {
     Parser* parser = new Parser(this->lexeredFile, this->varManager, &commandsMap, index);
     parser->parseLexer();
-    while (true){
+//    while (true){
+//
+//    }
 
-    }
-    int x = 5;
-    cout << "HELLO";
 }

@@ -13,7 +13,7 @@ class CreateVarCommand: public Command{
     VarManager* varManager;
 public:
     CreateVarCommand(VarManager* varManager);
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 private:
     bool checkIfValidConvention(string name);
     bool checkIfSavedWord(string name);

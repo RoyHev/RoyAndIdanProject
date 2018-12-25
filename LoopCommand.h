@@ -13,7 +13,7 @@ class LoopCommand : public ConditionParser {
 public:
     LoopCommand(VarManager *varManager, map<string,Expression*> *commandsMap);
 
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 };
 
 #endif //EX3_LOOPCOMMAND_H

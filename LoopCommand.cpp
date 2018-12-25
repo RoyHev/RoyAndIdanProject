@@ -4,16 +4,16 @@
 
 #include "LoopCommand.h"
 
-int LoopCommand::execute(int index, vector<string> data) {
-    int i = index;
+int LoopCommand::execute(int &index, vector<string> data) {
+//    int i = index;
     int counter = 0;
-    int temp;
+    int temp = index;
     ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);
-    while (conditionParser->conditionCheck(i, data)) {
-        counter = conditionParser->execute(index, data);
+    while (conditionParser->conditionCheck(index, data)) {
+        conditionParser->execute(index, data);
     }
-    counter = conditionParser->indexIncrement(i, data);
-    return counter - index;
+    counter = conditionParser->indexIncrement(index, data);
+    return counter - temp;
 }
 
 LoopCommand::LoopCommand(VarManager *varManager, map<string,Expression*> *commandsMap) : ConditionParser(varManager,

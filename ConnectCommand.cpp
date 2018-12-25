@@ -23,7 +23,7 @@ ConnectCommand::ConnectCommand(OpenClientSocket *openClientSocket, VarManager *v
     this->varManager = varManager;
 }
 
-int ConnectCommand::execute(int index, vector<string> data) {
+int ConnectCommand::execute(int &index, vector<string> data) {
     ShuntingYard *shuntingYard = new ShuntingYard(varManager);
     string ip = data.at(index + 1);
     double port = shuntingYard->evaluateInfix(data.at(index + 2))->calculate();

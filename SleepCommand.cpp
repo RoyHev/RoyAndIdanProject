@@ -12,7 +12,7 @@ SleepCommand::SleepCommand(VarManager* varManager) {
     this->varManager = varManager;
 }
 
-int SleepCommand::execute(int index, vector<string> data) {
+int SleepCommand::execute(int &index, vector<string> data) {
     ShuntingYard* shuntingYard = new ShuntingYard(varManager);
     double seconds = shuntingYard->evaluateInfix(data[index + 1])->calculate();
     seconds*=MILI_TO_MICRO_SEC;

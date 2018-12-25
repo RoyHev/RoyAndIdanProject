@@ -37,7 +37,7 @@ public:
     Runner(const char *fileName);
     void run();
 private:
-    map<string,Expression*> commandsGenerator(vector<string> *lexStrings);
+    map<string,Expression*> commandsGenerator(vector<string> lexStrings);
 };
 
 

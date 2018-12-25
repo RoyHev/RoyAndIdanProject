@@ -11,7 +11,7 @@ BindCommand::BindCommand(VarManager* varManager) {
     this->varManager = varManager;
 }
 
-int BindCommand::execute(int index, vector<string> data) {
+int BindCommand::execute(int &index, vector<string> data) {
     string newVarName = data.at(index - 1);
     string bindTo = data.at(index + 1);
     bool isPath = true;

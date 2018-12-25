@@ -24,7 +24,7 @@ class ConditionParser : public Command {
 public:
     ConditionParser(VarManager *varManager,  map<string,Expression*> *commandsMap);
 
-    virtual int execute(int index, vector<string> data);
+    virtual int execute(int &index, vector<string> data);
 
     int indexIncrement(int i, vector<string> data);
 

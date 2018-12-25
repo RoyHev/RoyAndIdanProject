@@ -13,7 +13,7 @@ using namespace std;
 
 class Command {
 public:
-    virtual int execute(int index, vector<string> data) = 0;
+    virtual int execute(int &index, vector<string> data) = 0;
 };
 
 #endif //EX3_COMMAND_H
