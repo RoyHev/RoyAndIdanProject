@@ -13,15 +13,16 @@
  * the function returns an index to the last element that describes the condition's scope ("}").
  */
 int IfCommand::execute(int &index, vector<string> data) {
-    //TODO - change name
-    int counter = 0;
-    int temp = index;
+    int elementsInScope = 0;
+    int initialIndex = index;
     ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);
+    //parsing the if scope - if condition is true
     if (conditionParser->conditionCheck(index, data)) {
         conditionParser->execute(index, data);
     }
-    counter = conditionParser->indexIncrement(index, data);
-    return counter - temp;
+    elementsInScope = conditionParser->indexIncrement(index, data);
+    //return the index to the last element in the current scope
+    return elementsInScope - initialIndex;
 }
 
 IfCommand::IfCommand(VarManager *varManager, map<string, Expression *> *commandsMap) : ConditionParser(varManager,

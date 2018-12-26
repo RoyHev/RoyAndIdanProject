@@ -57,15 +57,18 @@ int ConditionParser::indexIncrement(int i, vector<string> data) {
  * the function returns an index to the last element that describes the condition's scope.
  */
 int ConditionParser::execute(int &index, vector<string> data) {
+    //save index by value
     int indexKeeper = index;
     int i = index;
+    //counts the elements amount is the current scope.
     int elementsCounter = 0;
     vector<string> scopeLexerVector;
-    int newParserIndex = 0;
+    //increment the index
     while (data.at(i) != BRACKET_OPENER) {
         i++;
     }
     i++;
+    //an index to the  first element in the current scope
     int firstScopeString = i;
     int bracketsRatio = 1;
     while (bracketsRatio != 0) {
@@ -82,41 +85,25 @@ int ConditionParser::execute(int &index, vector<string> data) {
         i++;
         elementsCounter++;
     }
+    //set index to the first element in the current scope
     index = firstScopeString;
-    int lastScopeString = index+elementsCounter -1;
+    //an index to the  last element in the current scope
+    int lastScopeString = index + elementsCounter - 1;
     string temp = "";
-
+    //parsing the current scope
     while (index < lastScopeString) {
         temp = data[index];
-        if(commandsMap->find(temp) == commandsMap->end()){
+        if (commandsMap->find(temp) == commandsMap->end()) {
             index++;
             continue;
         }
-        Expression* conditionCommand = this->commandsMap->find(temp)->second;
-        index+= conditionCommand->calculate();
+        Expression *conditionCommand = this->commandsMap->find(temp)->second;
+        index += conditionCommand->calculate();
         index++;
     }
     index = indexKeeper;
-//    Parser *parser = new Parser(scopeLexerVector, varManager, commandsMap, newParserIndex);
-//    parser->parseLexer();
-
     return lastScopeString;
 }
-/*
- * string temp;
-    //go over the lexer and execute only if it is a command.
-    while (index < this->lexStrings.size()) {
-        temp = this->lexStrings[index];
-        //not a command, increase the index and continue to next iteration.
-        if (this->commandsMap->find(temp) == commandsMap->end()) {
-            index++;
-            continue;
-        }
-        //otherwise, it is a command, index is moved as many as the command args
-        Expression *command = this->commandsMap->find(temp)->second;
-        index += command->calculate();
-        index++;
- */
 
 /*
  * the function gets a vector of data which contains one condition or loop
