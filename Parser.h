@@ -17,11 +17,11 @@ using namespace std;
 
 class Parser {
     VarManager* varManager;
-    vector<string> lexStrings;
+    vector<string> &lexStrings;
     map<string, Expression *> *commandsMap;
     int &index;
 public:
-    Parser(vector<string> lexStrings,VarManager *varManager,map<string,Expression*> *commands, int &index);
+    Parser(vector<string> &lexStrings,VarManager *varManager,map<string,Expression*> *commands, int &index);
     void parseLexer();
 };
 

@@ -132,7 +132,7 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             string variableName = "";
             minusOp = true;
             while (operationPriority(expression[index]) == 0 && index <
-            expression.length()) {
+            expression.length() && expression.at(index) != CLOSE_BRACKET) {
                 if (expression.at(index) != SPACE) {
                     variableName += expression[index];
                 }
