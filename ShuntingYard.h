@@ -11,7 +11,6 @@
 #include "Number.h"
 #include "Divide.h"
 #include "Minus.h"
-#include "Negative.h"
 #include "Var.h"
 #include <string>
 #include "VarManager.h"

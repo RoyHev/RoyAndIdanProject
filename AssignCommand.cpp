@@ -49,7 +49,5 @@ int AssignCommand::execute(int &index, vector<string> data) {
     } else {
         this->varManager->setValueByName(varName, result);
     }
-
     return NUM_OF_ARG;
-
 }

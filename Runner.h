@@ -15,7 +15,6 @@
 #include "Number.h"
 #include "Divide.h"
 #include "Minus.h"
-#include "Negative.h"
 #include "ShuntingYard.h"
 #include "Lexer.h"
 #include "CommandExpression.h"
