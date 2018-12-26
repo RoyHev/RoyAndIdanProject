@@ -53,10 +53,6 @@ Expression *ShuntingYard::applyOperation(Expression *left, Expression *right, ch
  * the function gets a string which describes an expression and calculates it using applyOperation method.
  */
 Expression *ShuntingYard::evaluateInfix(string expression) {
-    if (expression == ""){
-//        Expression *exp = new Number(0);
-        return new Number(0);
-    }
     bool minusOp = false;
     //contains all the operation
     stack<char> operations;
