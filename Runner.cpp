@@ -45,7 +45,8 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
             make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager, &commandsMap), lexStrings, index)));
     commandsExMap.insert(
             make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager,&commandsMap), lexStrings, index)));
-    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(openClientSocket, varManager), lexStrings, index)));
+    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(*openClientSocket, varManager),
+            lexStrings, index)));
     commandsExMap.insert(
             make_pair(VAR, new CommandExpression(new CreateVarCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
@@ -53,7 +54,8 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     commandsExMap.insert(
             make_pair(SLEEP, new CommandExpression(new SleepCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
-            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager,openClientSocket), lexStrings, index)));
+            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager,*openClientSocket), lexStrings,
+                    index)));
     return commandsExMap;
 }
 

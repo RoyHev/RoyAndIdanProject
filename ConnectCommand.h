@@ -10,10 +10,10 @@
 #include "OpenClientSocket.h"
 
 class ConnectCommand: public Command{
-    OpenClientSocket *openClientSocket;
+    OpenClientSocket &openClientSocket;
     VarManager* varManager;
 public:
-    ConnectCommand(OpenClientSocket* openClientSocket, VarManager* varManager);
+    ConnectCommand(OpenClientSocket &openClientSocket, VarManager* varManager);
     virtual int execute(int &index, vector<string> data);
 
 

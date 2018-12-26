@@ -12,9 +12,9 @@
 
 class AssignCommand: public Command{
     VarManager *varManager;
-    OpenClientSocket* openClientSocket;
+    OpenClientSocket &openClientSocket;
 public:
-    AssignCommand(VarManager *varManager, OpenClientSocket* openClientSocket);
+    AssignCommand(VarManager *varManager, OpenClientSocket &openClientSocket);
     virtual int execute(int &index, vector<string> data);
 
 };

@@ -24,7 +24,7 @@ class OpenClientSocket {
 public:
     OpenClientSocket() = default;
 
-    void openSocket(string ip, double portNumber);
+    int openSocket(string ip, double portNumber);
 
     void writeToSimulator(const char *buffer) const;
 

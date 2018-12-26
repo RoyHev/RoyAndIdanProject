@@ -6,7 +6,7 @@
 #include "OpenClientSocket.h"
 
 
-void OpenClientSocket::openSocket(string ip, double portNumber) {
+int OpenClientSocket::openSocket(string ip, double portNumber) {
     int portno;
     struct sockaddr_in serv_addr;
     struct hostent *server;
