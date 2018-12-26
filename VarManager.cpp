@@ -8,7 +8,7 @@
 #define COMMA ','
 #define ENTER '\n'
 #define END_OF_LINE '\0'
-#define SIZE_BUFFER 1024
+#define SIZE_BUFFER 206
 
 VarManager::VarManager() {
     initializePaths();
@@ -148,13 +148,13 @@ void VarManager::initializeXMLVector() {
     this->pathsFromXML.emplace_back("/engines/engine/rpm");
 }
 
-void VarManager::updateXMLVars(char buffer[]) {
+void VarManager::updateXMLVars(const char *buffer, int size) {
     string temp = "";
     int counter = 0;
     int flag = 0;
     ShuntingYard *sh = new ShuntingYard(this);
-    for (int i = 0; i < SIZE_BUFFER; i++) {
-        if (buffer[i] == END_OF_LINE || i == (SIZE_BUFFER - 1) || buffer[i] == ENTER) {
+    for (int i = 0; i < size; i++) {
+        if (buffer[i] == END_OF_LINE || i == (size - 1) || buffer[i] == ENTER) {
             flag = 1;
         }
         if (buffer[i] == COMMA || flag == 1) {

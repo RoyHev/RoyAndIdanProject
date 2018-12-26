@@ -23,7 +23,7 @@ public:
 
     VarManager();
 
-    void updateXMLVars(char buffer[]);
+    void updateXMLVars(const char *buffer, int size);
 
     void addToSymbolTable(string name, double value);
 

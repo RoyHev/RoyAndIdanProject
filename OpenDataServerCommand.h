@@ -20,9 +20,12 @@
 #include "VarManager.h"
 
 class OpenDataServerCommand : public Command {
+    char buffer[1024];
     VarManager* varManager;
 public:
     OpenDataServerCommand(VarManager* varManager);
+
+    static void *openSocket(void *parameters);
 
     virtual int execute(int &index, vector<string> data);
 };
