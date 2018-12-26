@@ -20,6 +20,6 @@ int SleepCommand::execute(int &index, vector<string> data) {
     if (seconds < 0){
         throw runtime_error("Negative Number Given To Sleep Command");
     }
-    usleep(seconds);
+    usleep(static_cast<unsigned int>(seconds));
     return NUM_OF_ARGS;
 }
