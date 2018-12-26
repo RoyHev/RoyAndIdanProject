@@ -62,8 +62,4 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
 void Runner::run() {
     Parser* parser = new Parser(this->lexeredFile, this->varManager, &commandsMap, index);
     parser->parseLexer();
-    while (true){
-
-    }
-
 }
