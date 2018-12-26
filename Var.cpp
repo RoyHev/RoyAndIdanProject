@@ -13,7 +13,6 @@ string Var::getName() const {
     return this->varName;
 }
 
-//TODO - return it from the symbol table.
 double Var::calculate() {
     return 0;
 }

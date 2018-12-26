@@ -26,7 +26,29 @@
 #define CLOSE_SWIRLY_B 125
 #define DOT 46
 #define IP_DOTS 3
-
+#define CAPITAL_A 'A'
+#define CAPITAL_Z 'Z'
+#define LOW_A_LETTER 'a'
+#define LOW_Z_LETTER 'z'
+#define OPEN_DATA_SERVER "openDataServer"
+#define CONNECT_COMMAND "connect"
+#define VAR_COMMAND "var"
+#define PRINT_COMMAND "print"
+#define SLEEP_COMMAND "sleep"
+#define BIND_COMMAND "bind"
+#define WHILE_COMMAND "while"
+#define LESS_OPERATOR "<"
+#define GREATER_OPERATOR ">"
+#define LESS_EQUAL_OPERATOR "<="
+#define GREATER_EQUAL_OPERATOR ">="
+#define EQUAL_OPERATOR "="
+#define IS_EQUAL_OPERATOR "=="
+#define UNEQUAL_OPERATOR "!="
+#define DOT_CHAR '.'
+#define PLUS_OPERATOR "+"
+#define MINUS_OPERATOR "-"
+#define MULT_OPERATOR "*"
+#define DIV_OPERATOR "/"
 
 using namespace std;
 
@@ -45,8 +67,9 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
         string temp = "";
         //go over the line and put each word in a different place.
         for (int i = 0; i < str.length(); i++) {
-            if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' &&
-                                                     str[i] <= 'z') || isdigit(str[i]) || (str[i] == DOT)) {
+            if ((str[i] >= CAPITAL_A && str[i] <= CAPITAL_Z) || (str[i] >= LOW_A_LETTER &&
+                                                                 str[i] <= LOW_Z_LETTER) || isdigit(str[i]) ||
+                (str[i] == DOT)) {
                 temp += str[i];
                 continue;
             } else {
@@ -147,12 +170,13 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     for (int i = 0; i < initialVector.size(); i++) {
         string str = initialVector[i];
         temp = "";
-        //TODO in map
         //if the string describes a command, an IP address or inequality sign then push string to mergedVector.
-        if (str == "openDataServer" || str == "connect" || str == "var" || str == "bind" || str == "=" ||
-            str == "while" || str == "print" || str == "sleep" || str == ">" || str == ">=" || str == "<" ||
-            str == "<=" || str == "==" || str == "!=" || isIP(str)) {
-            if (str == "=" && initialVector[i+1] == "bind"){
+        if (str == OPEN_DATA_SERVER || str == CONNECT_COMMAND || str == VAR_COMMAND || str == BIND_COMMAND ||
+            str == EQUAL_OPERATOR ||
+            str == WHILE_COMMAND || str == PRINT_COMMAND || str == SLEEP_COMMAND || str == GREATER_OPERATOR ||
+            str == GREATER_EQUAL_OPERATOR || str == LESS_OPERATOR ||
+            str == LESS_EQUAL_OPERATOR || str == IS_EQUAL_OPERATOR || str == UNEQUAL_OPERATOR || isIP(str)) {
+            if (str == EQUAL_OPERATOR && initialVector[i + 1] == BIND_COMMAND) {
                 i++;
                 str += initialVector[i];
             }
@@ -160,15 +184,14 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             flag = 1;
             continue;
         }
-            //TODO MAGIC
             //this condition merges a calculation string that starts with '-' operator
-        else if (initialVector[i] == "-" && (flag == 1 || i == 0)) {
-            while (initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
-                   initialVector[i] == "-") {
+        else if (initialVector[i] == MINUS_OPERATOR && (flag == 1 || i == 0)) {
+            while (initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR || initialVector[i] == DIV_OPERATOR ||
+                   initialVector[i] == MINUS_OPERATOR) {
                 temp += initialVector[i];
                 temp += initialVector[i + 1];
-                if (initialVector[i + 1] == "+" || initialVector[i + 1] == "*" || initialVector[i + 1] == "/" ||
-                    initialVector[i + 1] == "-") {
+                if (initialVector[i + 1] == PLUS_OPERATOR || initialVector[i + 1] == MULT_OPERATOR || initialVector[i + 1] == DIV_OPERATOR ||
+                    initialVector[i + 1] == MINUS_OPERATOR) {
                     temp += initialVector[i + 2];
                     i += 3;
                 } else { i += 2; }
@@ -179,15 +202,17 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             i--;
             continue;
             //this condition merges a calculation string that doesn't starts with '-' operator
-        } else if ((initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
-                    initialVector[i] == "-") && i != 0) {
-            while (initialVector[i] == "+" || initialVector[i] == "*" || initialVector[i] == "/" ||
-                   initialVector[i] == "-") {
+        } else if ((initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR ||
+                    initialVector[i] == DIV_OPERATOR ||
+                    initialVector[i] == MINUS_OPERATOR) && i != 0) {
+            while (initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR ||
+                   initialVector[i] == DIV_OPERATOR ||
+                   initialVector[i] == MINUS_OPERATOR) {
                 temp = mergedVector.back();
                 mergedVector.pop_back();
                 temp += initialVector[i];
                 temp += initialVector[i + 1];
-                if (initialVector[i + 1] == "-") {
+                if (initialVector[i + 1] == MINUS_OPERATOR) {
                     temp += initialVector[i + 2];
                     i += 3;
                 } else { i += 2; }
@@ -207,7 +232,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
 bool Lexer::isIP(const string &s) const {
     int counter = 0;
     for (int i = 0; i < s.length(); i++) {
-        if (s.at(i) == '.') {
+        if (s.at(i) == DOT_CHAR) {
             counter++;
         }
     }

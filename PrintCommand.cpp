@@ -30,6 +30,5 @@ int PrintCommand::execute(int &index, vector<string> data) {
         ShuntingYard *sh = new ShuntingYard(varManager);
         cout << sh->evaluateInfix(str)->calculate() << endl;
     }
-    //TODO - is it true
     return NUM_OF_ARG;
 }
