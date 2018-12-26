@@ -34,8 +34,6 @@ int OpenClientSocket::openSocket(string ip, double portNumber) {
     if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
         perror("ERROR connecting");
         exit(1);
-    } else {
-        cout << "connected !!!" << endl;
     }
 }
 

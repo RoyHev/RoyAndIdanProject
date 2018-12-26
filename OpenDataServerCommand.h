@@ -20,7 +20,6 @@
 #include "VarManager.h"
 
 class OpenDataServerCommand : public Command {
-    char buffer[1024];
     VarManager* varManager;
 public:
     OpenDataServerCommand(VarManager* varManager);

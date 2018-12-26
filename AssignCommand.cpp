@@ -21,9 +21,6 @@ int AssignCommand::execute(int &index, vector<string> data) {
     ShuntingYard *sh = new ShuntingYard(varManager);
     double result = sh->evaluateInfix(data.at(index + 1))->calculate();
     string varName = data.at(index - 1);
-    if (varName == "throttle"){
-        cout << varName << endl;
-    }
     string writeToServer = "set ";
     //var is binded to a certain path.
     if (varManager->doesExistInBindedVars(varName)) {

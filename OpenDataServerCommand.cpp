@@ -6,7 +6,6 @@
 #include "OpenDataServerCommand.h"
 
 #define NUM_OF_ARGS 2
-#define SIZE_BUFFER 206
 
 OpenDataServerCommand::OpenDataServerCommand(VarManager *varManager) {
     this->varManager = varManager;
@@ -19,17 +18,8 @@ struct MyParameters {
     VarManager *varManager;
 };
 
-int find(char* buffer, int maxLen)  {
-    for (int i = 0; i < maxLen; ++i)    {
-        if (buffer[i] == '\n') return i;
-    }
-    return -1;
-
-}
-
 void* OpenDataServerCommand::openSocket(void *parameters){
     struct MyParameters *myParameters = (struct MyParameters *) parameters;
-//    char buffer[SIZE_BUFFER];
     char c = '\0';
     int n;
     string buffer = "";
@@ -53,7 +43,6 @@ void* OpenDataServerCommand::openSocket(void *parameters){
         buffer += '\n';
 
         myParameters->varManager->updateXMLVars(buffer.c_str(),size);
-        cout << buffer << endl;
         buffer = "";
     }
 }
