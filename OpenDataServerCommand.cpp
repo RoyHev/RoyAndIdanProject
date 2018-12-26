@@ -70,9 +70,7 @@ static void *openSocket(void *parameters) {
             exit(1);
         }
         printf("Here is the message: %s\n", buffer);
-        //TODO DELET
-        printf("XY: %lf\n", myParameters->varManager->getValueByName("xy"));
-//        printf("CHECK %lf\n",myParameters->varManager->getPaths().find("/instrumentation/altimeter/pressure-alt-ft")
+        //        printf("CHECK %lf\n",myParameters->varManager->getPaths().find("/instrumentation/altimeter/pressure-alt-ft")
 //        ->second);
         myParameters->varManager->updateXMLVars(buffer);
     }

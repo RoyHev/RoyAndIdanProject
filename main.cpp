@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
     //TODO - singltone?
     Runner* runner = new Runner("text.txt");
     runner->run();
+    while (true){}
     //cout << s->evaluateInfix("1.1934444")->calculate();
 
 //    varManager->addToBindedVars("xy", "/instrumentation/altimeter/pressure-alt-ft");
