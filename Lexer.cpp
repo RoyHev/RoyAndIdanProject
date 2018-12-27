@@ -49,6 +49,7 @@
 #define MINUS_OPERATOR "-"
 #define MULT_OPERATOR "*"
 #define DIV_OPERATOR "/"
+#define COMMA_STR ","
 
 using namespace std;
 
@@ -186,15 +187,21 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
         }
             //this condition merges a calculation string that starts with '-' operator
         else if (initialVector[i] == MINUS_OPERATOR && (flag == 1 || i == 0)) {
-            while (initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR || initialVector[i] == DIV_OPERATOR ||
+            while (initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR ||
+                   initialVector[i] == DIV_OPERATOR ||
                    initialVector[i] == MINUS_OPERATOR) {
                 temp += initialVector[i];
                 temp += initialVector[i + 1];
-                if (initialVector[i + 1] == PLUS_OPERATOR || initialVector[i + 1] == MULT_OPERATOR || initialVector[i + 1] == DIV_OPERATOR ||
+                if (initialVector[i + 1] == PLUS_OPERATOR || initialVector[i + 1] == MULT_OPERATOR ||
+                    initialVector[i + 1] == DIV_OPERATOR ||
                     initialVector[i + 1] == MINUS_OPERATOR) {
                     temp += initialVector[i + 2];
                     i += 3;
-                } else { i += 2; }
+                } else if (i + 2 < initialVector.size()) { i += 2; }
+                else {
+                    i+=2;
+                    break;
+                }
             }
             mergedVector.push_back(temp);
             flag = 0;
@@ -220,6 +227,9 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             }
             i--;
             flag = 0;
+        } else if (initialVector[i] == COMMA_STR) {
+            flag = 1;
+            continue;
         } else {
             mergedVector.push_back(str);
             flag = 0;
