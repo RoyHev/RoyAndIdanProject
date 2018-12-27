@@ -21,7 +21,7 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-    Runner* runner = new Runner("text.txt");
+    Runner* runner = new Runner(argv[1]);
     runner->run();
     delete runner;
     pthread_exit(nullptr);
