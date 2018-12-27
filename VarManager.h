@@ -18,10 +18,11 @@ class VarManager {
     map<string, double> paths;
     vector<int> openSocketfds;
     bool end = false;
+    //reference counter for this class
     int counter = 0;
     mutable pthread_mutex_t mutex;
 public:
-
+    //reference counter.
     int incCount() {
         pthread_mutex_lock(&mutex);
         int temp = ++counter;
