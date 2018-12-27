@@ -227,7 +227,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             }
             i--;
             flag = 0;
-        } else if (initialVector[i] == COMMA_STR) {***
+        } else if (initialVector[i] == COMMA_STR) {
             flag = 1;
             continue;
         } else {
