@@ -12,6 +12,13 @@ SleepCommand::SleepCommand(VarManager *varManager) {
     this->varManager = varManager;
 }
 
+/**
+ * executes the command.
+ *
+ * @param index - where the command is in the vector.
+ * @param data - vector of the code.
+ * @return - number of args.
+ */
 int SleepCommand::execute(int &index, vector<string> data) {
     ShuntingYard shuntingYard(varManager);
     Expression *exp = shuntingYard.evaluateInfix(data[index + 1]);

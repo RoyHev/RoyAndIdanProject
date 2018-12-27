@@ -36,6 +36,13 @@ Runner::Runner(const char *fileName) {
 
 }
 
+/**
+ * Generates the maps for the commands. Initializes the values and creates
+ * them dynamically to later be used by every execute function.
+ *
+ * @param lexStrings - vector of lexered strings.
+ * @return - the map after it was generated.
+ */
 map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     map<string, Expression *> commandsExMap;
 
@@ -74,11 +81,17 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     return commandsExMap;
 }
 
+/**
+ * Runs the program.
+ */
 void Runner::run() {
     Parser parser(this->lexeredFile, this->varManager, &commandsMap, index);
     parser.parseLexer();
 }
 
+/**
+ * Destructor.
+ */
 Runner::~Runner() {
     for (map<string, Expression *>::iterator it = this->commandsMap.begin();
          it != this->commandsMap.end(); it++) {

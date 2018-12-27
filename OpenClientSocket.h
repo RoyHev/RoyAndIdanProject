@@ -28,7 +28,6 @@ public:
 
     void writeToSimulator(const char *buffer) const;
 
-    int getSockfd() const;
 };
 
 

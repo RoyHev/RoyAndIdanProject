@@ -34,6 +34,9 @@ Parser::Parser(vector<string> &lexStrings, VarManager *varManager,
     this->commandsMap = commands;
 }
 
+/**
+ * Parse the lexer srings and execute the commands.
+ */
 void Parser::parseLexer() {
     this->index = 0;
     string temp;

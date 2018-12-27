@@ -11,6 +11,7 @@ OpenDataServerCommand::OpenDataServerCommand(VarManager *varManager) {
     this->varManager = varManager;
 }
 
+//struct to open a thread.
 struct MyParameters {
     int portNumber;
     int hz;
@@ -18,6 +19,11 @@ struct MyParameters {
     VarManager *varManager;
 };
 
+/**
+ * opens a socket for the command.
+ * @param parameters - struct with the parameters/
+ * @return - void* for the pthread.
+ */
 void *OpenDataServerCommand::openSocket(void *parameters) {
     struct MyParameters *myParameters = (struct MyParameters *) parameters;
     myParameters->varManager->incCount();
@@ -30,6 +36,7 @@ void *OpenDataServerCommand::openSocket(void *parameters) {
     while (myParameters->varManager->shouldContinue()) {
         /* If connection is established then start communicating */
         n = read(myParameters->sockfd, &c, 1);
+        //read all the characters until the \0 which is all the variables.
         while (c != '\n') {
             if (n < 0) {
                 perror("ERROR reading from socket");
@@ -41,7 +48,7 @@ void *OpenDataServerCommand::openSocket(void *parameters) {
         }
         size++;
         buffer += '\n';
-
+        //update them in the tables.
         myParameters->varManager->updateXMLVars(buffer.c_str(), size);
         buffer = "";
     }
@@ -53,6 +60,13 @@ void *OpenDataServerCommand::openSocket(void *parameters) {
     delete myParameters;
 }
 
+/**
+ * executes the command.
+ *
+ * @param index - where the command is.
+ * @param data - vector of the lexered file.
+ * @return - number of arguments.
+ */
 int OpenDataServerCommand::execute(int &index, vector<string> data) {
     pthread_t threadID;
     struct MyParameters *parameters = new MyParameters();
@@ -63,6 +77,7 @@ int OpenDataServerCommand::execute(int &index, vector<string> data) {
     exp = shuntingYard.evaluateInfix(data[index + 2]);
     double hertz = exp->calculate();
     delete (exp);
+    //initialize the parameters of the struct.
     parameters->varManager = this->varManager;
     parameters->portNumber = portNum;
     parameters->hz = hertz;
@@ -106,6 +121,7 @@ int OpenDataServerCommand::execute(int &index, vector<string> data) {
         perror("ERROR on accept");
         exit(1);
     }
+    //create the thread.
     pthread_create(&threadID, nullptr, openSocket, parameters);
     return NUM_OF_ARGS;
 }

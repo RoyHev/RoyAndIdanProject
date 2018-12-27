@@ -9,6 +9,7 @@ Plus::Plus(Expression *left, Expression *right) : BinaryExpression(left,
 
 }
 
+//calculate the value of the plus.
 double Plus::calculate() {
     return this->getRightExp()->calculate() + this->getLeftExp()->calculate();
 }

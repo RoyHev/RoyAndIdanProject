@@ -14,6 +14,7 @@ PrintCommand::PrintCommand(VarManager *varManager) {
     this->varManager = varManager;
 }
 
+//execute print command.
 int PrintCommand::execute(int &index, vector<string> data) {
     //stores the output
     string str = data.at(index + 1);

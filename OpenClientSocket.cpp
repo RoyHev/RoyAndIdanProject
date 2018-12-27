@@ -5,7 +5,13 @@
 #include <iostream>
 #include "OpenClientSocket.h"
 
-
+/**
+ * Open a socket for the client. for the connect command.
+ *
+ * @param ip - id address
+ * @param portNumber - port number
+ *
+ */
 int OpenClientSocket::openSocket(string ip, double portNumber) {
     int portno;
     struct sockaddr_in serv_addr;
@@ -40,6 +46,10 @@ int OpenClientSocket::openSocket(string ip, double portNumber) {
     }
 }
 
+/**
+ * Writes to the stimulator.
+ * @param buffer - string to write to the server.
+ */
 void OpenClientSocket::writeToSimulator(const char *buffer) const {
     /* Send message to the server */
     ssize_t message = write(sockfd, buffer, strlen(buffer));
@@ -47,8 +57,4 @@ void OpenClientSocket::writeToSimulator(const char *buffer) const {
         perror("ERROR writing to socket");
         exit(1);
     }
-}
-
-int OpenClientSocket::getSockfd() const {
-    return this->sockfd;
 }

@@ -28,8 +28,11 @@ ConnectCommand::ConnectCommand(OpenClientSocket *openClientSocket,
     this->varManager = varManager;
 }
 
-/*
- *
+/**
+ * executes the connect command.
+ * @param index - where the command is in the vector.
+ * @param data - vector of code.
+ * @return - num of arguments.
  */
 int ConnectCommand::execute(int &index, vector<string> data) {
     ShuntingYard shuntingYard(varManager);
