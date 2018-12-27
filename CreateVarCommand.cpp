@@ -24,6 +24,12 @@ CreateVarCommand::CreateVarCommand(VarManager* varManager) {
     this->varManager = varManager;
 }
 
+/*
+ * creates a new var. first, the function checks that the var's name is
+ * up to the standards, if so - adds it to the Symbol Table
+ * and initializes it
+ * with 0
+ */
 int CreateVarCommand::execute(int &index, vector<string> data) {
     string name = data.at(index + 1);
 

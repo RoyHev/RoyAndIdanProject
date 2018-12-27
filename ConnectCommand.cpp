@@ -25,10 +25,12 @@ struct MyParameters {
 ConnectCommand::ConnectCommand(OpenClientSocket *openClientSocket,
                                VarManager *varManager) :
         openClientSocket(openClientSocket) {
-//    this->openClientSocket = openClientSocket;
     this->varManager = varManager;
 }
 
+/*
+ *
+ */
 int ConnectCommand::execute(int &index, vector<string> data) {
     ShuntingYard shuntingYard(varManager);
     Expression *exp = shuntingYard.evaluateInfix(data.at(index + 2));

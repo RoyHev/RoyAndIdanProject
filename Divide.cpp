@@ -4,6 +4,7 @@
 
 #include "Divide.h"
 
+//calculates recursively division between left expression and right expression.
 double Divide::calculate() {
     if (this->getRightExp()->calculate() == 0){
         throw "Cannot divide by zero;";

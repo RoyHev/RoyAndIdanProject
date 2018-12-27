@@ -10,7 +10,9 @@
 BindCommand::BindCommand(VarManager *varManager) {
     this->varManager = varManager;
 }
-
+/*
+ * implements bind= Command, connects between var to a path in the server
+ */
 int BindCommand::execute(int &index, vector<string> data) {
     string newVarName = data.at(index - 1);
     string bindTo = data.at(index + 1);

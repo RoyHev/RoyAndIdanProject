@@ -16,9 +16,11 @@ AssignCommand::AssignCommand(VarManager *varManager,
         : openClientSocket(
         *openClientSocket) {
     this->varManager = varManager;
-//    this->openClientSocket = openClientSocket;
 }
 
+/*
+ * implements '=' Command
+ */
 int AssignCommand::execute(int &index, vector<string> data) {
     ShuntingYard sh(varManager);
     Expression *exp = sh.evaluateInfix(data.at(index + 1));

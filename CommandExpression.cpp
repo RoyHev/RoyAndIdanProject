@@ -10,6 +10,7 @@ CommandExpression::CommandExpression(Command* cmd, vector<string> lexer,
     this->lexer = lexer;
 }
 
+// executes the given command.
 double CommandExpression::calculate() {
     return this->cmd->execute(this->index, lexer);
 }

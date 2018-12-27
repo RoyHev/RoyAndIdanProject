@@ -53,7 +53,11 @@
 
 using namespace std;
 
-
+/*
+ * the function gets a txt file path, and parses each word to a string.
+ * the function returns vector<string> that each element is a word or a
+ * mathematical expression.
+ */
 vector<string> Lexer::lexerFromFile(const string &textFile) {
     vector<string> lexer;
     ifstream inputStream;
@@ -83,7 +87,7 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                     temp = "";
                     continue;
                 }
-                //
+                //for any of the following chars - push them to the vector.
                 if (str[i] == PLUS_SIGN || str[i] == MINUS_SIGN || str[i]
                                                                    ==
                                                                    MULT_SIGN ||
@@ -99,6 +103,7 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                     lexer.push_back(sign);
                     continue;
                 }
+                //pushes >,>=,<,<=,=,==,!=,= to the vector as is
                 if (str[i] == GREATER_THAN || str[i] == LESS_THAN || str[i] ==
                                                                      EQUAL ||
                     str[i] == EXCLAIM) {
@@ -115,6 +120,8 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                     temp = "";
                     continue;
                 }
+                //if current char is '(' - make sure there are same amount of
+                // '(' and ')' - if so push them, else throw an ERROR msg.
                 if (str[i] == OPEN_BRACKET) {
                     char needed = CLOSE_BRACKET;
                     int counter = 1;
@@ -141,7 +148,7 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                         }
                         i++;
                     }
-                }
+                }//for any QUOTE make sure it has a closing QUOTE,
                 if (str[i] == QUOTE) {
                     if (!temp.empty()) {
                         lexer.push_back(temp);
