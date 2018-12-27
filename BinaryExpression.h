@@ -13,6 +13,10 @@ class BinaryExpression : public Expression {
 public:
     BinaryExpression(Expression* left, Expression* right);
     virtual double calculate() = 0;
+    ~BinaryExpression(){
+        delete this->rightExp;
+        delete this->leftExp;
+    }
     Expression* getLeftExp(){ return this->leftExp; }
     Expression* getRightExp(){ return this->rightExp; }
 };

@@ -15,12 +15,12 @@
 int IfCommand::execute(int &index, vector<string> data) {
     int elementsInScope = 0;
     int initialIndex = index;
-    ConditionParser *conditionParser = new ConditionParser(varManager, commandsMap);
+    ConditionParser conditionParser(varManager, commandsMap);
     //parsing the if scope - if condition is true
-    if (conditionParser->conditionCheck(index, data)) {
-        conditionParser->execute(index, data);
+    if (conditionParser.conditionCheck(index, data)) {
+        conditionParser.execute(index, data);
     }
-    elementsInScope = conditionParser->indexIncrement(index, data);
+    elementsInScope = conditionParser.indexIncrement(index, data);
     //return the index to the last element in the current scope
     return elementsInScope - initialIndex;
 }
@@ -29,5 +29,4 @@ IfCommand::IfCommand(VarManager *varManager, map<string, Expression *> *commands
                                                                                                        commandsMap) {
     this->varManager = varManager;
     this->commandsMap = commandsMap;
-
 }

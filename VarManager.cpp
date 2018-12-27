@@ -13,7 +13,6 @@
 VarManager::VarManager() {
     initializePaths();
     initializeXMLVector();
-    this->clientSocketID = -1;
 }
 
 
@@ -152,18 +151,22 @@ void VarManager::updateXMLVars(const char *buffer, int size) {
     string temp = "";
     int counter = 0;
     int flag = 0;
-    ShuntingYard *sh = new ShuntingYard(this);
+    ShuntingYard sh(this);
     for (int i = 0; i < size; i++) {
         if (buffer[i] == END_OF_LINE || i == (size - 1) || buffer[i] == ENTER) {
             flag = 1;
         }
         if (buffer[i] == COMMA || flag == 1) {
             string path = this->pathsFromXML.at(counter);
-            setValueByPath(path, sh->evaluateInfix(temp)->calculate());
+            Expression *exp = sh.evaluateInfix(temp);
+            setValueByPath(path, exp->calculate());
+            delete (exp);
             for (auto &it : bindedVars) {
                 if (it.second == path) {
                     string varName = it.first;
-                    setValueByName(varName, sh->evaluateInfix(temp)->calculate());
+                    exp = sh.evaluateInfix(temp);
+                    setValueByName(varName, exp->calculate());
+                    delete (exp);
                 }
             }
             if (flag == 1) {
@@ -188,6 +191,3 @@ const map<string, string> &VarManager::getBindedVars() const {
     return bindedVars;
 }
 
-void VarManager::setSocketID(int newScoketID) {
-    this->clientSocketID = newScoketID;
-}

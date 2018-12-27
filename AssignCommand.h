@@ -16,7 +16,6 @@ class AssignCommand: public Command{
 public:
     AssignCommand(VarManager *varManager, OpenClientSocket &openClientSocket);
     virtual int execute(int &index, vector<string> data);
-
 };
 
 

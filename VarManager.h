@@ -16,10 +16,17 @@ class VarManager {
     map<string, string> bindedVars;
     vector<string> pathsFromXML;
     map<string, double> paths;
-    int clientSocketID;
+    vector<int> openSocketfds;
+    bool end = false;
 public:
 
-    void setSocketID(int newScoketID);
+    bool shouldContinue()   const {
+        return !end;
+    }
+
+    bool signalFinished()   {
+        end = true;
+    }
 
     VarManager();
 
@@ -50,6 +57,14 @@ public:
     const map<string, string> &getBindedVars() const;
 
     const map<string, double> &getPaths() const;
+
+    void addSockfd(int sockfd){
+        this->openSocketfds.emplace_back(sockfd);
+    }
+
+    vector<int> getSockfd(){
+        return this->openSocketfds;
+    }
 
 private:
     void initializeXMLVector();

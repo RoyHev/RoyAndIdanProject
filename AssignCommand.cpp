@@ -11,15 +11,17 @@
 #define ENTER '\r'
 #define ENTER2 '\n'
 
-AssignCommand::AssignCommand(VarManager *varManager, OpenClientSocket &openClientSocket): openClientSocket(openClientSocket) {
+AssignCommand::AssignCommand(VarManager *varManager, OpenClientSocket &openClientSocket) : openClientSocket(
+        openClientSocket) {
     this->varManager = varManager;
 //    this->openClientSocket = openClientSocket;
 }
 
 int AssignCommand::execute(int &index, vector<string> data) {
-
-    ShuntingYard *sh = new ShuntingYard(varManager);
-    double result = sh->evaluateInfix(data.at(index + 1))->calculate();
+    ShuntingYard sh(varManager);
+    Expression *exp = sh.evaluateInfix(data.at(index + 1));
+    double result = exp->calculate();
+    delete (exp);
     string varName = data.at(index - 1);
     string writeToServer = "set ";
     //var is binded to a certain path.

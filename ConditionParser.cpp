@@ -114,12 +114,16 @@ int ConditionParser::execute(int &index, vector<string> data) {
  */
 bool ConditionParser::conditionCheck(int i, vector<string> data) {
 //    Parser *scopeParser = new Parser(data, varManager, commandsMap);
-    ShuntingYard *sh = new ShuntingYard(varManager);
     string strOperand1 = data.at(i + 1);
-    double operand1 = sh->evaluateInfix(strOperand1)->calculate();
+    ShuntingYard sh(varManager);
+    Expression *exp = sh.evaluateInfix(strOperand1);
+    double operand1 = exp->calculate();
+    delete exp;
     string strOperand2 = data.at(i + 3);
-    double operand2 = sh->evaluateInfix(strOperand2)->calculate();
+    exp = sh.evaluateInfix(strOperand2);
+    double operand2 = exp->calculate();
     string operation = data.at(i + 2);
+    delete (exp);
     //find the condition operator and return true or false accordingly.
     if (operation == GREATER) {
         if (operand1 > operand2) {

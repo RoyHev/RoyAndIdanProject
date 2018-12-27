@@ -18,41 +18,46 @@ struct MyParameters {
     VarManager *varManager;
 };
 
-void* OpenDataServerCommand::openSocket(void *parameters){
+void *OpenDataServerCommand::openSocket(void *parameters) {
     struct MyParameters *myParameters = (struct MyParameters *) parameters;
     char c = '\0';
     int n;
     string buffer = "";
     int size = 0;
-
     /* First call to socket() function */
 
-    while (true) {
+    while (myParameters->varManager->shouldContinue()) {
         /* If connection is established then start communicating */
         n = read(myParameters->sockfd, &c, 1);
-        while (c != '\n'){
-        if (n < 0) {
-            perror("ERROR reading from socket");
-            exit(1);
-        }
-        size++;
-        buffer += c;
-         n = read(myParameters->sockfd, &c, 1);
+        while (c != '\n') {
+            if (n < 0) {
+                perror("ERROR reading from socket");
+                exit(1);
+            }
+            size++;
+            buffer += c;
+            n = read(myParameters->sockfd, &c, 1);
         }
         size++;
         buffer += '\n';
 
-        myParameters->varManager->updateXMLVars(buffer.c_str(),size);
+        myParameters->varManager->updateXMLVars(buffer.c_str(), size);
         buffer = "";
     }
+
+    close(myParameters->sockfd);
 }
 
 int OpenDataServerCommand::execute(int &index, vector<string> data) {
     pthread_t threadID;
-    struct MyParameters *parameters = new MyParameters();
-    ShuntingYard *shuntingYard = new ShuntingYard(varManager);
-    double portNum = shuntingYard->evaluateInfix(data[index + 1])->calculate();
-    double hertz = shuntingYard->evaluateInfix(data[index + 2])->calculate();
+    struct MyParameters* parameters = new MyParameters();
+    ShuntingYard shuntingYard(varManager);
+    Expression *exp = shuntingYard.evaluateInfix(data[index + 1]);
+    double portNum = exp->calculate();
+    delete exp;
+    exp = shuntingYard.evaluateInfix(data[index + 2]);
+    double hertz = exp->calculate();
+    delete (exp);
     parameters->varManager = this->varManager;
     parameters->portNumber = portNum;
     parameters->hz = hertz;
@@ -90,6 +95,7 @@ int OpenDataServerCommand::execute(int &index, vector<string> data) {
     /* Accept actual connection from the client */
     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
     parameters->sockfd = newsockfd;
+    this->varManager->addSockfd(newsockfd);
     if (newsockfd < 0) {
         perror("ERROR on accept");
         exit(1);

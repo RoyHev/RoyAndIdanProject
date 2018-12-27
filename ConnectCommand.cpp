@@ -17,32 +17,28 @@ struct MyParameters {
     double portNum;
     int socketfd;
     OpenClientSocket &openClientSocket;
-    MyParameters(OpenClientSocket &openClientSocket):openClientSocket(openClientSocket){
+
+    MyParameters(OpenClientSocket &openClientSocket) : openClientSocket(openClientSocket) {
 
     }
 };
 
 ConnectCommand::ConnectCommand(OpenClientSocket &openClientSocket, VarManager *varManager) : openClientSocket
-(openClientSocket) {
+                                                                                                     (openClientSocket) {
 //    this->openClientSocket = openClientSocket;
     this->varManager = varManager;
 }
 
 int ConnectCommand::execute(int &index, vector<string> data) {
-    ShuntingYard *shuntingYard = new ShuntingYard(varManager);
+    ShuntingYard shuntingYard(varManager);
+    Expression *exp = shuntingYard.evaluateInfix(data.at(index + 2));
     string ip = data.at(index + 1);
-    double port = shuntingYard->evaluateInfix(data.at(index + 2))->calculate();
+    double port = exp->calculate();
+    delete exp;
     struct MyParameters *myParameters = new MyParameters(this->openClientSocket);
     myParameters->portNum = port;
     myParameters->ip = ip;
-    myParameters-> socketfd = myParameters->openClientSocket.openSocket(myParameters->ip, myParameters->portNum);
-    pthread_t pthreadID;
-    pthread_create(&pthreadID, nullptr, openNewClientSocket, (void *) myParameters);
+    myParameters->socketfd = myParameters->openClientSocket.openSocket(myParameters->ip, myParameters->portNum);
+    this->varManager->addSockfd(myParameters->socketfd);
     return NUM_OF_ARGS;
-}
-
-void *openNewClientSocket(void *args) {
-    struct MyParameters *parameters;
-    parameters = (struct MyParameters *) args;
-//    parameters->openClientSocket->openSocket(parameters->ip, parameters->portNum);
 }

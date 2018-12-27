@@ -25,6 +25,9 @@ class CommandExpression: public Expression{
     int &index;
 public:
     CommandExpression(Command* cmd, vector<string> lexer, int &index);
+    virtual ~CommandExpression(){
+        delete cmd;
+    }
     virtual double calculate();
 };
 

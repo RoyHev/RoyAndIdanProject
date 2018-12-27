@@ -79,12 +79,12 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
                 index++;
             }
             //implements shunting yard on decimal numbers
-            if (index<expression.length() && expression.at(index) == '.'){
+            if (index < expression.length() && expression.at(index) == '.') {
                 index++;
-                while (index <expression.length() && isdigit(expression.at
-                (index))){
-                    tempDecimal += ((double)(expression.at(index) - '0') /
-                            pow(10,exponent));
+                while (index < expression.length() && isdigit(expression.at
+                        (index))) {
+                    tempDecimal += ((double) (expression.at(index) - '0') /
+                                    pow(10, exponent));
                     exponent++;
                     index++;
                 }
@@ -132,7 +132,8 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             string variableName = "";
             minusOp = true;
             while (operationPriority(expression[index]) == 0 && index <
-            expression.length() && expression.at(index) != CLOSE_BRACKET) {
+                                                                expression.length() &&
+                   expression.at(index) != CLOSE_BRACKET) {
                 if (expression.at(index) != SPACE) {
                     variableName += expression[index];
                 }
@@ -157,6 +158,5 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
     }
     return numbers.top();
 }
-
 
 

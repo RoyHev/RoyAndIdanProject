@@ -8,6 +8,7 @@
 class Expression {
 public:
     virtual double calculate() = 0;
+    virtual ~Expression() = default;
 };
 
 #endif //EX3_EXPRESSION_H

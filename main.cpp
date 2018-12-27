@@ -23,5 +23,6 @@ using namespace std;
 int main(int argc, char *argv[]) {
     Runner* runner = new Runner("text.txt");
     runner->run();
-    return 0;
+    delete runner;
+    pthread_exit(nullptr);
 }

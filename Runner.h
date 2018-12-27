@@ -34,6 +34,7 @@ class Runner {
 
 public:
     Runner(const char *fileName);
+    ~Runner();
     void run();
 private:
     map<string,Expression*> commandsGenerator(vector<string> lexStrings);
