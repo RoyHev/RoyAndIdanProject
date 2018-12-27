@@ -30,24 +30,25 @@ public:
         return temp;
     }
 
-    int decCount()  {
+    int decCount() {
         pthread_mutex_lock(&mutex);
         int temp = --counter;
         pthread_mutex_unlock(&mutex);
         return temp;
     }
 
-    int getCount()  {
+    int getCount() {
         pthread_mutex_lock(&mutex);
         int temp = counter;
         pthread_mutex_unlock(&mutex);
         return temp;
     }
-    bool shouldContinue()   const {
+
+    bool shouldContinue() const {
         return !end;
     }
 
-    bool signalFinished()   {
+    bool signalFinished() {
         end = true;
     }
 
@@ -81,17 +82,18 @@ public:
 
     const map<string, double> &getPaths() const;
 
-    void addSockfd(int sockfd){
+    void addSockfd(int sockfd) {
         this->openSocketfds.emplace_back(sockfd);
     }
 
-    vector<int> getSockfd(){
+    vector<int> getSockfd() {
         return this->openSocketfds;
     }
 
-    ~VarManager(){
+    ~VarManager() {
         pthread_mutex_destroy(&mutex);
     }
+
 private:
     void initializeXMLVector();
 
