@@ -15,7 +15,7 @@
 #include <pthread.h>
 #include <thread>
 #include <sys/socket.h>
-
+#include "Command.h"
 #include "ShuntingYard.h"
 #include "VarManager.h"
 

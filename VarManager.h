@@ -50,6 +50,7 @@ public:
 
     bool signalFinished() {
         end = true;
+        return true;
     }
 
     VarManager();

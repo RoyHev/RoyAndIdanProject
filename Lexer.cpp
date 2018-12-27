@@ -123,7 +123,6 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                 //if current char is '(' - make sure there are same amount of
                 // '(' and ')' - if so push them, else throw an ERROR msg.
                 if (str[i] == OPEN_BRACKET) {
-                    char needed = CLOSE_BRACKET;
                     int counter = 1;
                     i++;
                     if (!temp.empty()) {

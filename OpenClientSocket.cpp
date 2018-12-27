@@ -44,6 +44,7 @@ int OpenClientSocket::openSocket(string ip, double portNumber) {
         perror("ERROR connecting");
         exit(1);
     }
+    return 1;
 }
 
 /**

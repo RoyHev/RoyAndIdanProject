@@ -83,7 +83,6 @@ int OpenDataServerCommand::execute(int &index, vector<string> data) {
     parameters->hz = hertz;
     int sockfd, newsockfd, portno, clilen;
     struct sockaddr_in serv_addr, cli_addr;
-    int n;
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
         perror("ERROR opening socket");
