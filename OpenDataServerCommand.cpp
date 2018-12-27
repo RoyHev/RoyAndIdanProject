@@ -47,7 +47,7 @@ void *OpenDataServerCommand::openSocket(void *parameters) {
     }
 
     close(myParameters->sockfd);
-    if (myParameters->varManager->decCount() == 0)  {
+    if (myParameters->varManager->decCount() == 0) {
         delete myParameters->varManager;
     }
     delete myParameters;
@@ -55,7 +55,7 @@ void *OpenDataServerCommand::openSocket(void *parameters) {
 
 int OpenDataServerCommand::execute(int &index, vector<string> data) {
     pthread_t threadID;
-    struct MyParameters* parameters = new MyParameters();
+    struct MyParameters *parameters = new MyParameters();
     ShuntingYard shuntingYard(varManager);
     Expression *exp = shuntingYard.evaluateInfix(data[index + 1]);
     double portNum = exp->calculate();
@@ -98,7 +98,8 @@ int OpenDataServerCommand::execute(int &index, vector<string> data) {
     clilen = sizeof(cli_addr);
 
     /* Accept actual connection from the client */
-    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,
+                       (socklen_t *) &clilen);
     parameters->sockfd = newsockfd;
     this->varManager->addSockfd(newsockfd);
     if (newsockfd < 0) {

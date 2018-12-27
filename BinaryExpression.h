@@ -8,17 +8,21 @@
 #include "Expression.h"
 
 class BinaryExpression : public Expression {
-    Expression* leftExp;
-    Expression* rightExp;
+    Expression *leftExp;
+    Expression *rightExp;
 public:
-    BinaryExpression(Expression* left, Expression* right);
+    BinaryExpression(Expression *left, Expression *right);
+
     virtual double calculate() = 0;
-    ~BinaryExpression(){
+
+    ~BinaryExpression() {
         delete this->rightExp;
         delete this->leftExp;
     }
-    Expression* getLeftExp(){ return this->leftExp; }
-    Expression* getRightExp(){ return this->rightExp; }
+
+    Expression *getLeftExp() { return this->leftExp; }
+
+    Expression *getRightExp() { return this->rightExp; }
 };
 
 

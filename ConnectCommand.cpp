@@ -10,21 +10,21 @@
 
 #define NUM_OF_ARGS 2
 
-void *openNewClientSocket(void *args);
-
 struct MyParameters {
     string ip;
     double portNum;
     int socketfd;
-    OpenClientSocket* openClientSocket;
+    OpenClientSocket *openClientSocket;
 
-    MyParameters(OpenClientSocket* openClientSocket) : openClientSocket(openClientSocket) {
+    MyParameters(OpenClientSocket *openClientSocket) : openClientSocket(
+            openClientSocket) {
 
     }
 };
 
-ConnectCommand::ConnectCommand(OpenClientSocket* openClientSocket, VarManager *varManager) : openClientSocket
-                                                                                                     (openClientSocket) {
+ConnectCommand::ConnectCommand(OpenClientSocket *openClientSocket,
+                               VarManager *varManager) :
+        openClientSocket(openClientSocket) {
 //    this->openClientSocket = openClientSocket;
     this->varManager = varManager;
 }
@@ -35,10 +35,12 @@ int ConnectCommand::execute(int &index, vector<string> data) {
     string ip = data.at(index + 1);
     double port = exp->calculate();
     delete exp;
-    struct MyParameters *myParameters = new MyParameters(this->openClientSocket);
+    struct MyParameters *myParameters = new MyParameters(
+            this->openClientSocket);
     myParameters->portNum = port;
     myParameters->ip = ip;
-    myParameters->socketfd = myParameters->openClientSocket->openSocket(myParameters->ip, myParameters->portNum);
+    myParameters->socketfd = myParameters->openClientSocket->openSocket(
+            myParameters->ip, myParameters->portNum);
     this->varManager->addSockfd(myParameters->socketfd);
     delete myParameters;
     return NUM_OF_ARGS;

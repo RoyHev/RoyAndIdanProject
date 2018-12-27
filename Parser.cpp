@@ -26,8 +26,9 @@
 
 using namespace std;
 
-Parser::Parser(vector<string> &lexStrings, VarManager *varManager, map<string,Expression*> *commands, int &index) :
-index(index), lexStrings(lexStrings) {
+Parser::Parser(vector<string> &lexStrings, VarManager *varManager,
+               map<string, Expression *> *commands, int &index) :
+        index(index), lexStrings(lexStrings) {
     this->lexStrings = lexStrings;
     this->varManager = varManager;
     this->commandsMap = commands;

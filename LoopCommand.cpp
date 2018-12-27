@@ -19,8 +19,10 @@ int LoopCommand::execute(int &index, vector<string> data) {
     return elementsInScope - initialIndex;
 }
 
-LoopCommand::LoopCommand(VarManager *varManager, map<string, Expression *> *commandsMap) : ConditionParser(varManager,
-                                                                                                           commandsMap) {
+LoopCommand::LoopCommand(VarManager *varManager,
+                         map<string, Expression *> *commandsMap)
+        : ConditionParser(varManager,
+                          commandsMap) {
     this->varManager = varManager;
     this->commandsMap = commandsMap;
 

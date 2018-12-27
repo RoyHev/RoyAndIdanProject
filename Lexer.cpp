@@ -68,8 +68,9 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
         string temp = "";
         //go over the line and put each word in a different place.
         for (int i = 0; i < str.length(); i++) {
-            if ((str[i] >= CAPITAL_A && str[i] <= CAPITAL_Z) || (str[i] >= LOW_A_LETTER &&
-                                                                 str[i] <= LOW_Z_LETTER) || isdigit(str[i]) ||
+            if ((str[i] >= CAPITAL_A && str[i] <= CAPITAL_Z) ||
+                (str[i] >= LOW_A_LETTER &&
+                 str[i] <= LOW_Z_LETTER) || isdigit(str[i]) ||
                 (str[i] == DOT)) {
                 temp += str[i];
                 continue;
@@ -84,7 +85,9 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                 }
                 //
                 if (str[i] == PLUS_SIGN || str[i] == MINUS_SIGN || str[i]
-                                                                   == MULT_SIGN || str[i] == DIVISION_SIGN ||
+                                                                   ==
+                                                                   MULT_SIGN ||
+                    str[i] == DIVISION_SIGN ||
                     str[i] == COMMA ||
                     str[i] == OPEN_SWIRLY_B || str[i] == CLOSE_SWIRLY_B) {
                     if (!temp.empty()) {
@@ -97,7 +100,8 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                     continue;
                 }
                 if (str[i] == GREATER_THAN || str[i] == LESS_THAN || str[i] ==
-                                                                     EQUAL || str[i] == EXCLAIM) {
+                                                                     EQUAL ||
+                    str[i] == EXCLAIM) {
                     if (!temp.empty()) {
                         lexer.push_back(temp);
                         temp = "";
@@ -171,12 +175,16 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     for (int i = 0; i < initialVector.size(); i++) {
         string str = initialVector[i];
         temp = "";
-        //if the string describes a command, an IP address or inequality sign then push string to mergedVector.
-        if (str == OPEN_DATA_SERVER || str == CONNECT_COMMAND || str == VAR_COMMAND || str == BIND_COMMAND ||
+        //if the string describes a command, an IP address or inequality sign
+        // then push string to mergedVector.
+        if (str == OPEN_DATA_SERVER || str == CONNECT_COMMAND ||
+            str == VAR_COMMAND || str == BIND_COMMAND ||
             str == EQUAL_OPERATOR ||
-            str == WHILE_COMMAND || str == PRINT_COMMAND || str == SLEEP_COMMAND || str == GREATER_OPERATOR ||
+            str == WHILE_COMMAND || str == PRINT_COMMAND ||
+            str == SLEEP_COMMAND || str == GREATER_OPERATOR ||
             str == GREATER_EQUAL_OPERATOR || str == LESS_OPERATOR ||
-            str == LESS_EQUAL_OPERATOR || str == IS_EQUAL_OPERATOR || str == UNEQUAL_OPERATOR || isIP(str)) {
+            str == LESS_EQUAL_OPERATOR || str == IS_EQUAL_OPERATOR ||
+            str == UNEQUAL_OPERATOR || isIP(str)) {
             if (str == EQUAL_OPERATOR && initialVector[i + 1] == BIND_COMMAND) {
                 i++;
                 str += initialVector[i];
@@ -185,21 +193,24 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             flag = 1;
             continue;
         }
-            //this condition merges a calculation string that starts with '-' operator
+            //this condition merges a calculation string that starts with '-'
+            // operator
         else if (initialVector[i] == MINUS_OPERATOR && (flag == 1 || i == 0)) {
-            while (initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR ||
+            while (initialVector[i] == PLUS_OPERATOR ||
+                   initialVector[i] == MULT_OPERATOR ||
                    initialVector[i] == DIV_OPERATOR ||
                    initialVector[i] == MINUS_OPERATOR) {
                 temp += initialVector[i];
                 temp += initialVector[i + 1];
-                if (initialVector[i + 1] == PLUS_OPERATOR || initialVector[i + 1] == MULT_OPERATOR ||
+                if (initialVector[i + 1] == PLUS_OPERATOR ||
+                    initialVector[i + 1] == MULT_OPERATOR ||
                     initialVector[i + 1] == DIV_OPERATOR ||
                     initialVector[i + 1] == MINUS_OPERATOR) {
                     temp += initialVector[i + 2];
                     i += 3;
                 } else if (i + 2 < initialVector.size()) { i += 2; }
                 else {
-                    i+=2;
+                    i += 2;
                     break;
                 }
             }
@@ -208,11 +219,14 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             temp = "";
             i--;
             continue;
-            //this condition merges a calculation string that doesn't starts with '-' operator
-        } else if ((initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR ||
+            //this condition merges a calculation string that doesn't starts
+            // with '-' operator
+        } else if ((initialVector[i] == PLUS_OPERATOR ||
+                    initialVector[i] == MULT_OPERATOR ||
                     initialVector[i] == DIV_OPERATOR ||
                     initialVector[i] == MINUS_OPERATOR) && i != 0) {
-            while (initialVector[i] == PLUS_OPERATOR || initialVector[i] == MULT_OPERATOR ||
+            while (initialVector[i] == PLUS_OPERATOR ||
+                   initialVector[i] == MULT_OPERATOR ||
                    initialVector[i] == DIV_OPERATOR ||
                    initialVector[i] == MINUS_OPERATOR) {
                 temp = mergedVector.back();
@@ -227,7 +241,7 @@ vector<string> Lexer::elementsMerge(vector<string> initialVector) {
             }
             i--;
             flag = 0;
-        } else if (initialVector[i] == COMMA_STR) {***
+        } else if (initialVector[i] == COMMA_STR) {
             flag = 1;
             continue;
         } else {

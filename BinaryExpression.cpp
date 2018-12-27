@@ -9,7 +9,7 @@
  * @param left - left expression.
  * @param right - right expression.
  */
-BinaryExpression::BinaryExpression(Expression* left, Expression* right) {
+BinaryExpression::BinaryExpression(Expression *left, Expression *right) {
     this->leftExp = left;
     this->rightExp = right;
 }

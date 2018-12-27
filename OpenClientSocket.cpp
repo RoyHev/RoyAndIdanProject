@@ -28,17 +28,19 @@ int OpenClientSocket::openSocket(string ip, double portNumber) {
 
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    bcopy((char *) server->h_addr, (char *) &serv_addr.sin_addr.s_addr, server->h_length);
+    bcopy((char *) server->h_addr, (char *) &serv_addr.sin_addr.s_addr,
+          server->h_length);
     serv_addr.sin_port = htons(portno);
 
     /* Now connect to the server */
-    if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
+    if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) <
+        0) {
         perror("ERROR connecting");
         exit(1);
     }
 }
 
-void OpenClientSocket::writeToSimulator(const char *buffer) const{
+void OpenClientSocket::writeToSimulator(const char *buffer) const {
     /* Send message to the server */
     ssize_t message = write(sockfd, buffer, strlen(buffer));
     if (message < 0) {

@@ -28,10 +28,12 @@ int ShuntingYard::operationPriority(char operation) {
 }
 
 /*
- * the function gets 2 Expressions and 1 operation. it calculates the first Expression and the second Expression
+ * the function gets 2 Expressions and 1 operation. it calculates the first
+ * Expression and the second Expression
  * via the given operation.
  */
-Expression *ShuntingYard::applyOperation(Expression *left, Expression *right, char operation) {
+Expression *ShuntingYard::applyOperation(Expression *left, Expression *right,
+                                         char operation) {
     switch (operation) {
         case '*':
             return new Multiply(left, right);
@@ -50,7 +52,8 @@ Expression *ShuntingYard::applyOperation(Expression *left, Expression *right, ch
 }
 
 /*
- * the function gets a string which describes an expression and calculates it using applyOperation method.
+ * the function gets a string which describes an expression and calculates
+ * it using applyOperation method.
  */
 Expression *ShuntingYard::evaluateInfix(string expression) {
     bool minusOp = false;
@@ -67,13 +70,15 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             operations.push(expression.at(index));
             //if the current char is a digit - push it to operations.
         } else if (isdigit(expression.at(index))) {
-            //will hold the current number which is consists of the current chars.
+            //will hold the current number which is consists of the current
+            // chars.
             double temp = 0;
             double tempDecimal = 0;
             int exponent = 1;
             minusOp = true;
             //turns a string that consists of numbers into an integer.
-            while (index < expression.length() && isdigit(expression.at(index))) {
+            while (index < expression.length() &&
+                   isdigit(expression.at(index))) {
                 temp *= 10;
                 temp += (expression.at(index) - '0');
                 index++;
@@ -93,9 +98,11 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             index--;
             //push the number to the numbers' stack
             numbers.push(new Number(temp));
-            //if the current char is ')' - push it to the stack, solve what's inside the braces
+            //if the current char is ')' - push it to the stack, solve what's
+            // inside the braces
         } else if (expression.at(index) == CLOSE_BRACKET) {
-            //calculate all the operations in the stack operations until we face '('
+            //calculate all the operations in the stack operations until
+            // we face '('
             while (operations.top() != OPEN_BRACKET && !operations.empty()) {
                 Expression *val2 = numbers.top();
                 numbers.pop();
@@ -113,11 +120,14 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
                 Expression *zeroNum = new Number(0);
                 numbers.push(zeroNum);
             }
-            //while the top operation of the operations stack has same or greater precedence
+            //while the top operation of the operations stack has same or
+            // greater precedence
             //to the current operation, apply that operation.
             while (!operations.empty() && minusOp && (operationPriority
-                                                              (expression.at(index)) <=
-                                                      operationPriority(operations.top()))) {
+                                                              (expression.at(
+                                                                      index)) <=
+                                                      operationPriority(
+                                                              operations.top()))) {
                 Expression *val2 = numbers.top();
                 numbers.pop();
                 Expression *val = numbers.top();
@@ -131,8 +141,8 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
         } else {
             string variableName = "";
             minusOp = true;
-            while (operationPriority(expression[index]) == 0 && index <
-                                                                expression.length() &&
+            while (operationPriority(expression[index]) == 0 &&
+                   index < expression.length() &&
                    expression.at(index) != CLOSE_BRACKET) {
                 if (expression.at(index) != SPACE) {
                     variableName += expression[index];
@@ -145,7 +155,8 @@ Expression *ShuntingYard::evaluateInfix(string expression) {
             index -= 1;
         }
     }
-    //after the whole expression has been parsed, apply the remaining operations with
+    //after the whole expression has been parsed, apply the remaining
+    // operations with
     // to remaining values
     while (!operations.empty()) {
         Expression *val2 = numbers.top();

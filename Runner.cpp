@@ -39,25 +39,38 @@ Runner::Runner(const char *fileName) {
 map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     map<string, Expression *> commandsExMap;
 
-    commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
+    commandsExMap.insert(make_pair(BIND, new CommandExpression(
+            new BindCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
             make_pair(OPEN_SERVER,
-                      new CommandExpression(new OpenDataServerCommand(varManager), lexStrings, index)));
+                      new CommandExpression(
+                              new OpenDataServerCommand(varManager), lexStrings,
+                              index)));
     commandsExMap.insert(
-            make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager, &commandsMap), lexStrings, index)));
+            make_pair(IF_CONDITION, new CommandExpression(
+                    new IfCommand(varManager, &commandsMap), lexStrings,
+                    index)));
     commandsExMap.insert(
-            make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager, &commandsMap), lexStrings, index)));
-    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(openClientSocket, varManager),
-                                                                  lexStrings, index)));
+            make_pair(WHILE_LOOP, new CommandExpression(
+                    new LoopCommand(varManager, &commandsMap), lexStrings,
+                    index)));
+    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(
+            new ConnectCommand(openClientSocket, varManager),
+            lexStrings, index)));
     commandsExMap.insert(
-            make_pair(VAR, new CommandExpression(new CreateVarCommand(varManager), lexStrings, index)));
+            make_pair(VAR,
+                      new CommandExpression(new CreateVarCommand(varManager),
+                                            lexStrings, index)));
     commandsExMap.insert(
-            make_pair(PRINT, new CommandExpression(new PrintCommand(varManager), lexStrings, index)));
+            make_pair(PRINT, new CommandExpression(new PrintCommand(varManager),
+                                                   lexStrings, index)));
     commandsExMap.insert(
-            make_pair(SLEEP, new CommandExpression(new SleepCommand(varManager), lexStrings, index)));
+            make_pair(SLEEP, new CommandExpression(new SleepCommand(varManager),
+                                                   lexStrings, index)));
     commandsExMap.insert(
-            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager, openClientSocket), lexStrings,
-                                                    index)));
+            make_pair(ASSIGN, new CommandExpression(
+                    new AssignCommand(varManager, openClientSocket), lexStrings,
+                    index)));
     return commandsExMap;
 }
 
@@ -67,11 +80,12 @@ void Runner::run() {
 }
 
 Runner::~Runner() {
-    for (map<string, Expression *>::iterator it = this->commandsMap.begin(); it != this->commandsMap.end(); it++) {
+    for (map<string, Expression *>::iterator it = this->commandsMap.begin();
+         it != this->commandsMap.end(); it++) {
         delete (*it).second;
     }
     varManager->signalFinished();
-    if (varManager->decCount() == 0)    {
+    if (varManager->decCount() == 0) {
         delete varManager;
     }
 

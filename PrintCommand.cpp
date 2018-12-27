@@ -25,7 +25,8 @@ int PrintCommand::execute(int &index, vector<string> data) {
         }
         cout << temp << endl;
     }
-        //convert the string to an Expression and print it if its a legal Expression
+        //convert the string to an Expression and print it if its a legal
+        // Expression
     else {
         ShuntingYard sh(varManager);
         Expression *exp = sh.evaluateInfix(str);
