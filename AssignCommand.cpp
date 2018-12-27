@@ -11,8 +11,8 @@
 #define ENTER '\r'
 #define ENTER2 '\n'
 
-AssignCommand::AssignCommand(VarManager *varManager, OpenClientSocket &openClientSocket) : openClientSocket(
-        openClientSocket) {
+AssignCommand::AssignCommand(VarManager *varManager, OpenClientSocket* openClientSocket) : openClientSocket(
+        *openClientSocket) {
     this->varManager = varManager;
 //    this->openClientSocket = openClientSocket;
 }

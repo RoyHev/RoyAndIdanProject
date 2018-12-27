@@ -31,9 +31,10 @@ class Runner {
     map<string, Expression*> commandsMap;
     vector<string> lexeredFile;
     int index;
+    OpenClientSocket *openClientSocket;
 
 public:
-    Runner(const char *fileName);
+    explicit Runner(const char *fileName);
     ~Runner();
     void run();
 private:

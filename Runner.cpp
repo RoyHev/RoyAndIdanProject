@@ -29,14 +29,16 @@ Runner::Runner(const char *fileName) {
     this->varManager = new VarManager();
     varManager->incCount();
     Lexer lexer;
+    openClientSocket = new OpenClientSocket();
     this->lexeredFile = lexer.lexerFromFile(fileName);
     this->commandsMap = commandsGenerator(lexeredFile);
     this->index = 0;
+
 }
 
 map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     map<string, Expression *> commandsExMap;
-    OpenClientSocket *openClientSocket = new OpenClientSocket();
+
     commandsExMap.insert(make_pair(BIND, new CommandExpression(new BindCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
             make_pair(OPEN_SERVER,
@@ -45,7 +47,7 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
             make_pair(IF_CONDITION, new CommandExpression(new IfCommand(varManager, &commandsMap), lexStrings, index)));
     commandsExMap.insert(
             make_pair(WHILE_LOOP, new CommandExpression(new LoopCommand(varManager, &commandsMap), lexStrings, index)));
-    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(*openClientSocket, varManager),
+    commandsExMap.insert(make_pair(CONNECT, new CommandExpression(new ConnectCommand(openClientSocket, varManager),
                                                                   lexStrings, index)));
     commandsExMap.insert(
             make_pair(VAR, new CommandExpression(new CreateVarCommand(varManager), lexStrings, index)));
@@ -54,7 +56,7 @@ map<string, Expression *> Runner::commandsGenerator(vector<string> lexStrings) {
     commandsExMap.insert(
             make_pair(SLEEP, new CommandExpression(new SleepCommand(varManager), lexStrings, index)));
     commandsExMap.insert(
-            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager, *openClientSocket), lexStrings,
+            make_pair(ASSIGN, new CommandExpression(new AssignCommand(varManager, openClientSocket), lexStrings,
                                                     index)));
     return commandsExMap;
 }
@@ -72,4 +74,6 @@ Runner::~Runner() {
     if (varManager->decCount() == 0)    {
         delete varManager;
     }
+
+    delete openClientSocket;
 }
