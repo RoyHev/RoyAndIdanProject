@@ -148,7 +148,8 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
                         }
                         i++;
                     }
-                }//for any QUOTE make sure it has a closing QUOTE,
+                }//for any QUOTE make sure it has a closing QUOTE, and push
+                // what inside the two QUOTES to one string in the vector.
                 if (str[i] == QUOTE) {
                     if (!temp.empty()) {
                         lexer.push_back(temp);
@@ -174,6 +175,10 @@ vector<string> Lexer::lexerFromFile(const string &textFile) {
     return elementsMerge(lexer);
 }
 
+/*
+ * the function merges elements that describe a single mathematical expression
+ * into one element.
+ */
 vector<string> Lexer::elementsMerge(vector<string> initialVector) {
     vector<string> mergedVector;
     string temp;
