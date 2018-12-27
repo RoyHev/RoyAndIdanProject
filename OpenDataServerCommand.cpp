@@ -20,6 +20,7 @@ struct MyParameters {
 
 void *OpenDataServerCommand::openSocket(void *parameters) {
     struct MyParameters *myParameters = (struct MyParameters *) parameters;
+    myParameters->varManager->incCount();
     char c = '\0';
     int n;
     string buffer = "";
@@ -46,6 +47,10 @@ void *OpenDataServerCommand::openSocket(void *parameters) {
     }
 
     close(myParameters->sockfd);
+    if (myParameters->varManager->decCount() == 0)  {
+        delete myParameters->varManager;
+    }
+    delete myParameters;
 }
 
 int OpenDataServerCommand::execute(int &index, vector<string> data) {

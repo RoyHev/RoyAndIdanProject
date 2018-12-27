@@ -18,8 +18,30 @@ class VarManager {
     map<string, double> paths;
     vector<int> openSocketfds;
     bool end = false;
+    int counter = 0;
+    mutable pthread_mutex_t mutex;
 public:
 
+    int incCount() {
+        pthread_mutex_lock(&mutex);
+        int temp = ++counter;
+        pthread_mutex_unlock(&mutex);
+        return temp;
+    }
+
+    int decCount()  {
+        pthread_mutex_lock(&mutex);
+        int temp = --counter;
+        pthread_mutex_unlock(&mutex);
+        return temp;
+    }
+
+    int getCount()  {
+        pthread_mutex_lock(&mutex);
+        int temp = counter;
+        pthread_mutex_unlock(&mutex);
+        return temp;
+    }
     bool shouldContinue()   const {
         return !end;
     }
@@ -66,6 +88,9 @@ public:
         return this->openSocketfds;
     }
 
+    ~VarManager(){
+        pthread_mutex_destroy(&mutex);
+    }
 private:
     void initializeXMLVector();
 

@@ -27,6 +27,7 @@
 
 Runner::Runner(const char *fileName) {
     this->varManager = new VarManager();
+    varManager->incCount();
     Lexer lexer;
     this->lexeredFile = lexer.lexerFromFile(fileName);
     this->commandsMap = commandsGenerator(lexeredFile);
@@ -68,4 +69,7 @@ Runner::~Runner() {
         delete (*it).second;
     }
     varManager->signalFinished();
+    if (varManager->decCount() == 0)    {
+        delete varManager;
+    }
 }

@@ -11,6 +11,7 @@
 #define SIZE_BUFFER 206
 
 VarManager::VarManager() {
+    pthread_mutex_init(&mutex, nullptr);
     initializePaths();
     initializeXMLVector();
 }

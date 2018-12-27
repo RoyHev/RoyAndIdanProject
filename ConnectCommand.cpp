@@ -40,5 +40,6 @@ int ConnectCommand::execute(int &index, vector<string> data) {
     myParameters->ip = ip;
     myParameters->socketfd = myParameters->openClientSocket.openSocket(myParameters->ip, myParameters->portNum);
     this->varManager->addSockfd(myParameters->socketfd);
+    delete myParameters;
     return NUM_OF_ARGS;
 }

@@ -18,9 +18,10 @@ int OpenClientSocket::openSocket(string ip, double portNumber) {
         exit(1);
     }
 
+
     server = gethostbyname(ip.c_str());
 
-    if (server == NULL) {
+    if (server == nullptr) {
         fprintf(stderr, "ERROR, no such host\n");
         exit(0);
     }
